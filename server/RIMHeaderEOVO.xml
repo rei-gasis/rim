@@ -1,0 +1,372 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RIMHeaderEOVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxup.oracle.apps.per.rim.server.RIMHeaderEOVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT RIMHeaderEO.TRANSACTION_NO, 
+       RIMHeaderEO.ASSIGNMENT_ID, 
+       RIMHeaderEO.RESEARCH_TYPE, 
+       RIMHeaderEO.RESEARCH_TYPE_SPEC, 
+       RIMHeaderEO.RESEARCH_TITLE, 
+       RIMHeaderEO.RESEARCH_TITLE2, 
+       RIMHeaderEO.RESEARCH_TITLE3, 
+       RIMHeaderEO.BRIEF_DESCRIPTION, 
+       RIMHeaderEO.MAIN_AREA_INTEREST, 
+       RIMHeaderEO.PROJECT_LEADER_ID, 
+       RIMHeaderEO.START_DATE, 
+       RIMHeaderEO.END_DATE, 
+       RIMHeaderEO.ACTUAL_END_DATE, 
+       RIMHeaderEO.PROJECT_STATUS, 
+       RIMHeaderEO.PROJECT_REMARKS, 
+       RIMHeaderEO.ITEM_KEY, 
+       RIMHeaderEO.APPROVAL_STATUS, 
+       RIMHeaderEO.ATTRIBUTE1, 
+       RIMHeaderEO.ATTRIBUTE2, 
+       RIMHeaderEO.ATTRIBUTE3, 
+       RIMHeaderEO.ATTRIBUTE4, 
+       RIMHeaderEO.ATTRIBUTE5, 
+       RIMHeaderEO.LAST_UPDATE_DATE, 
+       RIMHeaderEO.LAST_UPDATED_BY, 
+       RIMHeaderEO.LAST_UPDATE_LOGIN, 
+       RIMHeaderEO.CREATED_BY, 
+       RIMHeaderEO.CREATION_DATE, 
+       RIMHeaderEO.PROJECT_IMPACT_DESC,
+       (SELECT FULL_NAME
+        FROM HR.PER_ALL_PEOPLE_F
+        WHERE PERSON_ID = RIMHEADEREO.PROJECT_LEADER_ID 
+        AND SYSDATE BETWEEN EFFECTIVE_START_DATE AND EFFECTIVE_END_DATE
+       ) PROJECT_LEADER_DISP,
+       LPAD(RIMHEADEREO.TRANSACTION_NO,9,'0') TRANSACTION_NO_DISP,
+        (SELECT full_name
+        FROM hr.per_all_people_f papf
+            ,apps.fnd_user fu
+        WHERE SYSDATE BETWEEN EFFECTIVE_START_DATE AND EFFECTIVE_END_DATE
+        AND fu.employee_id = papf.person_id
+        AND fu.user_id = RIMHeaderEO.LAST_UPDATED_BY
+        ) LAST_UPDATED_BY_DISP,
+        (SELECT (SELECT ppd.segment1
+                FROM per_position_definitions ppd
+                 WHERE ppd.position_definition_id = pap.position_definition_id) POSITION_NAME
+        FROM per_all_assignments_f paaf
+            ,per_all_positions pap
+        WHERE 1=1
+        AND SYSDATE BETWEEN paaf.effective_start_date AND paaf.effective_end_date
+        AND paaf.position_id = pap.position_id
+        AND paaf.assignment_id = RIMHeaderEO.ASSIGNMENT_ID)
+        POSITION_NAME,
+        DECODE(RIMHeaderEO.approval_status, 'Approved', 'ENABLED', 'DISABLED') SUMM_PG_AC
+FROM XXUP.XXUP_RIM_HEADER RIMHeaderEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RIMHeaderEO"
+      Entity="xxup.oracle.apps.per.rim.schema.server.RIMHeaderEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="TransactionNo"
+      IsNotNull="true"
+      EntityAttrName="TransactionNo"
+      EntityUsage="RIMHeaderEO"
+      AliasName="TRANSACTION_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AssignmentId"
+      IsNotNull="true"
+      EntityAttrName="AssignmentId"
+      EntityUsage="RIMHeaderEO"
+      AliasName="ASSIGNMENT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ResearchType"
+      IsNotNull="true"
+      EntityAttrName="ResearchType"
+      EntityUsage="RIMHeaderEO"
+      AliasName="RESEARCH_TYPE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ResearchTypeSpec"
+      EntityAttrName="ResearchTypeSpec"
+      EntityUsage="RIMHeaderEO"
+      AliasName="RESEARCH_TYPE_SPEC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ResearchTitle"
+      IsNotNull="true"
+      EntityAttrName="ResearchTitle"
+      EntityUsage="RIMHeaderEO"
+      AliasName="RESEARCH_TITLE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ResearchTitle2"
+      EntityAttrName="ResearchTitle2"
+      EntityUsage="RIMHeaderEO"
+      AliasName="RESEARCH_TITLE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ResearchTitle3"
+      EntityAttrName="ResearchTitle3"
+      EntityUsage="RIMHeaderEO"
+      AliasName="RESEARCH_TITLE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="BriefDescription"
+      EntityAttrName="BriefDescription"
+      EntityUsage="RIMHeaderEO"
+      AliasName="BRIEF_DESCRIPTION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MainAreaInterest"
+      IsNotNull="true"
+      EntityAttrName="MainAreaInterest"
+      EntityUsage="RIMHeaderEO"
+      AliasName="MAIN_AREA_INTEREST" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectLeaderId"
+      IsNotNull="true"
+      EntityAttrName="ProjectLeaderId"
+      EntityUsage="RIMHeaderEO"
+      AliasName="PROJECT_LEADER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StartDate"
+      IsNotNull="true"
+      EntityAttrName="StartDate"
+      EntityUsage="RIMHeaderEO"
+      AliasName="START_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EndDate"
+      IsNotNull="true"
+      EntityAttrName="EndDate"
+      EntityUsage="RIMHeaderEO"
+      AliasName="END_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ActualEndDate"
+      EntityAttrName="ActualEndDate"
+      EntityUsage="RIMHeaderEO"
+      AliasName="ACTUAL_END_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectStatus"
+      IsNotNull="true"
+      EntityAttrName="ProjectStatus"
+      EntityUsage="RIMHeaderEO"
+      AliasName="PROJECT_STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectRemarks"
+      EntityAttrName="ProjectRemarks"
+      EntityUsage="RIMHeaderEO"
+      AliasName="PROJECT_REMARKS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemKey"
+      IsNotNull="true"
+      EntityAttrName="ItemKey"
+      EntityUsage="RIMHeaderEO"
+      AliasName="ITEM_KEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApprovalStatus"
+      EntityAttrName="ApprovalStatus"
+      EntityUsage="RIMHeaderEO"
+      AliasName="APPROVAL_STATUS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="RIMHeaderEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="RIMHeaderEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="RIMHeaderEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="RIMHeaderEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="RIMHeaderEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="RIMHeaderEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="RIMHeaderEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="RIMHeaderEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="RIMHeaderEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="RIMHeaderEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectImpactDesc"
+      IsNotNull="true"
+      EntityAttrName="ProjectImpactDesc"
+      EntityUsage="RIMHeaderEO"
+      AliasName="PROJECT_IMPACT_DESC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectLeaderDisp"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_LEADER_DISP"
+      Expression="PROJECT_LEADER_DISP"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionNoDisp"
+      IsPersistent="false"
+      Precision="9"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="TRANSACTION_NO_DISP"
+      Expression="TRANSACTION_NO_DISP"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="9" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedByDisp"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="LAST_UPDATED_BY_DISP"
+      Expression="LAST_UPDATED_BY_DISP"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PositionName"
+      IsPersistent="false"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="POSITION_NAME"
+      Expression="POSITION_NAME"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SummPgAc"
+      IsPersistent="false"
+      Precision="8"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SUMM_PG_AC"
+      Expression="SUMM_PG_AC"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="8" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RenderResearchType"
+      IsSelected="false"
+      IsPersistent="false"
+      DefaultValue="false"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="BIT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ResearchTypeOthers"
+      IsSelected="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="RenderMainAreaIntOthers"
+      IsSelected="false"
+      IsPersistent="false"
+      DefaultValue="false"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="BIT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MainAreaIntOthers"
+      IsSelected="false"
+      IsPersistent="false"
+      Precision="255"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="VIEW_ATTR"
+      SQLType="VARCHAR" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DisableBasicInfo"
+      IsSelected="false"
+      IsPersistent="false"
+      DefaultValue="true"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="BIT" >
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="RIMMainAM"
+   ComponentClass="xxup.oracle.apps.per.rim.server.RIMMainAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="RIMFiscalDetailsEOVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMFiscalDetailsEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMTeamMembersEOVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMTeamMembersEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMOtherTeamMembersVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMOtherTeamMembersVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMProjImpactEOVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMProjImpactEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMProjectImpactVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMProjectImpactVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMMilestonesEOVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMMilestonesEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMFiscalDetailsEOVO2"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMFiscalDetailsEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMMilestonesEOVO2"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMMilestonesEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMOtherTeamMembersVO2"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMOtherTeamMembersVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMProjImpactEOVO2"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMProjImpactEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMTeamMembersEOVO2"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMTeamMembersEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMActionHistoryVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMActionHistoryVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMFundingEOVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMFundingEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMFundingEOVO2"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMFundingEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMPublicationEOVO2"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMPublicationEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMPublicationEOVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMPublicationEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMHeaderEOVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMHeaderEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMHeaderEOVO2"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMHeaderEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMHeaderSummVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMHeaderSummVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMProjectStatusVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMProjectStatusVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMMembersVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMMembersVO" >
+   </ViewUsage>
+</AppModule>

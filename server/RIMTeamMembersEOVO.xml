@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RIMTeamMembersEOVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxup.oracle.apps.per.rim.server.RIMTeamMembersEOVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT RIMMembersEO.RIM_MEMBER_ID, 
+       RIMMembersEO.LINE_NO, 
+       RIMMembersEO.TRANSACTION_NO, 
+       RIMMembersEO.ITEM_KEY, 
+       RIMMembersEO.FULL_NAME, 
+       RIMMembersEO.POSITION, 
+       RIMMembersEO.ORGANIZATION, 
+       RIMMembersEO.PROJECT_ROLE, 
+       RIMMembersEO.ATTRIBUTE1, 
+       RIMMembersEO.ATTRIBUTE2, 
+       RIMMembersEO.ATTRIBUTE3, 
+       RIMMembersEO.ATTRIBUTE4, 
+       RIMMembersEO.ATTRIBUTE5, 
+       RIMMembersEO.LAST_UPDATE_DATE, 
+       RIMMembersEO.LAST_UPDATED_BY, 
+       RIMMembersEO.LAST_UPDATE_LOGIN, 
+       RIMMembersEO.CREATED_BY, 
+       RIMMembersEO.CREATION_DATE
+FROM XXUP.XXUP_RIM_TEAM_MEMBERS RIMMembersEO
+WHERE attribute1 IS NULL
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RIMMembersEO"
+      Entity="xxup.oracle.apps.per.rim.schema.server.RIMMembersEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="RimMemberId"
+      IsNotNull="true"
+      EntityAttrName="RimMemberId"
+      EntityUsage="RIMMembersEO"
+      AliasName="RIM_MEMBER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LineNo"
+      EntityAttrName="LineNo"
+      EntityUsage="RIMMembersEO"
+      AliasName="LINE_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionNo"
+      IsNotNull="true"
+      EntityAttrName="TransactionNo"
+      EntityUsage="RIMMembersEO"
+      AliasName="TRANSACTION_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemKey"
+      EntityAttrName="ItemKey"
+      EntityUsage="RIMMembersEO"
+      AliasName="ITEM_KEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FullName"
+      EntityAttrName="FullName"
+      EntityUsage="RIMMembersEO"
+      AliasName="FULL_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Position"
+      EntityAttrName="Position"
+      EntityUsage="RIMMembersEO"
+      AliasName="POSITION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Organization"
+      EntityAttrName="Organization"
+      EntityUsage="RIMMembersEO"
+      AliasName="ORGANIZATION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectRole"
+      EntityAttrName="ProjectRole"
+      EntityUsage="RIMMembersEO"
+      AliasName="PROJECT_ROLE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="RIMMembersEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="RIMMembersEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="RIMMembersEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="RIMMembersEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="RIMMembersEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="RIMMembersEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="RIMMembersEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="RIMMembersEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="RIMMembersEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="RIMMembersEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+</ViewObject>

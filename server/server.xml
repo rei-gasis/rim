@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="xxup.oracle.apps.per.rim.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="RIMActionHistoryVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMActionHistoryVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMFiscalDetailsEOVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMFiscalDetailsEOVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMFundingEOVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMFundingEOVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMHeaderEOVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMHeaderEOVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMHeaderSummVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMHeaderSummVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMMainAM"
+      FullName="xxup.oracle.apps.per.rim.server.RIMMainAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="RIMMembersVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMMembersVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMMilestonesEOVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMMilestonesEOVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMOtherTeamMembersVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMOtherTeamMembersVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMProjImpactEOVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMProjImpactEOVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMPublicationEOVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMPublicationEOVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMTeamMembersEOVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMTeamMembersEOVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

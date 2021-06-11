@@ -1,0 +1,29 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:subTabLayout version="10.1.3_1312" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header: RIMSubTabRN.xml 120.1.12010000.5 2010/12/02 09:40:33 kgowripe ship $" scope="/">
+   <ui:subTabs>
+      <oa:subTabBar id="subTabBarRN">
+         <ui:contents>
+            <oa:link id="BasicInfoLink" text="Basic Info" serverUnvalidated="true">
+               <ui:primaryClientAction>
+                  <ui:firePartialAction unvalidated="true"/>
+               </ui:primaryClientAction>
+            </oa:link>
+            <oa:link id="FiscalInfoLink" text="Fiscal Info" serverUnvalidated="true">
+               <ui:primaryClientAction>
+                  <ui:firePartialAction unvalidated="true"/>
+               </ui:primaryClientAction>
+            </oa:link>
+            <oa:link id="PublishInfoLink" text="Publication Info" serverUnvalidated="true">
+               <ui:primaryClientAction>
+                  <ui:firePartialAction unvalidated="true"/>
+               </ui:primaryClientAction>
+            </oa:link>
+         </ui:contents>
+      </oa:subTabBar>
+   </ui:subTabs>
+   <ui:contents>
+      <oa:flowLayout id="BasicInfoRN" adminCustomizable="false" promptWidth="20%" extends="/xxup/oracle/apps/per/rim/webui/RIMBasicInfoSubRN"/>
+      <oa:flowLayout id="FiscalInfoRN" adminCustomizable="false" promptWidth="20%" extends="/xxup/oracle/apps/per/rim/webui/RIMFiscalInfoSubRN"/>
+      <oa:flowLayout id="PubInfoRN" adminCustomizable="false" promptWidth="20%" extends="/xxup/oracle/apps/per/rim/webui/RIMPubInfoSubRN" controllerClass="xxup.oracle.apps.per.rim.webui.RIMPubInfoSubCO"/>
+   </ui:contents>
+</oa:subTabLayout>

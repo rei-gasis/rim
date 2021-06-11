@@ -1,0 +1,147 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:header version="10.1.3_1312" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" text="Details" controllerClass="xxup.oracle.apps.per.rim.webui.RIMApprDetailsCO" amDefName="xxup.oracle.apps.per.rim.server.RIMMainAM" standalone="true">
+   <ui:contents>
+      <!-- <oa:header id="ReviewHdr" text="Review Details">
+         <ui:contents> -->
+      <oa:hideShowHeader id="BasicInfoSHS" text="Basic Info" disclosed="true">
+         <ui:contents>
+            <oa:messageComponentLayout id="BasicDetailsRN" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="TransactionNo" dataType="VARCHAR2" prompt="Research Sequence No" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="TransactionNoDisp"/>
+                  <oa:messageStyledText id="PositionName" dataType="VARCHAR2" prompt="Assignment Position" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="PositionName"/>
+                  <oa:messageStyledText id="ResearchType" dataType="VARCHAR2" prompt="Type of Research" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="ResearchType"/>
+                  <oa:messageStyledText id="ResearchTypeSpec" dataType="VARCHAR2" prompt="Type of Research (Specifics)" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="ResearchTypeSpec"/>
+                  <oa:messageStyledText id="ResearchTitle" dataType="VARCHAR2" prompt="Title of Research" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="ResearchTitle"/>
+                  <oa:messageStyledText id="ResearchTitle2" dataType="VARCHAR2" prompt="Title of Research (Line 2)" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="ResearchTitle2"/>
+                  <oa:messageStyledText id="ResearchTitle3" dataType="VARCHAR2" prompt="Title of Research (Line 3)" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="ResearchTitle3"/>
+                  <oa:messageStyledText id="BriefDescription" dataType="VARCHAR2" prompt="Brief Description" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="BriefDescription"/>
+                  <oa:messageStyledText id="MainAreaInterest" dataType="VARCHAR2" prompt="Main Area of Interest" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="MainAreaInterest"/>
+                  <!-- <oa:messageLayout id="ProjectImpactML" prompt="Project Impact">
+                           <ui:contents>
+                              <oa:table id="ProjectImpactTbl">
+                                 <ui:contents>
+                                    <oa:messageStyledText id="ProjectImpact" dataType="VARCHAR2" styleClass="OraDataText" viewName="RIMProjImpactEOVO1" viewAttr="ProjectImpact"/>
+                                 </ui:contents>
+                              </oa:table>
+                           </ui:contents>
+                        </oa:messageLayout> -->
+                  <oa:messageStyledText id="ProjectImpactDesc" dataType="VARCHAR2" prompt="Project Impact Description" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="ProjectImpactDesc"/>
+                  <oa:messageStyledText id="ProjectLeaderDisp" dataType="VARCHAR2" prompt="Project Leader" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="ProjectLeaderDisp"/>
+                  <oa:messageLayout id="TeamMemberML" prompt="Team Members">
+                     <ui:contents>
+                        <oa:advancedTable id="TeamMembersAT" viewName="RIMMembersVO1" width="80%">
+                           <ui:contents>
+                              <oa:column id="FullNameCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="FullNameSH" prompt="Full Name"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="FullName" viewAttr="FullName" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="PositionCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="PositionSH" prompt="Position"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="Position" viewAttr="Position" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="OrganizationCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="OrganizationSH" prompt="Organization"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="Organization" viewAttr="Organization" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                              <oa:column id="ProjectRoleCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="ProjectRoleSH" prompt="Project Role"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="ProjectRole" viewAttr="ProjectRole" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
+                           </ui:contents>
+                        </oa:advancedTable>
+                     </ui:contents>
+                  </oa:messageLayout>
+                  <oa:messageStyledText id="StartDate" dataType="VARCHAR2" prompt="MOA / Contract Start date" viewName="RIMHeaderEOVO1" viewAttr="StartDate" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="EndDate" dataType="VARCHAR2" prompt="MOA / Contract End date" viewName="RIMHeaderEOVO1" viewAttr="EndDate" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="ActualEndDate" dataType="VARCHAR2" prompt="Actual End date" viewName="RIMHeaderEOVO1" viewAttr="ActualEndDate" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="ProjectStatus" dataType="VARCHAR2" prompt="Project Status" viewName="RIMHeaderEOVO1" viewAttr="ProjectStatus" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="LastUpdateDate" dataType="VARCHAR2" prompt="Date Updated" viewName="RIMHeaderEOVO1" viewAttr="LastUpdateDate" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="LastUpdatedByDisp" dataType="VARCHAR2" prompt="Updated By" viewName="RIMHeaderEOVO1" viewAttr="LastUpdatedByDisp" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="ProjectRemarks" dataType="VARCHAR2" prompt="Project Remarks" viewName="RIMHeaderEOVO1" viewAttr="ProjectRemarks" styleClass="OraDataText"/>
+               </ui:contents>
+            </oa:messageComponentLayout>
+         </ui:contents>
+      </oa:hideShowHeader>
+      <oa:hideShowHeader id="FiscalInfoSHS" text="Fiscal Info" disclosed="true">
+         <ui:contents>
+            <oa:messageComponentLayout id="FiscDetailsRN" width="100%">
+               <ui:contents>
+                  <oa:messageLayout id="OrganizationML" prompt="Organization">
+                     <ui:contents>
+                        <oa:table id="OrganizationTbl">
+                           <ui:contents>
+                              <oa:messageStyledText id="ConstituentUnit" dataType="VARCHAR2" prompt="Constituent University" viewName="RIMFiscalDetailsEOVO1" viewAttr="ConstituentUnit" styleClass="OraDataText"/>
+                              <oa:messageStyledText id="ResponsibilityCenterDisp" dataType="VARCHAR2" prompt="Responsibility Center" viewName="RIMFiscalDetailsEOVO1" viewAttr="ResponsibilityCenterDisp" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:table>
+                     </ui:contents>
+                  </oa:messageLayout>
+                  <oa:messageStyledText id="CollaboratingAgency" dataType="VARCHAR2" prompt="Collaborating Agency" viewName="RIMFiscalDetailsEOVO1" viewAttr="CollaboratingAgency" styleClass="OraDataText"/>
+                  <oa:messageLayout id="FundingMLM" prompt="Funding">
+                     <ui:contents>
+                        <oa:table id="FundingTbl">
+                           <ui:contents>
+                              <oa:messageStyledText id="FundingSource" dataType="VARCHAR2" prompt="FundingSource" viewName="RIMFundingEOVO1" viewAttr="FundingSource" styleClass="OraDataText"/>
+                              <oa:messageStyledText id="Description" dataType="VARCHAR2" prompt="Description" viewName="RIMFundingEOVO1" viewAttr="Description" styleClass="OraDataText"/>
+                              <oa:messageStyledText id="Amount" dataType="NUMBER" prompt="Amount" viewName="RIMFundingEOVO1" viewAttr="Amount" styleClass="OraDataText"/>
+                              <oa:messageStyledText id="Currency" dataType="VARCHAR2" prompt="Currency" viewName="RIMFundingEOVO1" viewAttr="Currency" styleClass="OraDataText"/>
+                              <oa:messageStyledText id="TotalAmount" dataType="NUMBER" prompt="Total Amount" viewName="RIMFundingEOVO1" viewAttr="TotalAmount" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:table>
+                     </ui:contents>
+                  </oa:messageLayout>
+                  <oa:messageStyledText id="FundingAgency" dataType="VARCHAR2" prompt="Funding Agency" viewName="RIMFiscalDetailsEOVO1" viewAttr="FundingAgency" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="SpCodeDisp" dataType="VARCHAR2" prompt="SP Code" viewName="RIMFiscalDetailsEOVO1" viewAttr="SpCodeDisp" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="FundControllerDisp" dataType="VARCHAR2" prompt="Fund Controller" viewName="RIMFiscalDetailsEOVO1" viewAttr="FundControllerDisp" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="FarExcluded" dataType="VARCHAR2" prompt="Far Excluded" viewName="RIMFiscalDetailsEOVO1" viewAttr="FarExcluded" styleClass="OraDataText"/>
+                  <oa:messageLayout id="MilestoneMLM" prompt="Milestones">
+                     <ui:contents>
+                        <oa:table id="MilestoneTbl">
+                           <ui:contents>
+                              <oa:messageStyledText id="Milestone" dataType="VARCHAR2" prompt="Milestone" viewName="RIMMilestonesEOVO1" viewAttr="Milestone" styleClass="OraDataText"/>
+                              <oa:messageStyledText id="CompletionPercentage" dataType="NUMBER" prompt="Completion Percentage" viewName="RIMMilestonesEOVO1" viewAttr="CompletionPercentage" styleClass="OraDataText"/>
+                              <oa:messageStyledText id="BudgetReleasedDate" dataType="VARCHAR2" prompt="Budget Released" viewName="RIMMilestonesEOVO1" viewAttr="BudgetReleasedDate" styleClass="OraDataText"/>
+                              <oa:messageStyledText id="MilestoneRemarks" dataType="VARCHAR2" prompt="Milestone Remarks" viewName="RIMMilestonesEOVO1" viewAttr="Remarks" styleClass="OraDataText"/>
+                           </ui:contents>
+                        </oa:table>
+                     </ui:contents>
+                  </oa:messageLayout>
+               </ui:contents>
+            </oa:messageComponentLayout>
+         </ui:contents>
+      </oa:hideShowHeader>
+      <oa:hideShowHeader id="PubInfoSHS" text="Publication Info" disclosed="true">
+         <ui:contents>
+            <oa:messageComponentLayout id="PubDetailsRN" width="100%">
+               <ui:contents>
+                  <oa:messageStyledText id="IsPublished" dataType="VARCHAR2" prompt="Is Published?" viewName="RIMPublicationEOVO1" viewAttr="IsPublished" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="DistributionMode" dataType="VARCHAR2" prompt="Distribution Mode" viewName="RIMPublicationEOVO1" viewAttr="DistributionMode" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="HasAward" dataType="VARCHAR2" prompt="Has Award?" viewName="RIMPublicationEOVO1" viewAttr="HasAward" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="AwardTitle" dataType="VARCHAR2" prompt="Award Title" viewName="RIMPublicationEOVO1" viewAttr="AwardTitle" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="AwardDate" dataType="VARCHAR2" prompt="Award Date" viewName="RIMPublicationEOVO1" viewAttr="AwardDate" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="ConferringBody" dataType="VARCHAR2" prompt="Conferring Body" viewName="RIMPublicationEOVO1" viewAttr="ConferringBody" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="Points" dataType="NUMBER" prompt="Points" viewName="RIMPublicationEOVO1" viewAttr="Points" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="PostActEvalRating" dataType="VARCHAR2" prompt="Post Activity Evaluation Rating (Good and Better rating)" viewName="RIMPublicationEOVO1" viewAttr="PostActEvalRating" styleClass="OraDataText"/>
+                  <oa:messageStyledText id="PubRemarks" dataType="VARCHAR2" prompt="Remarks" viewName="RIMPublicationEOVO1" viewAttr="Remarks" styleClass="OraDataText"/>
+               </ui:contents>
+            </oa:messageComponentLayout>
+         </ui:contents>
+      </oa:hideShowHeader>
+   </ui:contents>
+</oa:header>
