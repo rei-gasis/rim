@@ -215,7 +215,8 @@
       ColumnType="VARCHAR2"
       SQLType="VARCHAR"
       TableName="XXUP.XXUP_RIM_HEADER"
-      PrimaryKey="true" >
+      PrimaryKey="true"
+      ChangeIndicator="true" >
       <DesignTime>
          <Attr Name="_DisplaySize" Value="100" />
       </DesignTime>
