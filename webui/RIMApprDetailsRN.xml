@@ -16,15 +16,15 @@
                   <oa:messageStyledText id="ResearchTitle3" dataType="VARCHAR2" prompt="Title of Research (Line 3)" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="ResearchTitle3"/>
                   <oa:messageStyledText id="BriefDescription" dataType="VARCHAR2" prompt="Brief Description" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="BriefDescription"/>
                   <oa:messageStyledText id="MainAreaInterest" dataType="VARCHAR2" prompt="Main Area of Interest" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="MainAreaInterest"/>
-                  <!-- <oa:messageLayout id="ProjectImpactML" prompt="Project Impact">
+                  <oa:messageLayout id="ProjectImpactML" prompt="Project Impact">
+                     <ui:contents>
+                        <oa:table id="ProjectImpactTbl">
                            <ui:contents>
-                              <oa:table id="ProjectImpactTbl">
-                                 <ui:contents>
-                                    <oa:messageStyledText id="ProjectImpact" dataType="VARCHAR2" styleClass="OraDataText" viewName="RIMProjImpactEOVO1" viewAttr="ProjectImpact"/>
-                                 </ui:contents>
-                              </oa:table>
+                              <oa:messageStyledText id="ProjectImpact" dataType="VARCHAR2" styleClass="OraDataText" viewName="RIMProjImpactEOVO1" viewAttr="ProjectImpact"/>
                            </ui:contents>
-                        </oa:messageLayout> -->
+                        </oa:table>
+                     </ui:contents>
+                  </oa:messageLayout>
                   <oa:messageStyledText id="ProjectImpactDesc" dataType="VARCHAR2" prompt="Project Impact Description" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="ProjectImpactDesc"/>
                   <oa:messageStyledText id="ProjectLeaderDisp" dataType="VARCHAR2" prompt="Project Leader" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="ProjectLeaderDisp"/>
                   <oa:messageLayout id="TeamMemberML" prompt="Team Members">
