@@ -221,103 +221,11 @@ public class RIMReviewCO extends OAControllerImpl
 
         //pageContext.forwardImmediately("OA.jsp?page=/oracle/apps/fnd/framework/navigate/webui/NewHomePG",
         
-    } else if(RIMHelper.C_FOR_CLSOUT_AC.equals(urlParam) ||
-              RIMHelper.C_DON_FIN_REP_AC.equals(urlParam) ||
-              RIMHelper.C_CLS_REP_VAL_AC.equals(urlParam) ||
-              RIMHelper.C_CLOSED_AC.equals(urlParam) ||
-              RIMHelper.C_COMPLETED_PS.equals(urlParam)
-          ){
-
-        OAViewObject vo = 
-            (OAViewObject)am.findViewObject("RIMHeaderEOVO1");
-
-        vo.reset();
-        Row row = vo.next();  
-
-        
-        String strProjectStatus = row.getAttribute("ProjectStatus").toString();
-
-        pageContext.writeDiagnostics(this, "pItemKey: " + pItemKey, 1);
-        pageContext.writeDiagnostics(this, "strProjectStatus: " + strProjectStatus, 1);
-
-
-        System.out.println("throw dialog for proj status");
-        MessageToken[] tokens = 
-        { new MessageToken("PROJ_STATUS", strProjectStatus) };
-
-        OAException confirmMessage = 
-            new OAException("XXUP", "UP_RIM_CLS_PROJ_STAT_MSG", tokens, 
-                            OAException.INFORMATION, null);
-
-        OADialogPage dialogPage = 
-            new OADialogPage(OAException.INFORMATION, confirmMessage, null, 
-                             "", null);
-
-
-        dialogPage.setOkButtonToPost(true);
-        dialogPage.setOkButtonLabel("Ok");
-        dialogPage.setOkButtonItemName("DialogOk");
-
-        dialogPage.setPostToCallingPage(true);
-
-        Serializable[] updateParams = { pItemKey, strProjectStatus };
-        am.invokeMethod("updateProjStatus", updateParams);
-
-        am.invokeMethod("commitTransaction");
-        pageContext.redirectToDialogPage(dialogPage);
-        
-      }
-
-    else if (RIMHelper.C_ACCTG_AC.equals(urlParam)) {
-        
-        OAViewObject vo = (OAViewObject)am.findViewObject("RIMHeaderEOVO1");
-//        String pItemKey = pageContext.getParameter("pItemKey");
-        Serializable[] reviewTranParams = { pItemKey };
-        am.invokeMethod("reviewTran", reviewTranParams);
-        
-        
-        vo.reset();
-        Row row = vo.next();
-//            Row row = vo.getCurrentRow();
-
-        if(vo.getRowCount() == 1){
-            String researchTitle = row.getAttribute("ResearchTitle").toString();
-            
-            pageContext.writeDiagnostics(this, "researchTitle: " + researchTitle, 1);
-
-            MessageToken[] tokens = { new MessageToken("MODULE_TITLE", RIMHelper.C_MODULE_TITLE) 
-                                     ,new MessageToken("APPLICATION_TITLE", researchTitle)  
-            };
-
-            OAException updAcctgMessage = 
-                new OAException("XXUP", "UP_RIM_UPD_ACCTG_MSG", tokens, 
-                                OAException.INFORMATION, null);
-                
-            OADialogPage dialogPage = 
-            new OADialogPage(OAException.INFORMATION, updAcctgMessage, 
-                             null, "", null);
-
-
-            dialogPage.setOkButtonToPost(true);
-            dialogPage.setOkButtonLabel("Ok");
-            dialogPage.setOkButtonItemName("DialogOk");
-
-            dialogPage.setPostToCallingPage(true);
-
-            Serializable[] updAcctgParams = { pItemKey };
-            am.invokeMethod("updateAcctgInfo", updAcctgParams);
-
-            am.invokeMethod("commitTransaction");
-
-            pageContext.redirectToDialogPage(dialogPage);
-            
-            
-            
-        }
-
-    
     } else if (pageContext.getParameter("Submit") != null) {
-
+      if(urlParam.equals(RIMHelper.C_CREATE_AC) ||
+         urlParam.equals(RIMHelper.C_UPDATE_AC) ||
+         urlParam.equals(RIMHelper.C_CLOSE_AC)
+      ) {
         OAViewObject vo = 
             (OAViewObject)am.findViewObject("RIMHeaderEOVO1");
 
@@ -385,13 +293,100 @@ public class RIMReviewCO extends OAControllerImpl
 
           pageContext.redirectToDialogPage(dialogPage);
         }
+      }else if (RIMHelper.C_ACCTG_AC.equals(urlParam)) {
         
+        OAViewObject vo = (OAViewObject)am.findViewObject("RIMHeaderEOVO1");
+        System.out.println("Acctg submit!");
+//        String pItemKey = pageContext.getParameter("pItemKey");
+        // Serializable[] reviewTranParams = { pItemKey };
+        // am.invokeMethod("reviewTran", reviewTranParams);
+        
+        
+        vo.reset();
+        Row row = vo.next();
+//            Row row = vo.getCurrentRow();
+
+        // if(vo.getRowCount() == 1){
+            String researchTitle = row.getAttribute("ResearchTitle").toString();
+            
+            pageContext.writeDiagnostics(this, "researchTitle: " + researchTitle, 1);
+
+            MessageToken[] tokens = { new MessageToken("MODULE_TITLE", RIMHelper.C_MODULE_TITLE) 
+                                     ,new MessageToken("APPLICATION_TITLE", researchTitle)  
+            };
+
+            OAException updAcctgMessage = 
+                new OAException("XXUP", "UP_RIM_UPD_ACCTG_MSG", tokens, 
+                                OAException.INFORMATION, null);
+                
+            OADialogPage dialogPage = 
+            new OADialogPage(OAException.INFORMATION, updAcctgMessage, 
+                             null, "", null);
+
+
+            dialogPage.setOkButtonToPost(true);
+            dialogPage.setOkButtonLabel("Ok");
+            dialogPage.setOkButtonItemName("DialogOk");
+
+            dialogPage.setPostToCallingPage(true);
+
+            Serializable[] updAcctgParams = { pItemKey };
+            am.invokeMethod("updateAcctgInfo", updAcctgParams);
+
+            am.invokeMethod("commitTransaction");
+
+            pageContext.redirectToDialogPage(dialogPage);
+            
+      }else if(RIMHelper.C_FOR_CLSOUT_AC.equals(urlParam) ||
+            RIMHelper.C_DON_FIN_REP_AC.equals(urlParam) ||
+            RIMHelper.C_CLS_REP_VAL_AC.equals(urlParam) ||
+            RIMHelper.C_CLOSED_AC.equals(urlParam) ||
+            RIMHelper.C_COMPLETED_PS.equals(urlParam)
+        ){
+
+        OAViewObject vo = 
+            (OAViewObject)am.findViewObject("RIMHeaderEOVO1");
+
+        vo.reset();
+        Row row = vo.next();  
 
         
+        String strProjectStatus = row.getAttribute("ProjectStatus").toString();
 
-        //pageContext.putDialogMessage(confirmMessage);
+        pageContext.writeDiagnostics(this, "pItemKey: " + pItemKey, 1);
+        pageContext.writeDiagnostics(this, "strProjectStatus: " + strProjectStatus, 1);
 
-        //pageContext.forwardImmediately("OA.jsp?page=/oracle/apps/fnd/framework/navigate/webui/NewHomePG",
+
+        System.out.println("throw dialog for proj status");
+        MessageToken[] tokens = 
+        { new MessageToken("PROJ_STATUS", strProjectStatus) };
+
+        OAException confirmMessage = 
+            new OAException("XXUP", "UP_RIM_CLS_PROJ_STAT_MSG", tokens, 
+                            OAException.INFORMATION, null);
+
+        OADialogPage dialogPage = 
+            new OADialogPage(OAException.INFORMATION, confirmMessage, null, 
+                             "", null);
+
+
+        dialogPage.setOkButtonToPost(true);
+        dialogPage.setOkButtonLabel("Ok");
+        dialogPage.setOkButtonItemName("DialogOk");
+
+        dialogPage.setPostToCallingPage(true);
+
+        Serializable[] updateParams = { pItemKey, strProjectStatus };
+        am.invokeMethod("updateProjStatus", updateParams);
+
+        am.invokeMethod("commitTransaction");
+        pageContext.redirectToDialogPage(dialogPage);
+        
+      }
+
+
+
+        
 
 
     } else if (pageContext.getParameter("Cancel") != null) {
