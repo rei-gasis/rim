@@ -23,6 +23,7 @@ import oracle.apps.fnd.framework.webui.beans.OAWebBean;
 import oracle.apps.fnd.framework.webui.beans.layout.OAFlowLayoutBean;
 import oracle.apps.fnd.framework.webui.beans.nav.OAButtonBean;
 import oracle.apps.fnd.framework.webui.beans.nav.OAPageButtonBarBean;
+import oracle.apps.fnd.framework.webui.beans.table.OAColumnBean;
 
 /**
  * Controller for ...
@@ -45,14 +46,24 @@ public class RIMSummaryCO extends OAControllerImpl
     System.out.println("RIMSummaryCO");
     
     String srcMenu = pageContext.getParameter("srcMenu");
-    OAWebBean rootWB = pageContext.getRootWebBean();
-
-     OAFlowLayoutBean summFlowLayout = 
-       (OAFlowLayoutBean)rootWB.findChildRecursive("RIMSummTableAction"); 
-     OAButtonBean createBtn = (OAButtonBean)summFlowLayout.findChildRecursive("Create");
-  
+      
     if("Inquiry".equals(srcMenu)){
-        createBtn.setRendered(false);
+      OAWebBean rootWB = pageContext.getRootWebBean();
+
+       OAFlowLayoutBean summFlowLayout = 
+         (OAFlowLayoutBean)rootWB.findChildRecursive("RIMSummTableAction"); 
+
+       //Hide Create Button
+       OAButtonBean createBtn = (OAButtonBean)summFlowLayout.findChildRecursive("Create");
+       createBtn.setRendered(false);
+
+       OAColumnBean updCol = (OAColumnBean)rootWB.findChildRecursive("UpdateResCol"); 
+       updCol.setRendered(false);
+
+       OAColumnBean clsCol = (OAColumnBean)rootWB.findChildRecursive("CloseResCol"); 
+       clsCol.setRendered(false);
+
+
     }
 
     String access_level = "";
