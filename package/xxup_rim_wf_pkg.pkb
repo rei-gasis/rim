@@ -5,11 +5,13 @@ IS
     c_update_ac CONSTANT VARCHAR2(20) := 'UPDATE';
     c_close_ac CONSTANT VARCHAR2(20) := 'CLOSE';
     c_acctg_ac CONSTANT VARCHAR2(20) := 'ACCTG_UPD';
-    c_for_clsout_ac CONSTANT VARCHAR2(20) := 'FOR_CLOSEOUT';
-    c_don_fin_rep_ac CONSTANT VARCHAR2(20) := 'DONE_FIN_REP';
-    c_closed_ac CONSTANT VARCHAR2(20) := 'CLOSE';
-    c_completed_ac CONSTANT VARCHAR2(20) := 'COMPLETED';
-    c_cls_rep_val_ac CONSTANT VARCHAR2(20) := 'CLOSE_REP_VALIDATED';
+    c_for_clsout_ac CONSTANT VARCHAR2(50) := 'FOR_CLOSEOUT';
+    c_clsd_out_ac CONSTANT VARCHAR2(50) := 'CLOSED_OUT';
+    c_don_fin_rep_ac CONSTANT VARCHAR2(50) := 'DONE_FIN_REP';
+    c_cls_rep_val_ac CONSTANT VARCHAR2(50) := 'CLOSE_REP_VALIDATED';
+    c_closed_ac CONSTANT VARCHAR2(50) := 'CLOSED';
+    c_completed_ac CONSTANT VARCHAR2(50) := 'COMPLETED';
+    
 
 
     c_acctg_upd_ac CONSTANT VARCHAR2(50) := 'For Accounting Info Update';
@@ -21,6 +23,7 @@ IS
 
 
     c_for_clsout_ps CONSTANT VARCHAR2(50) := 'For Closeout';
+    c_clsd_out_ps CONSTANT VARCHAR2(50) := 'Closed Out';
     c_don_fin_rep_ps CONSTANT VARCHAR2(50) := 'Final Financial Reports Provided';
     c_cls_rep_val_ps CONSTANT VARCHAR2(50) := 'Closeout Report Validated';
     c_closed_ps CONSTANT VARCHAR2(50) := 'Closed';
@@ -38,7 +41,7 @@ IS
     c_for_clsout_msg VARCHAR2(20) := 'FOR_CLOSEOUT_MSG';
     c_don_fin_rep_msg VARCHAR2(20) := 'FINAL_FIN_REP_MSG';
     c_cls_rep_val_msg VARCHAR2(20) := 'CLSOUT_REP_VAL_MSG';
-    c_closed_msg VARCHAR2(20) := 'CLOSED';
+    c_closed_msg VARCHAR2(20) := 'CLOSED_MSG';
     c_complete_msg VARCHAR2(20) := 'COMPLETE_RIM_MSG';
 
     FUNCTION create_item_key(p_tran_no        IN VARCHAR2
@@ -363,7 +366,7 @@ IS
                                             );
 
         SELECT transaction_no
-              ,DECODE(SUBSTR(item_key,1,1), 'U', 'UPDATE', 'C', 'CLOSE', 'CREATE') action
+              ,DECODE(SUBSTR(item_key,1,1), 'U', c_update_ac, 'C', c_close_ac, c_create_ac) action
         INTO lv_tran_no
             ,lv_action
         FROM xxup_rim_header hd
@@ -653,7 +656,7 @@ IS
                                      ,l_itemkey
                                      ,'CLOSE_STATUS_URL'
                                      ,'JSP:/OA_HTML/OA.jsp?OAFunc=XXUP_RIM_REQ_PG' || 
-                                      '&urlParam='    || c_close_ac ||
+                                      '&urlParam='    || c_for_clsout_ac ||
                                       '&pSequenceNo=' || lv_tran_no ||
                                       '&pItemKey='    || l_itemkey
                                     );                        
@@ -739,7 +742,7 @@ IS
                          );
 
             INSERT INTO test_tbl
-            VALUES(lv_item_key);
+            VALUES(lv_item_key, CURRENT_TIMESTAMP);
 
 
         BEGIN
@@ -1825,6 +1828,7 @@ IS
 
     lv_appr_status xxup.xxup_per_ps_action_history.action%TYPE;
     lv_close_ac VARCHAR2(50);
+    lv_prev_proj_status xxup.xxup_rim_header.project_status%TYPE;
 
     BEGIN
 
@@ -1838,7 +1842,7 @@ IS
                                                              ,l_itemkey
                                                              ,'APPROVER_COUNTER');
 
-            INSERT INTO test_tbl VALUES('lv_ntf_result: ' || lv_ntf_result);
+            INSERT INTO test_tbl VALUES('lv_ntf_result: ' || lv_ntf_result, CURRENT_TIMESTAMP);
 
 
             BEGIN 
@@ -1901,7 +1905,7 @@ IS
 
                 resultout := c_acctg_ac;
 
-                INSERT INTO test_tbl VALUES('done update acctg');
+                INSERT INTO test_tbl VALUES('done update acctg', CURRENT_TIMESTAMP);
                 RETURN;
 
             ELSIF lv_ntf_result IN (c_for_clsout_ac
@@ -1910,15 +1914,76 @@ IS
                                     ,c_closed_ac
                                     ,c_completed_ac
                                     )
-                THEN
+            THEN
+                INSERT INTO test_tbl VALUES('closing..', CURRENT_TIMESTAMP);
+                
                     CASE 
+                        /*1. Update approval status on history
+                          2. Assign new close action
+                          3. Query for last project status
+                        */
+                    
                         WHEN lv_ntf_result = c_for_clsout_ac THEN
-                            lv_appr_status := 'Closeout - Approved';
-                            lv_close_ac:= c_don_fin_rep_ac;
+                            lv_appr_status := c_clsd_out_ps;
+                            lv_close_ac := c_clsd_out_ac;
+                            lv_prev_proj_status := NULL; --for closeout is initial
+                            
+                            INSERT INTO test_tbl VALUES('cls:1', CURRENT_TIMESTAMP);
 
                         WHEN lv_ntf_result = c_don_fin_rep_ac THEN
-                            lv_appr_status := 'Financial Reports Provided';
-                            lv_close_ac:= c_cls_rep_val_ac;
+                            lv_appr_status := c_don_fin_rep_ps;
+                            lv_close_ac := c_don_fin_rep_ac;
+                            lv_prev_proj_status := c_prep_fin_rep_ac;
+                            
+                            INSERT INTO test_tbl VALUES('cls:2', CURRENT_TIMESTAMP);
+                            
+                        WHEN lv_ntf_result = c_cls_rep_val_ac THEN
+                            lv_appr_status := c_cls_rep_val_ps;
+                            lv_close_ac := c_cls_rep_val_ac;
+                            lv_prev_proj_status := c_val_cls_rep_ac; 
+                            
+                            INSERT INTO test_tbl VALUES('cls:3', CURRENT_TIMESTAMP);  
+                            
+                        WHEN lv_ntf_result = c_closed_ac THEN
+                            lv_appr_status := c_closed_ps;
+                            lv_close_ac := c_closed_ac;
+                            lv_prev_proj_status := c_for_closing_ac; 
+                            
+                            INSERT INTO test_tbl VALUES('cls:4', CURRENT_TIMESTAMP);  
+                            
+                        WHEN lv_ntf_result = c_completed_ac THEN
+--                            lv_appr_status := c_closed_ps;
+--                            lv_close_ac := c_closed_ac;
+--                            lv_prev_proj_status := c_for_closing_ac; 
+--                            
+                            INSERT INTO test_tbl VALUES('cls:5', CURRENT_TIMESTAMP); 
+                            
+                            UPDATE xxup_rim_header main
+                            SET (approval_status
+                                ,project_status
+                               ,last_updated_by
+                               ,last_update_date
+                               )
+                               = 
+                               (SELECT c_closed_ps
+                                      ,c_completed_ps
+                                        ,last_updated_by
+                                        ,last_update_date
+                                FROM xxup_rim_header tr
+                                WHERE tr.item_key = l_itemkey
+                               )
+                            WHERE main.approval_status = 'Approved'
+                            AND main.transaction_no = lv_tran_no;
+                            
+                            
+                            DELETE FROM xxup_rim_header
+                            WHERE item_key = l_itemkey;
+--                            del_records(l_itemkey);
+                            resultout := c_completed_ac;
+                            
+                            
+                            RETURN; --exit workflow
+                            
                     END CASE;
 
                 BEGIN
@@ -1929,27 +1994,24 @@ IS
                       AND approver_no = (SELECT MAX(approver_no)
                                          FROM XXUP.XXUP_PER_PS_ACTION_HISTORY hist_1
                                          WHERE hist_1.item_key = hist.item_key
-                                         AND action = c_for_clsout_ac); 
+                                         AND action = lv_prev_proj_status); 
 
-                      UPDATE xxup.xxup_rim_header
-                      SET approval_status = lv_appr_status
-                      WHERE item_key = l_itemkey;   
-
+--                      UPDATE xxup.xxup_rim_header
+--                      SET approval_status = lv_appr_status
+--                      WHERE item_key = l_itemkey;   
+                    
                   EXCEPTION
                     WHEN OTHERS THEN
                       raise_application_error(-20101, 'error on updating proj status info: ' || SQLERRM);
                   END;
 
                 BEGIN
-
-
                   wf_engine.setitemattrtext(c_item_type
                             ,l_itemkey
                             ,'FYI_TITLE'
                             ,c_module_title || ' - '
                             || lv_research_title
-                            || ' has been approved by Accounting Office'
-                            || ' and has been completed'
+                            || ' has been ' || c_closed_ps
                             );
 
                   wf_engine.setitemattrtext(itemtype
@@ -1968,8 +2030,11 @@ IS
                     raise_application_error(-20101, 'Close project: ' || lv_error);
                 END;
 
+                INSERT INTO test_tbl VALUES('exiting closing...', CURRENT_TIMESTAMP);  
                 resultout := lv_close_ac;
                 RETURN;
+                
+                INSERT INTO test_tbl VALUES('exited', CURRENT_TIMESTAMP);  
             END IF;
 
             BEGIN
@@ -2139,7 +2204,7 @@ IS
 
                 ELSIF lv_ntf_result = 'APPROVE' THEN
 
-                    INSERT INTO test_tbl VALUES('upd, appr');
+                    INSERT INTO test_tbl VALUES('upd, appr', CURRENT_TIMESTAMP);
 
                     wf_engine.setitemattrtext(itemtype
                                              ,l_itemkey
@@ -2341,7 +2406,7 @@ IS
 
 
                   IF lv_completed_approval = 'Y' THEN
-                    INSERT INTO test_tbl VALUES('lv_completed_approval: ' || lv_completed_approval);
+                    INSERT INTO test_tbl VALUES('lv_completed_approval: ' || lv_completed_approval, CURRENT_TIMESTAMP);
                       IF lv_ntf_result = 'APPROVE' THEN
 
 
@@ -2361,10 +2426,11 @@ IS
                         SELECT SUBSTR(l_itemkey,1,1)
                         INTO lv_action_prefix
                         FROM DUAL;
-
+                        
+                        
                         IF lv_action_prefix = 'U' THEN
 
-                            INSERT INTO test_tbl VALUES('lv_action_prefix: ' || lv_action_prefix);
+                            INSERT INTO test_tbl VALUES('lv_action_prefix: ' || lv_action_prefix, CURRENT_TIMESTAMP);
 
                             UPDATE xxup_rim_header main
                                 SET (transaction_no
@@ -2608,7 +2674,7 @@ IS
                                 WHERE item_key = l_itemkey;
                             END IF;
 
-                            INSERT INTO test_tbl VALUES('updated: ');
+                            INSERT INTO test_tbl VALUES('updated: ', CURRENT_TIMESTAMP);
 
                         EXCEPTION
                             WHEN OTHERS THEN
@@ -2630,7 +2696,7 @@ IS
                                     );
 
 
-                           INSERT INTO test_tbl VALUES('workflow done '); 
+                           INSERT INTO test_tbl VALUES('workflow done ', CURRENT_TIMESTAMP); 
 
                             --workflow done, exit proc
                             RETURN;
@@ -2677,7 +2743,7 @@ IS
 
             IF lv_ntf_result IN ('APPROVE', 'REJECT','RFC') THEN
             BEGIN
-                INSERT INTO test_tbl VALUES('upd, still here');
+                INSERT INTO test_tbl VALUES('upd, still here', CURRENT_TIMESTAMP);
                 wf_engine.setitemattrtext(itemtype
                                      ,l_itemkey
                                      ,'RESULT'
@@ -2918,7 +2984,7 @@ IS
       lv_error VARCHAR2(2000);
 
       lv_item_key wf_notifications.item_key%TYPE;
-      lv_msg_name VARCHAR2(20);
+      lv_msg_name VARCHAR2(50);
       lv_result VARCHAR2(50);  
 
 
@@ -2929,6 +2995,7 @@ IS
       CASE 
         WHEN p_proj_status = c_for_clsout_ps THEN
             lv_msg_name := c_for_clsout_msg;
+            lv_result := c_clsd_out_ac;
 --            lv_result := ;    
 
         WHEN p_proj_status = c_don_fin_rep_ps THEN
@@ -2941,13 +3008,15 @@ IS
 
         WHEN p_proj_status = c_closed_ps THEN
             lv_msg_name := c_closed_msg;
-
+            lv_result := c_closed_ac;
 
         WHEN p_proj_status = c_completed_ps THEN
             lv_msg_name := c_complete_msg;
+            lv_result := c_completed_ac;
+            
       END CASE;
 
-
+      INSERT INTO test_tbl VALUES('lv_msg_name: ' || lv_msg_name, CURRENT_TIMESTAMP);
 
       --get notification id
       BEGIN
@@ -2981,7 +3050,7 @@ IS
 
 
       IF ln_nid IS NOT NULL THEN
-
+            INSERT INTO test_tbl VALUES('cls: notif found', CURRENT_TIMESTAMP);
 
           lv_research_title := wf_engine.getitemattrtext(c_item_type
                                                       ,lv_item_key
@@ -3016,14 +3085,14 @@ IS
 
           BEGIN
 
-            wf_engine.setitemattrtext(c_item_type
-                                   ,lv_item_key
-                                   ,'TITLE'
-                                   ,c_module_title || ' - '
-                                   || lv_research_title
-                                   || '- Fiscal Info has been updated and RIM Transaction has been completed'
-                                    );
-
+--            wf_engine.setitemattrtext(c_item_type
+--                                   ,lv_item_key
+--                                   ,'TITLE'
+--                                   ,c_module_title || ' - '
+--                                   || lv_research_title
+--                                   || '- Fiscal Info has been updated and RIM Transaction has been completed'
+--                                    );
+            INSERT INTO test_tbl VALUES('result: ' || lv_result, CURRENT_TIMESTAMP);
 
               wf_notification.setattrtext(nid    => ln_nid
                                          ,aname  => 'RESULT'
@@ -3041,6 +3110,8 @@ IS
                                    ,responder =>  lv_approver);
           EXCEPTION
             WHEN OTHERS THEN
+               ROLLBACK;
+               INSERT INTO test_tbl VALUES('lv_approver: ' || lv_approver, CURRENT_TIMESTAMP);
               raise_application_error(-20105, 'Error encountered sending response' || SQLERRM);
           END;
 
@@ -3050,7 +3121,7 @@ IS
 
     EXCEPTION 
       WHEN OTHERS THEN 
-
+        
         raise_application_error(-20100, 'upd_proj_stat error: ' || SQLERRM);
 
 
@@ -3070,17 +3141,20 @@ IS
         WHERE item_key = p_item_key;
 
 
-        DELETE FROM xxup_rim_team_members main
+        DELETE FROM xxup_rim_team_members 
         WHERE item_key = p_item_key;
 
 
-        DELETE FROM xxup_rim_funding main
+        DELETE FROM xxup_rim_funding 
         WHERE item_key = p_item_key;
 
-        DELETE FROM xxup_rim_milestones main
+        DELETE FROM xxup_rim_milestones 
         WHERE item_key = p_item_key;
 
-        DELETE FROM xxup_rim_proj_impact main
+        DELETE FROM xxup_rim_proj_impact 
+        WHERE item_key = p_item_key;
+        
+        DELETE FROM xxup_per_ps_action_history 
         WHERE item_key = p_item_key;
 
         COMMIT;
