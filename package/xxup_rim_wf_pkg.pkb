@@ -10,41 +10,36 @@ IS
     c_closed_ac CONSTANT VARCHAR2(20) := 'CLOSE';
     c_completed_ac CONSTANT VARCHAR2(20) := 'COMPLETED';
     c_cls_rep_val_ac CONSTANT VARCHAR2(20) := 'CLOSE_REP_VALIDATED';
-    
-    
+
+
     c_acctg_upd_ac CONSTANT VARCHAR2(50) := 'For Accounting Info Update';
     c_prep_fin_rep_ac CONSTANT VARCHAR2(50) := 'Prepare Financial Reports';
     c_val_cls_rep_ac CONSTANT VARCHAR2(50) := 'Validate Closeout Reports';
     c_for_closing_ac CONSTANT VARCHAR2(50) := 'For Closing';
     c_for_completion_ac CONSTANT VARCHAR2(50) := 'For Completion';
-    
-    
+
+
 
     c_for_clsout_ps CONSTANT VARCHAR2(50) := 'For Closeout';
     c_don_fin_rep_ps CONSTANT VARCHAR2(50) := 'Final Financial Reports Provided';
     c_cls_rep_val_ps CONSTANT VARCHAR2(50) := 'Closeout Report Validated';
     c_closed_ps CONSTANT VARCHAR2(50) := 'Closed';
     c_completed_ps CONSTANT VARCHAR2(50) := 'Completed';
-    
-    
+
+
     c_module_title CONSTANT VARCHAR2(50) := 'Research Information Module';
 
     c_item_type VARCHAR2(100) := 'RIMWF';
     c_create_prc VARCHAR2(140) := 'XXUP_RIM_PRC'; 
-    c_update_prc VARCHAR2(140) := 'XXUP_RIM_UPD_PRC';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+    c_update_prc VARCHAR2(140) := 'XXUP_RIM_UPD_PRC';                                                          
     c_close_prc VARCHAR2(140) := 'XXUP_RIM_CLS_PRC'; 
-    
+
     c_acctg_msg VARCHAR2(20) := 'ACCTG_MSG';
     c_for_clsout_msg VARCHAR2(20) := 'FOR_CLOSEOUT_MSG';
     c_don_fin_rep_msg VARCHAR2(20) := 'FINAL_FIN_REP_MSG';
     c_cls_rep_val_msg VARCHAR2(20) := 'CLSOUT_REP_VAL_MSG';
     c_closed_msg VARCHAR2(20) := 'CLOSED';
     c_complete_msg VARCHAR2(20) := 'COMPLETE_RIM_MSG';
-    
-    
-    
-    
-
 
     FUNCTION create_item_key(p_tran_no        IN VARCHAR2
                             ,p_action        IN VARCHAR2                
@@ -101,7 +96,7 @@ IS
 
 
                     RETURN 'U-' || c_ik_prefix || '-' || p_tran_no || '-' || to_char(ln_last_update_ctr + 1);
-                
+
                 ELSE --no last update transaction
                     RETURN 'U-' || c_ik_prefix || '-' || p_tran_no || '-1';
                 END IF;
@@ -112,8 +107,8 @@ IS
              END;
 
              RETURN 'U-' || c_ik_prefix || '-' || p_tran_no || '-1';
-             
-             
+
+
         ELSIF p_action = c_close_ac THEN
             /*Get last update transaction's item key*/
 
@@ -146,7 +141,7 @@ IS
 
 
                     RETURN 'C-' || c_ik_prefix || '-' || p_tran_no || '-' || to_char(ln_last_update_ctr + 1);
-                
+
                 ELSE --no last update transaction
                     RETURN 'C-' || c_ik_prefix || '-' || p_tran_no || '-1';
                 END IF;
@@ -158,9 +153,9 @@ IS
 
              RETURN 'C-' || c_ik_prefix  || '-' || p_tran_no || '-1';
         END IF;
-        
-        
-        
+
+
+
 
     EXCEPTION
 
@@ -271,9 +266,9 @@ IS
 
     lv_item_key VARCHAR2(100) := p_item_key;
     lv_wf_prc VARCHAR2(30) := c_create_prc;
-    
+
     BEGIN 
-        
+
         IF p_process = c_create_ac THEN
             lv_wf_prc := c_create_prc;
         ELSIF p_process = c_update_ac THEN
@@ -281,7 +276,7 @@ IS
         ELSIF p_process = c_close_ac THEN
             lv_wf_prc := c_close_prc;
         END IF;
-    
+
 
         wf_engine.createprocess(c_item_type
                                ,lv_item_key
@@ -312,7 +307,7 @@ IS
         SET action_date = SYSDATE
         WHERE item_key = lv_item_key
         AND action = 'Submit';
-        
+
 
         COMMIT;
 
@@ -366,7 +361,7 @@ IS
                                             ,l_itemkey
                                             ,'OWNER'
                                             );
-        
+
         SELECT transaction_no
               ,DECODE(SUBSTR(item_key,1,1), 'U', 'UPDATE', 'C', 'CLOSE', 'CREATE') action
         INTO lv_tran_no
@@ -429,7 +424,7 @@ IS
                 BEGIN 
 
                     /*Set employee details*/
-    
+
                     set_owner_details(p_item_key     => l_itemkey
                                      ,p_emp_id       => ln_emp_id
                                      ,p_emp_name     => lv_emp_name
@@ -444,12 +439,12 @@ IS
                     WHEN OTHERS THEN
                         NULL;
                 END;
-                
+
                 --set attribute for SUBMIT Action
                 IF lv_action = c_create_ac THEN
-                    
+
                     BEGIN
-                    
+
                         SELECT user_name
                             INTO lv_acctg_staff
                             FROM fnd_user
@@ -462,11 +457,11 @@ IS
                             raise_application_error(-20101, 'Error getting accounting staff username');
                     END;
                 END IF;
-                
+
                 --set attribute for CLOSE Action
                 IF lv_action = c_close_ac THEN
                     BEGIN
-                
+
                         SELECT user_name
                             INTO lv_acctg_staff
                             FROM fnd_user
@@ -474,14 +469,14 @@ IS
                                                 FROM xxup.xxup_per_ps_action_history
                                                 WHERE item_key = l_itemkey
                                                 AND action = c_prep_fin_rep_ac);
-                                            
+
                     EXCEPTION
                         WHEN OTHERS THEN
                             raise_application_error(-20101, 'Error getting accounting staff username');
                     END;
-                    
+
                     BEGIN
-                
+
                         SELECT user_name
                             INTO lv_res_off_staff
                             FROM fnd_user
@@ -489,20 +484,20 @@ IS
                                                 FROM xxup.xxup_per_ps_action_history
                                                 WHERE item_key = l_itemkey
                                                 AND action = c_for_completion_ac);
-                                            
+
                     EXCEPTION
                         WHEN OTHERS THEN
                             raise_application_error(-20101, 'Error getting research office staff username');
                     END;
                 END IF;
-                
-                
+
+
 --                wf_engine.setitemattrtext(itemtype
 --                                         ,l_itemkey
 --                                         ,'TRANSACTION_NO'
 --                                         ,lv_tran_no
 --                                        );
-                
+
                 wf_engine.setitemattrtext(itemtype
                                          ,l_itemkey
                                          ,'FROM'
@@ -570,7 +565,7 @@ IS
 
 
             END;
-            
+
             BEGIN
                 SELECT COUNT(1)
                 INTO ln_total_approver_count
@@ -642,7 +637,7 @@ IS
                                      ,'RIM_OFC_STAFF'
                                      ,lv_res_off_staff
                                     );                        
-            
+
 
 
             wf_engine.setitemattrtext(itemtype
@@ -653,7 +648,7 @@ IS
                                       '&pSequenceNo=' || lv_tran_no ||
                                       '&pItemKey='    || l_itemkey
                                     );
-                                    
+
             wf_engine.setitemattrtext(itemtype
                                      ,l_itemkey
                                      ,'CLOSE_STATUS_URL'
@@ -662,17 +657,17 @@ IS
                                       '&pSequenceNo=' || lv_tran_no ||
                                       '&pItemKey='    || l_itemkey
                                     );                        
-                                    
-                                    
-                                    
-            
-                                    
+
+
+
+
+
             resultout := '';
 
         END IF;
 
 
-        
+
 
     EXCEPTION
       WHEN OTHERS THEN
@@ -742,24 +737,24 @@ IS
           lv_item_key := create_item_key(p_tran_no        => p_tran_no
                                         ,p_action        => NVL(p_action, c_create_ac)
                          );
-                         
+
             INSERT INTO test_tbl
             VALUES(lv_item_key);
 
-          
+
         BEGIN
           SELECT 'Y'
           INTO lv_exist
           FROM xxup.xxup_per_ps_action_history
           WHERE ROWNUM = 1
           AND item_key = lv_item_key;
-          
+
             IF lv_exist = 'Y' THEN
                 DELETE
                   FROM xxup.xxup_per_ps_action_history
                   WHERE 1=1
                   AND item_key = lv_item_key;
-    
+
             END IF;
         EXCEPTION
             WHEN no_data_found THEN
@@ -823,10 +818,10 @@ IS
          lv_from_pos_name := lv_emp_pos_name;
          lv_from_org_name := lv_emp_org_name;
 
-        
+
         IF p_action = c_create_ac THEN
-            
-            
+
+
             /*Set Research Office Recipient approver*/        
             ln_approver_ctr := ln_approver_ctr + 1;
 
@@ -892,7 +887,7 @@ IS
                         raise_application_error(-20101, 'Encountered error on Initializing approvers - Unable to retrieve Research Office Recipient data');
                 END;
 
-                
+
                 INSERT INTO xxup.xxup_per_ps_action_history (
                             item_key,
                             sequence_no,
@@ -920,18 +915,18 @@ IS
                             lv_to_org_name,
                             'Pending'
                         );
-    
+
             END IF;
-            
+
             ln_from_id := ln_to_id;
             lv_from_name := lv_to_name;
             lv_from_pos_name := lv_to_pos_name;
             lv_from_org_name := lv_to_org_name;
-            
-            
-            
-            
-                        
+
+
+
+
+
             /*Set Accounting Office Recipient approver*/        
             ln_approver_ctr := ln_approver_ctr + 1;
 
@@ -980,7 +975,7 @@ IS
                         raise_application_error(-20101, 'Encountered error on Initializing approvers - Unable to retrieve Accounting Office Recipient data');
                 END;
 
-                
+
                 INSERT INTO xxup.xxup_per_ps_action_history (
                             item_key,
                             sequence_no,
@@ -1008,13 +1003,13 @@ IS
                             lv_to_org_name,
                             c_acctg_upd_ac
                         );
-                
+
             END IF;
-            
+
             p_item_key :=  lv_item_key; 
             COMMIT;
-            
-            
+
+
         ELSIF p_action = c_update_ac THEN
             /*Set Research Office Recipient approver*/        
             ln_approver_ctr := ln_approver_ctr + 1;
@@ -1081,7 +1076,7 @@ IS
                         raise_application_error(-20101, 'Encountered error on Initializing approvers - Unable to retrieve Research Office Recipient data');
                 END;
 
-                
+
                 INSERT INTO xxup.xxup_per_ps_action_history (
                             item_key,
                             sequence_no,
@@ -1109,15 +1104,15 @@ IS
                             lv_to_org_name,
                             'Pending'
                         );
-    
+
             END IF;
-            
+
             ln_from_id := ln_to_id;
             lv_from_name := lv_to_name;
             lv_from_pos_name := lv_to_pos_name;
             lv_from_org_name := lv_to_org_name;
 
-                        
+
             /*Set Accounting Office Recipient approver*/        
             ln_approver_ctr := ln_approver_ctr + 1;
 
@@ -1167,7 +1162,7 @@ IS
                         raise_application_error(-20101, 'Encountered error on Initializing approvers - Unable to retrieve Accounting Office Recipient data');
                 END;
 
-                
+
                 INSERT INTO xxup.xxup_per_ps_action_history (
                             item_key,
                             sequence_no,
@@ -1195,14 +1190,14 @@ IS
                             lv_to_org_name,
                             'Pending'--
                         );
-                
-                
-            
+
+
+
             END IF;
-            
+
             p_item_key :=  lv_item_key; 
             COMMIT;
-            
+
         ELSIF p_action = c_close_ac THEN
             /*Set Research Office Recipient approver*/        
             ln_approver_ctr := ln_approver_ctr + 1;
@@ -1269,7 +1264,7 @@ IS
                         raise_application_error(-20101, 'Encountered error on Initializing approvers - Unable to retrieve Research Office Recipient data');
                 END;
 
-                
+
                 INSERT INTO xxup.xxup_per_ps_action_history (
                             item_key,
                             sequence_no,
@@ -1297,15 +1292,15 @@ IS
                             lv_to_org_name,
                             'Pending'
                         );
-    
+
             END IF;
-            
+
             ln_from_id := ln_to_id;
             lv_from_name := lv_to_name;
             lv_from_pos_name := lv_to_pos_name;
             lv_from_org_name := lv_to_org_name;
 
-                        
+
             /*Set Accounting Office Recipient approver*/        
             ln_approver_ctr := ln_approver_ctr + 1;
 
@@ -1355,7 +1350,7 @@ IS
                         raise_application_error(-20101, 'Encountered error on Initializing approvers - Unable to retrieve Accounting Office Recipient data');
                 END;
 
-                
+
                 INSERT INTO xxup.xxup_per_ps_action_history (
                             item_key,
                             sequence_no,
@@ -1383,15 +1378,15 @@ IS
                             lv_to_org_name,
                             'Pending'--
                         );
-                
-            
+
+
             ln_from_id := ln_to_id;
             lv_from_name := lv_to_name;
             lv_from_pos_name := lv_to_pos_name;
             lv_from_org_name := lv_to_org_name;
 
             ln_approver_ctr := ln_approver_ctr + 1; 
-            
+
             --Financial Reports provided
             INSERT INTO xxup.xxup_per_ps_action_history (
                             item_key,
@@ -1420,7 +1415,7 @@ IS
                             lv_to_org_name,
                             c_prep_fin_rep_ac
                         );
-            
+
             ln_approver_ctr := ln_approver_ctr + 1;             
             --Closeout reports validate
             INSERT INTO xxup.xxup_per_ps_action_history (
@@ -1450,10 +1445,10 @@ IS
                             lv_to_org_name,
                             c_val_cls_rep_ac
                         ); 
-                        
-                        
+
+
              ln_approver_ctr := ln_approver_ctr + 1; 
-             
+
             --For Closing (Acctg)
             INSERT INTO xxup.xxup_per_ps_action_history (
                             item_key,
@@ -1482,8 +1477,8 @@ IS
                             lv_to_org_name,
                             c_for_closing_ac
                         ); 
-            
-            
+
+
             ln_approver_ctr := ln_approver_ctr + 1; 
             --For Closing (RIM office)
             SELECT apps.xxup_hrms_utilities_pkg.get_up_approver(lv_rim_org_name,
@@ -1492,8 +1487,8 @@ IS
                                                                 trunc(sysdate)) hr
              INTO ln_res_recipient_id
              FROM DUAL;
-            
-            
+
+
             BEGIN
              SELECT papf.full_name
                    ,papf.person_id
@@ -1528,7 +1523,7 @@ IS
                     raise_application_error(-20101, 'Encountered error on Initializing approvers - Unable to retrieve Research Office Recipient data');
             END;
 
-            
+
             INSERT INTO xxup.xxup_per_ps_action_history (
                         item_key,
                         sequence_no,
@@ -1556,18 +1551,18 @@ IS
                         lv_to_org_name,
                         c_for_completion_ac
                     );
-            
-            
+
+
             END IF;
-            
-            
-            
-            
+
+
+
+
             p_item_key :=  lv_item_key; 
             COMMIT;    
-            
+
         END IF;
-        
+
     EXCEPTION
         WHEN OTHERS THEN
             raise_application_error(-20100, 'init_approvers error: ' || SQLERRM);
@@ -1682,7 +1677,7 @@ IS
                              WHERE hist_1.item_key = hist.item_key
                              AND action = 'Pending'); /*get line number of employee*/
 
-          COMMIT;
+--          COMMIT;
 
           EXCEPTION
             WHEN OTHERS THEN
@@ -1752,7 +1747,7 @@ IS
 --                                     ,'APPROVER_COUNTER'
 --                                     ,ln_approver_counter);
 
-                                       
+
 --          SELECT COUNT(1)
 --          INTO ln_total_approver_count
 --          FROM xxup.xxup_per_ps_action_history
@@ -1762,7 +1757,7 @@ IS
 --                                     ,p_sequence_no
 --                                     ,'TOTAL_APPROVER_COUNT'
 --                                     ,ln_total_approver_count);   
-          
+
 
 
           COMMIT;
@@ -1844,7 +1839,7 @@ IS
                                                              ,'APPROVER_COUNTER');
 
             INSERT INTO test_tbl VALUES('lv_ntf_result: ' || lv_ntf_result);
-            
+
 
             BEGIN 
                 SELECT transaction_no
@@ -1861,10 +1856,11 @@ IS
             lv_research_title := wf_engine.getitemattrtext(itemtype
                                                  ,l_itemkey
                                                  ,'PROJECT_NAME');
-                                                 
+
             /*Will update transaction and exit this procedure once done */                  
             IF lv_ntf_result = c_acctg_ac THEN                                
                 BEGIN
+
                   UPDATE xxup.xxup_per_ps_action_history hist
                       SET action = 'Updated Fiscal Info'
                          ,action_date = SYSDATE
@@ -1873,19 +1869,20 @@ IS
                                          FROM XXUP.XXUP_PER_PS_ACTION_HISTORY hist_1
                                          WHERE hist_1.item_key = hist.item_key
                                          AND action = c_acctg_upd_ac); 
-        
+
+   
                       UPDATE xxup.xxup_rim_header
                       SET approval_status = 'Approved'
-                      WHERE item_key = l_itemkey;   
-        
+                      WHERE item_key = l_itemkey;
+
                   EXCEPTION
                     WHEN OTHERS THEN
                       raise_application_error(-20101, 'error on update fiscal info: ' || SQLERRM);
                   END;
-                  
-            
+
+
                 BEGIN
-        
+
                   wf_engine.setitemattrtext(c_item_type
                             ,l_itemkey
                             ,'FYI_TITLE'
@@ -1894,16 +1891,19 @@ IS
                             || ' has been approved by Accounting Office'
                             || ' and has been completed'
                             );
-        
-        
+
+
                 EXCEPTION
                   WHEN OTHERS THEN
                     lv_error := SQLERRM;
                     raise_application_error(-20101, 'Update status: ' || lv_error);
                 END;
-            
+
                 resultout := c_acctg_ac;
+
+                INSERT INTO test_tbl VALUES('done update acctg');
                 RETURN;
+
             ELSIF lv_ntf_result IN (c_for_clsout_ac
                                     ,c_don_fin_rep_ac
                                     ,c_cls_rep_val_ac
@@ -1915,12 +1915,12 @@ IS
                         WHEN lv_ntf_result = c_for_clsout_ac THEN
                             lv_appr_status := 'Closeout - Approved';
                             lv_close_ac:= c_don_fin_rep_ac;
-                            
+
                         WHEN lv_ntf_result = c_don_fin_rep_ac THEN
                             lv_appr_status := 'Financial Reports Provided';
                             lv_close_ac:= c_cls_rep_val_ac;
                     END CASE;
-                    
+
                 BEGIN
                   UPDATE xxup.xxup_per_ps_action_history hist
                       SET action = lv_appr_status
@@ -1930,19 +1930,19 @@ IS
                                          FROM XXUP.XXUP_PER_PS_ACTION_HISTORY hist_1
                                          WHERE hist_1.item_key = hist.item_key
                                          AND action = c_for_clsout_ac); 
-        
+
                       UPDATE xxup.xxup_rim_header
                       SET approval_status = lv_appr_status
                       WHERE item_key = l_itemkey;   
-        
+
                   EXCEPTION
                     WHEN OTHERS THEN
                       raise_application_error(-20101, 'error on updating proj status info: ' || SQLERRM);
                   END;
-                  
+
                 BEGIN
-        
-        
+
+
                   wf_engine.setitemattrtext(c_item_type
                             ,l_itemkey
                             ,'FYI_TITLE'
@@ -1951,7 +1951,7 @@ IS
                             || ' has been approved by Accounting Office'
                             || ' and has been completed'
                             );
-                            
+
                   wf_engine.setitemattrtext(itemtype
                                      ,l_itemkey
                                      ,'CLOSE_STATUS_URL'
@@ -1960,14 +1960,14 @@ IS
                                       '&pSequenceNo=' || lv_tran_no ||
                                       '&pItemKey='    || l_itemkey
                                     );          
-                            
-        
+
+
                 EXCEPTION
                   WHEN OTHERS THEN
                     lv_error := SQLERRM;
                     raise_application_error(-20101, 'Close project: ' || lv_error);
                 END;
-            
+
                 resultout := lv_close_ac;
                 RETURN;
             END IF;
@@ -2002,9 +2002,9 @@ IS
                     lv_error := SQLERRM;
                     raise_application_error(-20105, 'error getting employee details: ' || lv_error);
             END;
-            
-            
-            INSERT INTO test_tbl VALUES('upd, emp det');
+
+
+
 
             BEGIN
 
@@ -2027,13 +2027,13 @@ IS
               WHEN OTHERS THEN
                 raise_application_error(-20101, 'Error getting latest approver user name');
             END;
-            
-            INSERT INTO test_tbl VALUES('upd, latest');
+
+
 
 
             BEGIN
 
-    
+
               SELECT COUNT(DISTINCT to_employee_name)
               INTO ln_total_approver_count
               FROM xxup.xxup_per_ps_action_history
@@ -2045,8 +2045,8 @@ IS
                 raise_application_error(-20101, 'Error getting total approver count');
             END;
 
-                
-                    
+
+
                 IF lv_ntf_result = 'RFC' THEN
 
                     wf_engine.setitemattrtext(itemtype
@@ -2138,9 +2138,9 @@ IS
                   END;
 
                 ELSIF lv_ntf_result = 'APPROVE' THEN
-                
+
                     INSERT INTO test_tbl VALUES('upd, appr');
-                   
+
                     wf_engine.setitemattrtext(itemtype
                                              ,l_itemkey
                                              ,'FYI_TITLE'
@@ -2166,7 +2166,7 @@ IS
                        ,note = wf_engine.context_user_comment
                     WHERE item_key = l_itemkey
                     AND approver_no = ln_approver_counter;
-                    
+
                 ELSIF lv_ntf_result = 'REJECT' THEN
 
                     wf_engine.setitemattrtext(itemtype
@@ -2296,7 +2296,7 @@ IS
                      WHERE item_key = l_itemkey
                      AND approver_no = ln_cur_approver_no
                      ;         
-            
+
 
         --            ln_approver_counter := ln_approver_counter + 1;
         ----            
@@ -2310,8 +2310,8 @@ IS
 
 
                 END IF;
-                
-            
+
+
 
 
                 --exit workflow and complete, if no 'Pending' approval remaining
@@ -2339,7 +2339,7 @@ IS
 
 
 
-                
+
                   IF lv_completed_approval = 'Y' THEN
                     INSERT INTO test_tbl VALUES('lv_completed_approval: ' || lv_completed_approval);
                       IF lv_ntf_result = 'APPROVE' THEN
@@ -2357,15 +2357,15 @@ IS
                                      ,note = wf_engine.context_user_comment
                                   WHERE item_key = l_itemkey
                                   AND approver_no = ln_cur_approver_no; 
-                                  
+
                         SELECT SUBSTR(l_itemkey,1,1)
                         INTO lv_action_prefix
                         FROM DUAL;
-                        
+
                         IF lv_action_prefix = 'U' THEN
-                            
+
                             INSERT INTO test_tbl VALUES('lv_action_prefix: ' || lv_action_prefix);
-                            
+
                             UPDATE xxup_rim_header main
                                 SET (transaction_no
                                 ,assignment_id
@@ -2428,11 +2428,11 @@ IS
                                 )
                                 WHERE main.approval_status = 'Approved'
                                 AND main.transaction_no = lv_tran_no;
-                                
+
                                 DELETE FROM xxup_rim_header tr
                                 WHERE item_key = l_itemkey;
-                                
-                                
+
+
                                 UPDATE xxup_rim_fiscal_details
                                 SET 
                                 (
@@ -2490,10 +2490,10 @@ IS
                                                   FROM xxup_rim_header hd
                                                   WHERE hd.approval_status = 'Approved'
                                                     AND hd.transaction_no = lv_tran_no);
-                                
+
                                 DELETE FROM xxup_rim_fiscal_details tr
                                 WHERE item_key = l_itemkey;
-                                
+
                                 UPDATE xxup_rim_publication
                                 SET (
                                 transaction_no
@@ -2547,59 +2547,59 @@ IS
                                                   FROM xxup_rim_header hd
                                                   WHERE hd.approval_status = 'Approved'
                                                     AND hd.transaction_no = lv_tran_no);
-                                
+
                                 DELETE FROM xxup_rim_publication tr
                                 WHERE item_key = l_itemkey;
-                                
+
                                 --
                                 DELETE FROM xxup_rim_team_members main
                                 WHERE item_key = (SELECT item_key
                                                   FROM xxup_rim_header hd
                                                   WHERE hd.approval_status = 'Approved'
                                                     AND hd.transaction_no = lv_tran_no);
-                                
+
                                 UPDATE xxup_rim_team_members
                                 SET item_key = (SELECT item_key
                                                   FROM xxup_rim_header hd
                                                   WHERE hd.approval_status = 'Approved'
                                                     AND hd.transaction_no = lv_tran_no)
                                 WHERE item_key = l_itemkey;
-                                
+
                                 --
                                 DELETE FROM xxup_rim_funding main
                                 WHERE item_key = (SELECT item_key
                                                   FROM xxup_rim_header hd
                                                   WHERE hd.approval_status = 'Approved'
                                                     AND hd.transaction_no = lv_tran_no);
-                                
+
                                 UPDATE xxup_rim_funding
                                 SET item_key = (SELECT item_key
                                                   FROM xxup_rim_header hd
                                                   WHERE hd.approval_status = 'Approved'
                                                     AND hd.transaction_no = lv_tran_no)
                                 WHERE item_key = l_itemkey;
-                                
+
                                 --
                                 DELETE FROM xxup_rim_milestones main
                                 WHERE item_key = (SELECT item_key
                                                   FROM xxup_rim_header hd
                                                   WHERE hd.approval_status = 'Approved'
                                                     AND hd.transaction_no = lv_tran_no);
-                                
+
                                 UPDATE xxup_rim_milestones
                                 SET item_key = (SELECT item_key
                                                   FROM xxup_rim_header hd
                                                   WHERE hd.approval_status = 'Approved'
                                                     AND hd.transaction_no = lv_tran_no)
                                 WHERE item_key = l_itemkey;
-                                
+
                                 --
                                 DELETE FROM xxup_rim_proj_impact main
                                 WHERE item_key = (SELECT item_key
                                                   FROM xxup_rim_header hd
                                                   WHERE hd.approval_status = 'Approved'
                                                     AND hd.transaction_no = lv_tran_no);
-                                
+
                                 UPDATE xxup_rim_proj_impact
                                 SET item_key = (SELECT item_key
                                                   FROM xxup_rim_header hd
@@ -2607,7 +2607,7 @@ IS
                                                     AND hd.transaction_no = lv_tran_no)
                                 WHERE item_key = l_itemkey;
                             END IF;
-                            
+
                             INSERT INTO test_tbl VALUES('updated: ');
 
                         EXCEPTION
@@ -2628,10 +2628,10 @@ IS
                                     || lv_approver_name
                                     || ' and has been completed'
                                     );
-                         
-                            
+
+
                            INSERT INTO test_tbl VALUES('workflow done '); 
-                            
+
                             --workflow done, exit proc
                             RETURN;
 
@@ -2682,9 +2682,9 @@ IS
                                      ,l_itemkey
                                      ,'RESULT'
                                      ,lv_ntf_result);
-                                     
+
                 resultout := lv_ntf_result;
-                
+
                 --previous approver
                 wf_engine.setitemattrtext(itemtype
                                          ,l_itemkey
@@ -2712,24 +2712,24 @@ IS
                                      WHERE item_key = l_itemkey     
                                      AND approver_no = ln_approver_counter);                  
 
-                
-                                   
-                                         
+
+
+
                 IF lv_ntf_result IN ('APPROVE', 'REJECT') THEN
                     BEGIN
                         wf_engine.setitemattrtext(itemtype
                                                  ,l_itemkey
                                                  ,'APPROVER_NAME'
                                                  ,lv_approver_name);
-        
-        
+
+
                         wf_engine.setitemattrtext(itemtype
                                            ,l_itemkey
                                            ,'APPROVER'
                                            ,lv_appr_user_name);            
-        
-                        
-        
+
+
+
                      EXCEPTION 
                         WHEN OTHERS THEN
                           raise_application_error(-20101, 'Encountered error on Update status - set attributes: ' || SUBSTR(SQLERRM,0,200));
@@ -2754,7 +2754,7 @@ IS
             lv_error := SQLERRM;
             raise_application_error(-20101, 'update status' ||  lv_error);
     END update_status;
-    
+
     PROCEDURE upd_acctg_info(p_item_key  IN VARCHAR2)
     IS
 
@@ -2829,11 +2829,11 @@ IS
           ln_approver_counter := wf_engine.getitemattrnumber(c_item_type
                                                             ,lv_item_key
                                                            ,'APPROVER_COUNTER');
-                                                           
+
 --          lv_acctg_staff := wf_engine.getitemattrtext(c_item_type
 --                                                    ,lv_item_key
 --                                                    ,'ACCTG_STAFF');
-                                                    
+
         BEGIN
             SELECT (SELECT full_name
                    FROM per_all_people_f papf
@@ -2847,12 +2847,12 @@ IS
             WHEN OTHERS THEN
                 raise_application_error(-20101, 'Error fetching Accounting staff name');
         END;
-        
 
-          
+
+
 
           BEGIN
-          
+
             wf_engine.setitemattrtext(c_item_type
                                    ,lv_item_key
                                    ,'TITLE'
@@ -2865,14 +2865,14 @@ IS
               wf_notification.setattrtext(nid    => ln_nid
                                          ,aname  => 'RESULT'
                                          ,avalue => c_acctg_ac);
-          
-              
+
+
 
           EXCEPTION
             WHEN OTHERS THEN
               raise_application_error(-20105, 'Error encountered on Upd Acctg info:  get and set attributes: ' || SQLERRM);
           END;
-          
+
           BEGIN
             wf_notification.respond(nid       =>  ln_nid
                                    ,responder =>  lv_acctg_staff);
@@ -2880,7 +2880,7 @@ IS
             WHEN OTHERS THEN
               raise_application_error(-20105, 'Error encountered sending response' || SQLERRM);
           END;
-        
+
       END IF;
 
 
@@ -2892,7 +2892,7 @@ IS
 
 
     END upd_acctg_info; 
-    
+
     PROCEDURE upd_proj_stat(p_item_key  IN VARCHAR2
                            ,p_proj_status VARCHAR2)
     IS
@@ -2920,34 +2920,34 @@ IS
       lv_item_key wf_notifications.item_key%TYPE;
       lv_msg_name VARCHAR2(20);
       lv_result VARCHAR2(50);  
-      
+
 
     BEGIN
         lv_item_key := p_item_key;
-        
-    
+
+
       CASE 
         WHEN p_proj_status = c_for_clsout_ps THEN
             lv_msg_name := c_for_clsout_msg;
 --            lv_result := ;    
-                
+
         WHEN p_proj_status = c_don_fin_rep_ps THEN
             lv_msg_name := c_don_fin_rep_msg;
             lv_result := c_don_fin_rep_ac;
-            
+
         WHEN p_proj_status = c_cls_rep_val_ps THEN
             lv_msg_name := c_cls_rep_val_msg;
             lv_result := c_cls_rep_val_ac;
-            
+
         WHEN p_proj_status = c_closed_ps THEN
             lv_msg_name := c_closed_msg;
-            
-            
+
+
         WHEN p_proj_status = c_completed_ps THEN
             lv_msg_name := c_complete_msg;
       END CASE;
-        
-        
+
+
 
       --get notification id
       BEGIN
@@ -2992,11 +2992,11 @@ IS
           ln_approver_counter := wf_engine.getitemattrnumber(c_item_type
                                                             ,lv_item_key
                                                            ,'APPROVER_COUNTER');
-                                                           
+
 --          lv_acctg_staff := wf_engine.getitemattrtext(c_item_type
 --                                                    ,lv_item_key
 --                                                    ,'ACCTG_STAFF');
-                                                    
+
 --        BEGIN
 --            SELECT (SELECT full_name
 --                   FROM per_all_people_f papf
@@ -3010,12 +3010,12 @@ IS
 --            WHEN OTHERS THEN
 --                raise_application_error(-20101, 'Error fetching Accounting staff name');
 --        END;
-        
 
-          
+
+
 
           BEGIN
-          
+
             wf_engine.setitemattrtext(c_item_type
                                    ,lv_item_key
                                    ,'TITLE'
@@ -3028,14 +3028,14 @@ IS
               wf_notification.setattrtext(nid    => ln_nid
                                          ,aname  => 'RESULT'
                                          ,avalue => lv_result);
-          
-              
+
+
 
           EXCEPTION
             WHEN OTHERS THEN
               raise_application_error(-20105, 'Error encountered on Update Project status:  get and set attributes: ' || SQLERRM);
           END;
-          
+
           BEGIN
             wf_notification.respond(nid       =>  ln_nid
                                    ,responder =>  lv_approver);
@@ -3043,7 +3043,7 @@ IS
             WHEN OTHERS THEN
               raise_application_error(-20105, 'Error encountered sending response' || SQLERRM);
           END;
-        
+
       END IF;
 
 
@@ -3055,44 +3055,44 @@ IS
 
 
     END upd_proj_stat; 
-    
+
     PROCEDURE del_records(p_item_key  IN VARCHAR2)
     IS
-    
+
     BEGIN
         DELETE FROM xxup_rim_header
         WHERE item_key = p_item_key;
-        
+
         DELETE FROM xxup_rim_fiscal_details
         WHERE item_key = p_item_key;
-        
+
         DELETE FROM xxup_rim_publication
         WHERE item_key = p_item_key;
-        
-        
+
+
         DELETE FROM xxup_rim_team_members main
         WHERE item_key = p_item_key;
 
-        
+
         DELETE FROM xxup_rim_funding main
         WHERE item_key = p_item_key;
-        
+
         DELETE FROM xxup_rim_milestones main
         WHERE item_key = p_item_key;
-            
+
         DELETE FROM xxup_rim_proj_impact main
         WHERE item_key = p_item_key;
-        
+
         COMMIT;
     EXCEPTION
         WHEN OTHERS THEN
             ROLLBACK;
             raise_application_error(-20101, 'Error deleting records');
-            
-            
+
+
     END del_records;
-    
-    
+
+
     PROCEDURE store_acctg_info(p_item_key VARCHAR2
                             ,p_sp_code_disp VARCHAR2
                             ,p_fund_controller_disp VARCHAR2
@@ -3103,19 +3103,19 @@ IS
         DELETE 
         FROM xxup.xxup_rim_acctg_info
         WHERE item_key = p_item_key;
-     
+
         INSERT INTO xxup.xxup_rim_acctg_info 
         VALUES(p_item_key, p_sp_code_disp, p_fund_controller_disp);
-        
+
         COMMIT;
-        
-        
-        
+
+
+
      EXCEPTION
         WHEN OTHERS THEN
             ROLLBACK;
             raise_application_error(-20101, 'Error storing accounting info');
-            
+
      END store_acctg_info;
 
 END xxup_rim_wf_pkg;
