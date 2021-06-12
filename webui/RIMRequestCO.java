@@ -411,6 +411,7 @@ public class RIMRequestCO extends OAControllerImpl
                 if(!"".equals(strSpCodeDisp) || !"".equals(strFundControllerDisp)){
 
                   Serializable []storeAcctParams = { itemKey, strSpCodeDisp, strFundControllerDisp };
+                  am.invokeMethod("storeAcctgInfo", storeAcctParams);
                    System.out.println("storeAcctgInfo");
                 }
 
@@ -420,13 +421,14 @@ public class RIMRequestCO extends OAControllerImpl
             }
 
           try{
-            row.setAttribute("ApprovalStatus", "For Approval");
+            
             am.invokeMethod("saveDetails"); //store child tables  
 
             if(RIMHelper.C_CREATE_AC.equals(actionFromURL) || 
                RIMHelper.C_UPDATE_AC.equals(actionFromURL) ||
                RIMHelper.C_CLOSE_AC.equals(actionFromURL) 
               ){
+              // row.setAttribute("ApprovalStatus", "For Approval");
               System.out.println("commitTransaction");
               am.invokeMethod("commitTransaction");
               
