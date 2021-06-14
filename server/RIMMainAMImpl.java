@@ -755,6 +755,7 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
            sFundVO.reset();
 
            Row mRow = null;
+           RIMFundingEOVOImpl tFundVO = getRIMFundingEOVO1();
            if(sFundVO != null){
                sFundVO.initExist(pItemKey);
                
@@ -776,7 +777,7 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     String strAttribute5 = currRow.getAttribute("Attribute5") != null ? currRow.getAttribute("Attribute5").toString() : null;
 
 
-                    RIMFundingEOVOImpl tFundVO = getRIMFundingEOVO1();
+          
                     tFundVO.initNewRecord();
                     Row tRow = tFundVO.getCurrentRow();
 
@@ -798,19 +799,21 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     tRow.setAttribute("Attribute5", strAttribute5);
 
 
-                    if(tFundVO.getRowCount() <= 0)
-                        tFundVO.initNewRecord();
+                    
 
                     System.out.println("Copy Fund info done");
 
                }
            }
-
-
+            
+            if(tFundVO.getRowCount() <= 0)
+              tFundVO.initNewRecord();
 
         }catch(Exception ex){
             throw new OAException("Error occured initializing Funding info " + ex);
         }
+
+        
 
 
         //MEMBERS
@@ -822,6 +825,7 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
            sMembersVO.reset();
 
            Row mRow = null;
+           RIMTeamMembersEOVOImpl tMembersVO = getRIMTeamMembersEOVO1();
            if(sMembersVO != null){
                sMembersVO.initExist(pItemKey);
                
@@ -842,7 +846,7 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     String strAttribute5 = currRow.getAttribute("Attribute5") != null ? currRow.getAttribute("Attribute5").toString() : null;
 
 
-                    RIMTeamMembersEOVOImpl tMembersVO = getRIMTeamMembersEOVO1();
+                    
                     tMembersVO.initNewRecord();
                     Row tRow = tMembersVO.getCurrentRow();
 
@@ -863,19 +867,21 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     tRow.setAttribute("Attribute5", strAttribute5);
 
 
-                    if(tMembersVO.getRowCount() <= 0)
-                        tMembersVO.initNewRecord();
+                    
 
                     System.out.println("Copy members info done");
 
                }
            }
 
-
+            if(tMembersVO.getRowCount() <= 0)
+               tMembersVO.initNewRecord();
 
         }catch(Exception ex){
             throw new OAException("Error occured initializing Members info " + ex);
         }
+
+        
 
 
         // //NON-UP
@@ -887,11 +893,15 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
            sOthMembersVO.reset();
 
            Row mRow = null;
+           RIMOtherTeamMembersVOImpl tOthMembersVO = getRIMOtherTeamMembersVO1();
+           tOthMembersVO.setMaxFetchSize(0);
+           tOthMembersVO.executeQuery();
            if(sOthMembersVO != null){
                sOthMembersVO.initExist(pItemKey);
                
                while(sOthMembersVO.hasNext()){
                    OAViewRowImpl currRow = (OAViewRowImpl) sOthMembersVO.next();
+
 
                     String strLineNo = currRow.getAttribute("LineNo") != null ? currRow.getAttribute("LineNo").toString() : null;
                     String strTransactionNo = currRow.getAttribute("TransactionNo") != null ? currRow.getAttribute("TransactionNo").toString() : null;
@@ -906,7 +916,7 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     String strAttribute5 = currRow.getAttribute("Attribute5") != null ? currRow.getAttribute("Attribute5").toString() : null;
 
 
-                    RIMOtherTeamMembersVOImpl tOthMembersVO = getRIMOtherTeamMembersVO1();
+                    
                     tOthMembersVO.initNewRecord();
                     Row tRow = tOthMembersVO.getCurrentRow();
 
@@ -926,20 +936,20 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     tRow.setAttribute("Attribute4", strAttribute4);
                     tRow.setAttribute("Attribute5", strAttribute5);
 
-
-                    if(tOthMembersVO.getRowCount() <= 0)
-                        tOthMembersVO.initNewRecord();
-
-                    
-
                }
            }
 
-
+            if(tOthMembersVO.getRowCount() <= 0)
+                tOthMembersVO.initNewRecord();
 
         }catch(Exception ex){
             throw new OAException("Error occured initializing Members info " + ex);
         }
+
+        
+
+
+        System.out.println("Done Copy NON-UP ");
 
 
         // //Project Impact
@@ -1349,10 +1359,11 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
         }
     }
 
-    public void limitProjectStatus(String pProcess){
+    public void limitProjectStatus(String pUrl){
         RIMProjectStatusVOImpl psVO = getRIMProjectStatusVO1();
 
-        psVO.limitProjectStatus(pProcess);
+        psVO.limitProjectStatus(pUrl);
+        System.out.println("AM");
 
         
     }
