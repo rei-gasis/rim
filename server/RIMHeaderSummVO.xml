@@ -40,7 +40,7 @@ SELECT transaction_no,
     created_by,
     creation_date,
     research_type_spec
-    ,DECODE(hd.approval_status, 'Approved', 'ENABLED', 'ENABLED') SUMM_PG_AC
+    ,DECODE(hd.approval_status, 'Approved', 'ENABLED', 'DISABLED') SUMM_PG_AC
     ,ROW_NUMBER() OVER(PARtitION BY transaction_no ORDER BY CASE WHEN approval_status = 'Approved'
                                                                  THEN 2
                                                                  ELSE 1

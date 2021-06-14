@@ -19,6 +19,7 @@ import oracle.apps.fnd.framework.webui.beans.OAWebBean;
 
 import oracle.jbo.Row;
 
+import xxup.oracle.apps.per.rim.lov.server.RIMProjectStatusVOImpl;
 import xxup.oracle.apps.per.rim.server.RIMHelper;
 
 public class RIMBasicInfoSubCO extends OAControllerImpl {
@@ -46,15 +47,7 @@ public class RIMBasicInfoSubCO extends OAControllerImpl {
 
         // String backUsed = pageContext.getParameter("backUsed");
       String actionFromURL = pageContext.getParameter("urlParam");
-      pageContext.writeDiagnostics(this, "actionFromURL: " + actionFromURL, 1);
-    // String transactionNo = pageContext.getParameter("pTransactionNo");
-
-
-      // if (RIMHelper.C_CREATE_AC.equals(actionFromURL) || actionFromURL == null) {
-      //   am.invokeMethod("initVOBasicInfo", null);
-      // }
-
-        
+      System.out.println("actionFromURL: " + actionFromURL);      
 
         /*on init, hide some fields*/
         OAViewObject mainVO = 
@@ -75,100 +68,101 @@ public class RIMBasicInfoSubCO extends OAControllerImpl {
           } catch (Exception ex) {
               throw new OAException("Setting transactionNo: " + ex);
           }
+          
+          // actionFromURL = "CREATE";
+          // Serializable []limitParams = { actionFromURL };
+          // am.invokeMethod("limitProjectStatus", limitParams);
+
 
           if(RIMHelper.C_CREATE_AC.equals(actionFromURL)){
             
-
             
-            Serializable []limitParams = { RIMHelper.C_CREATE_AC };
-            am.invokeMethod("limitProjectStatus", limitParams);
 
             mRow.setAttribute("DisableBasicInfo", false);
 
 
               //@TEST: default values
-            mRow.setAttribute("ResearchTitle", "Research 1");
-            mRow.setAttribute("ResearchType", "Descriptive Research");
-            mRow.setAttribute("ProjectImpactDesc", "Desc");
-            mRow.setAttribute("MainAreaInterest", "Chemistry");
-            mRow.setAttribute("ProjectLeaderDisp", "Gasis, Mr. Winson Rei Dalida");
-            mRow.setAttribute("PositionName", "Senior ICT Assistant");
-            mRow.setAttribute("AssignmentId", 67829);
-            mRow.setAttribute("StartDate", new Date());
-            mRow.setAttribute("EndDate", new Date());
-            mRow.setAttribute("ProjectStatus", "Execution and Control");
-            mRow.setAttribute("ProjectLeaderId", 31532);
+          //   mRow.setAttribute("ResearchTitle", "Research 1");
+          //   mRow.setAttribute("ResearchType", "Descriptive Research");
+          //   mRow.setAttribute("ProjectImpactDesc", "Desc");
+          //   mRow.setAttribute("MainAreaInterest", "Chemistry");
+          //   mRow.setAttribute("ProjectLeaderDisp", "Gasis, Mr. Winson Rei Dalida");
+          //   mRow.setAttribute("PositionName", "Senior ICT Assistant");
+          //   mRow.setAttribute("AssignmentId", 67829);
+          //   mRow.setAttribute("StartDate", new Date());
+          //   mRow.setAttribute("EndDate", new Date());
+          //   mRow.setAttribute("ProjectStatus", "Execution and Control");
+          //   mRow.setAttribute("ProjectLeaderId", 31532);
 
 
+          //   OAViewObject membersVO = 
+          //     (OAViewObject)am.findViewObject("RIMTeamMembersEOVO1");
+
+          //   if( membersVO != null){
+          //     membersVO.reset();
+          //     Row memRow = membersVO.next();    
+
+          //     memRow.setAttribute("FullName", "Gasis, Mr. Winson Rei Dalida");
+          //     memRow.setAttribute("Position", "Senior ICT Assistant");
+          //     memRow.setAttribute("Organization", "UPS UP Information Technology Development Center");
+          //     memRow.setAttribute("Attribute2", 31532);
+
+          //   }
+
+          //   //   OAViewObject othermembersVO = 
+          //   //   (OAViewObject)am.findViewObject("RIMOtherTeamMembersVO1");
+
+          //   // if( othermembersVO != null){
+          //   //   othermembersVO.reset();
+          //   //   Row memRow = othermembersVO.next();    
+
+          //   //   memRow.setAttribute("FullName", "Gasis, Mr. Winson Rei Dalida");
+          //   //   memRow.setAttribute("Position", "Senior ICT Assistant");
+          //   //   memRow.setAttribute("Organization", "UPS UP Information Technology Development Center");
+
+          //   //   memRow.setAttribute("Attribute1", "Non-UP");
+
+          //   // }
+
+
+          //   OAViewObject fiscVO = 
+          //       (OAViewObject)am.findViewObject("RIMFiscalDetailsEOVO1");
+          //   //@TEST: init fiscal
+          //   if( fiscVO != null){
+          //     fiscVO.reset();
+          //     Row fRow = fiscVO.next();
+
+          //     fRow.setAttribute("ConstituentUnit", "UP System");
+          //     fRow.setAttribute("ResponsibilityCenterDisp", "UPS System Budget Office");
+          //     fRow.setAttribute("ResponsibilityCenter", "SA03006001");
+
+          //   }
+
+
+          //   OAViewObject mileVO = 
+          //       (OAViewObject)am.findViewObject("RIMMilestonesEOVO1");
+          //   //@TEST: init fiscal
+          //   if( mileVO != null){
+          //     mileVO.reset();
+          //     Row mileRow = mileVO.next();
+
+          //     mileRow.setAttribute("Milestone", "First Milestone");
+          //     mileRow.setAttribute("CompletionPercentage", "10");
+
+          //   }
+
+          // }else{
             
-          // // }
+          //   mRow.setAttribute("DisableBasicInfo", true);
+          // }
+
           
-            OAViewObject membersVO = 
-              (OAViewObject)am.findViewObject("RIMTeamMembersEOVO1");
+          
 
-            if( membersVO != null){
-              membersVO.reset();
-              Row memRow = membersVO.next();    
-
-              memRow.setAttribute("FullName", "Gasis, Mr. Winson Rei Dalida");
-              memRow.setAttribute("Position", "Senior ICT Assistant");
-              memRow.setAttribute("Organization", "UPS UP Information Technology Development Center");
-              memRow.setAttribute("Attribute2", 31532);
-
-            }
-
-            //   OAViewObject othermembersVO = 
-            //   (OAViewObject)am.findViewObject("RIMOtherTeamMembersVO1");
-
-            // if( othermembersVO != null){
-            //   othermembersVO.reset();
-            //   Row memRow = othermembersVO.next();    
-
-            //   memRow.setAttribute("FullName", "Gasis, Mr. Winson Rei Dalida");
-            //   memRow.setAttribute("Position", "Senior ICT Assistant");
-            //   memRow.setAttribute("Organization", "UPS UP Information Technology Development Center");
-
-            //   memRow.setAttribute("Attribute1", "Non-UP");
-
-            // }
-
-
-            OAViewObject fiscVO = 
-                (OAViewObject)am.findViewObject("RIMFiscalDetailsEOVO1");
-            //@TEST: init fiscal
-            if( fiscVO != null){
-              fiscVO.reset();
-              Row fRow = fiscVO.next();
-
-              fRow.setAttribute("ConstituentUnit", "UP System");
-              fRow.setAttribute("ResponsibilityCenterDisp", "UPS System Budget Office");
-              fRow.setAttribute("ResponsibilityCenter", "SA03006001");
-
-            }
-
-
-            OAViewObject mileVO = 
-                (OAViewObject)am.findViewObject("RIMMilestonesEOVO1");
-            //@TEST: init fiscal
-            if( mileVO != null){
-              mileVO.reset();
-              Row mileRow = mileVO.next();
-
-              mileRow.setAttribute("Milestone", "First Milestone");
-              mileRow.setAttribute("CompletionPercentage", "10");
-
-            }
-
-          }else{
+          
+          }else {
             
-            mRow.setAttribute("DisableBasicInfo", true);
-          }
-
-          
-          
-
-          
-
+            mRow.setAttribute("DisableBasicInfo", true); 
 
 
         }

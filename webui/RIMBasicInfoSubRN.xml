@@ -73,7 +73,12 @@
             <oa:messageTextInput id="StartDate" dataType="DATE" prompt="* MOA / Contract Start date" viewName="RIMHeaderEOVO1" viewAttr="StartDate"/>
             <oa:messageTextInput id="EndDate" dataType="DATE" prompt="* MOA / Contract End date" viewName="RIMHeaderEOVO1" viewAttr="EndDate"/>
             <oa:messageTextInput id="ActualEndDate" dataType="DATE" prompt="Actual End date" viewName="RIMHeaderEOVO1" viewAttr="ActualEndDate"/>
-            <oa:messageChoice id="ProjectStatus" dataType="VARCHAR2" prompt="Project Status" pickListViewDef="xxup.oracle.apps.per.rim.lov.server.RIMProjectStatusVO" pickListViewName="ProjectStatus" pickListDispAttr="ProjectStatus" pickListValAttr="ProjectStatus" defaultValue="Execution and Control" viewName="RIMHeaderEOVO1" viewAttr="ProjectStatus"/>
+            <oa:messageLovInput id="ProjectStatus" dataType="VARCHAR2" prompt="* Project Status" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/RIMProjectStatusLovRN" lookAheadSearchType="contains" lookAheadEnabled="true" viewName="RIMHeaderEOVO1" viewAttr="ProjectStatus">
+               <lovMappings>
+                  <lovMap id="lovProjectStatus" lovItem="ProjectStatus" resultTo="ProjectStatus" criteriaFrom="ProjectStatus"/>
+               </lovMappings>
+            </oa:messageLovInput>
+            <!-- <oa:messageChoice id="ProjectStatus" dataType="VARCHAR2" prompt="Project Status" pickListViewDef="xxup.oracle.apps.per.rim.lov.server.RIMProjectStatusVO" pickListViewName="ProjectStatus" pickListDispAttr="ProjectStatus" pickListValAttr="ProjectStatus" defaultValue="Execution and Control" viewName="RIMHeaderEOVO1" viewAttr="ProjectStatus"/> -->
             <oa:messageStyledText id="DateUpdated" dataType="DATE" prompt="Date Updated" viewName="RIMHeaderEOVO1" viewAttr="LastUpdateDate" styleClass="OraDataText"/>
             <oa:messageStyledText id="UpdatedBy" dataType="VARCHAR2" prompt="Updated By" viewName="RIMHeaderEOVO1" viewAttr="LastUpdatedByDisp" styleClass="OraDataText"/>
             <oa:messageTextInput id="ProjectRemarks" dataType="VARCHAR2" prompt="Project Remarks" maximumLength="2000" columns="100" rows="3" viewName="RIMHeaderEOVO1" viewAttr="ProjectRemarks"/>

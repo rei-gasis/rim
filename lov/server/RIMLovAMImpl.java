@@ -88,6 +88,16 @@ public class RIMLovAMImpl extends OAApplicationModuleImpl {
         
         
     }
+    
+    
+    public void limitProjectStatus(String pUrl){
+        RIMProjectStatusVOImpl pVO = getRIMProjectStatusVO1();
+
+        pVO.limitProjectStatus(pUrl);
+
+        System.out.println("LovAM");
+        
+    }
 
     /**Container's getter for RIMFundingVO1
      */

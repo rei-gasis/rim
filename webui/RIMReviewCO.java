@@ -247,12 +247,12 @@ public class RIMReviewCO extends OAControllerImpl
           am.invokeMethod("commitTransaction");
 
           // if(RIMHelper.C_CLOSEOUT_PS.equals(projectStatus)){
-            wfProcess = RIMHelper.C_CLOSE_AC;
+          wfProcess = RIMHelper.C_CLOSE_AC;
           // }
             
         } else if(RIMHelper.C_UPDATE_AC.equals(urlParam)) {
-          wfProcess = RIMHelper.C_UPDATE_AC;
           am.invokeMethod("commitTransaction");
+          wfProcess = RIMHelper.C_UPDATE_AC;
         }
 
 
@@ -267,7 +267,7 @@ public class RIMReviewCO extends OAControllerImpl
 
           if(!"Y".equals(resInitWf)){
             throw new OAException("Initiating workflow error occured!");
-          }  
+          }
 
           System.out.println("WF Started");
 
@@ -293,15 +293,11 @@ public class RIMReviewCO extends OAControllerImpl
 
           pageContext.redirectToDialogPage(dialogPage);
         }
-      }else if (RIMHelper.C_ACCTG_AC.equals(urlParam)) {
+      } else if (RIMHelper.C_ACCTG_AC.equals(urlParam)) {
         
         OAViewObject vo = (OAViewObject)am.findViewObject("RIMHeaderEOVO1");
         System.out.println("Acctg submit!");
-//        String pItemKey = pageContext.getParameter("pItemKey");
-        // Serializable[] reviewTranParams = { pItemKey };
-        // am.invokeMethod("reviewTran", reviewTranParams);
-        
-        
+
         vo.reset();
         Row row = vo.next();
 //            Row row = vo.getCurrentRow();
@@ -353,14 +349,12 @@ public class RIMReviewCO extends OAControllerImpl
         
         String strProjectStatus = row.getAttribute("ProjectStatus").toString();
 
-        pageContext.writeDiagnostics(this, "pItemKey: " + pItemKey, 1);
-        pageContext.writeDiagnostics(this, "strProjectStatus: " + strProjectStatus, 1);
-
 
         System.out.println("throw dialog for proj status");
         MessageToken[] tokens = 
         { new MessageToken("PROJ_STATUS", strProjectStatus) };
 
+        System.out.println("strProjectStatus: " + strProjectStatus);
         OAException confirmMessage = 
             new OAException("XXUP", "UP_RIM_CLS_PROJ_STAT_MSG", tokens, 
                             OAException.INFORMATION, null);
@@ -379,15 +373,10 @@ public class RIMReviewCO extends OAControllerImpl
         Serializable[] updateParams = { pItemKey, strProjectStatus };
         am.invokeMethod("updateProjStatus", updateParams);
 
-        am.invokeMethod("commitTransaction");
+        // am.invokeMethod("commitTransaction");
         pageContext.redirectToDialogPage(dialogPage);
         
       }
-
-
-
-        
-
 
     } else if (pageContext.getParameter("Cancel") != null) {
         OAViewObject vo = 

@@ -87,7 +87,7 @@ public class RIMRequestCO extends OAControllerImpl
         } else if(RIMHelper.C_RFC_AC.equals(actionFromURL) || 
                   RIMHelper.C_ACCTG_AC.equals(actionFromURL) ||
                   RIMHelper.C_FOR_CLSOUT_AC.equals(actionFromURL) ||
-                  RIMHelper.C_FINAL_FIN_REP_PS.equals(actionFromURL) ||
+                  RIMHelper.C_DON_FIN_REP_AC.equals(actionFromURL) ||
                   RIMHelper.C_CLS_REP_VAL_AC.equals(actionFromURL) ||
                   RIMHelper.C_CLOSED_AC.equals(actionFromURL) ||
                   RIMHelper.C_COMPLETED_AC.equals(actionFromURL) 
@@ -439,7 +439,7 @@ public class RIMRequestCO extends OAControllerImpl
           }
           
 
-          // pageContext.writeDiagnostics(this, "forwardedIK:" + itemKey, 1);
+          System.out.println("forwardedIK:" + itemKey);
 
 
           pageContext.forwardImmediately("OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMReviewPG&pTransactionNo=" + 

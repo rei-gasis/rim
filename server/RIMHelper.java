@@ -14,9 +14,10 @@ public class RIMHelper  {
 
     public static final String C_FOR_CLSOUT_AC = "FOR_CLOSEOUT";
 	public static final String C_DON_FIN_REP_AC = "DONE_FIN_REP";
+    public static final String C_CLS_REP_VAL_AC = "CLOSE_REP_VALIDATED";
 	public static final String C_CLOSED_AC = "CLOSED";
 	public static final String C_COMPLETED_AC = "COMPLETED";
-	public static final String C_CLS_REP_VAL_AC = "CLOSE_REP_VALIDATED";
+	
 
 
     public static final String C_EXEC_PS = "Execution and Control";
