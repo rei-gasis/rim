@@ -14,18 +14,52 @@ public class RIMProjectStatusVOImpl extends OAViewObjectImpl {
     public RIMProjectStatusVOImpl() {
     }
 
-    public void limitProjectStatus(String pProcess){
-      // setMaxFetchSize(0);
-     setWhereClause(null);
-     setWhereClause("1<>2");
+    public void limitProjectStatus(String pUrl){
+        System.out.println("receivedURL: " + pUrl);
 
-     System.out.println("pProcess");
-     System.out.println("project_status IN ('" + RIMHelper.C_EXEC_PS + "')");
-     // if(RIMHelper.C_CREATE_AC.equals(pProcess)){
-     // 	   pageContext.writeDiagnostics(this, RIMHelper.C_EXEC_PS, 1);
-     //     setWhereClause("project_status IN ('" + RIMHelper.C_EXEC_PS + "')");
-     // }
-  
-    executeQuery(); 
+      String criteria = "";  
+      setWhereClauseParams(null);
+
+      if(RIMHelper.C_FOR_CLSOUT_AC.equals(pUrl) ||
+          RIMHelper.C_DON_FIN_REP_AC.equals(pUrl) ||
+          RIMHelper.C_CLS_REP_VAL_AC.equals(pUrl) ||
+          RIMHelper.C_CLOSED_AC.equals(pUrl) ||
+          RIMHelper.C_COMPLETED_AC.equals(pUrl)) {
+
+        if(pUrl.equals(RIMHelper.C_FOR_CLSOUT_AC.equals(pUrl))){
+            criteria = RIMHelper.C_FINAL_FIN_REP_PS;            
+            
+        } else if(pUrl.equals(RIMHelper.C_DON_FIN_REP_AC.equals(pUrl))){
+            criteria = RIMHelper.C_CLSOUT_REP_VAL_PS;            
+            
+        } else if(pUrl.equals(RIMHelper.C_CLS_REP_VAL_AC.equals(pUrl))){
+            criteria = RIMHelper.C_CLOSED_PS;            
+            
+        
+        } else if(pUrl.equals(RIMHelper.C_CLOSED_AC.equals(pUrl))){
+            criteria = RIMHelper.C_COMPLETED_PS;            
+            
+        }
+
+        setWhereClause("project_status = :1");
+        setWhereClauseParam(0, criteria);
+        executeQuery();  
+
+      
+      } else { // Create/Update 
+        setWhereClause("project_status NOT IN (:1, :2, :3, :4, :5)");
+        setWhereClauseParam(0, RIMHelper.C_CLOSEOUT_PS);
+        setWhereClauseParam(1, RIMHelper.C_FINAL_FIN_REP_PS);
+        setWhereClauseParam(2, RIMHelper.C_CLSOUT_REP_VAL_PS);
+        setWhereClauseParam(3, RIMHelper.C_CLOSED_PS);
+        setWhereClauseParam(4, RIMHelper.C_COMPLETED_PS);
+        executeQuery();  
+
+      }
+
+
+      
+
+    
   }
 }
