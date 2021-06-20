@@ -82,74 +82,74 @@ public class RIMBasicInfoSubCO extends OAControllerImpl {
 
 
               //@TEST: default values
-          //   mRow.setAttribute("ResearchTitle", "Research 1");
-          //   mRow.setAttribute("ResearchType", "Descriptive Research");
-          //   mRow.setAttribute("ProjectImpactDesc", "Desc");
-          //   mRow.setAttribute("MainAreaInterest", "Chemistry");
-          //   mRow.setAttribute("ProjectLeaderDisp", "Gasis, Mr. Winson Rei Dalida");
-          //   mRow.setAttribute("PositionName", "Senior ICT Assistant");
-          //   mRow.setAttribute("AssignmentId", 67829);
-          //   mRow.setAttribute("StartDate", new Date());
-          //   mRow.setAttribute("EndDate", new Date());
-          //   mRow.setAttribute("ProjectStatus", "Execution and Control");
-          //   mRow.setAttribute("ProjectLeaderId", 31532);
+            // mRow.setAttribute("ResearchTitle", "Research 1");
+            // mRow.setAttribute("ResearchType", "Descriptive Research");
+            // mRow.setAttribute("ProjectImpactDesc", "Desc");
+            // mRow.setAttribute("MainAreaInterest", "Chemistry");
+            // mRow.setAttribute("ProjectLeaderDisp", "Gasis, Mr. Winson Rei Dalida");
+            // mRow.setAttribute("PositionName", "Senior ICT Assistant");
+            // mRow.setAttribute("AssignmentId", 67829);
+            // mRow.setAttribute("StartDate", new Date());
+            // mRow.setAttribute("EndDate", new Date());
+            // mRow.setAttribute("ProjectStatus", "Execution and Control");
+            // mRow.setAttribute("ProjectLeaderId", 31532);
 
 
-          //   OAViewObject membersVO = 
-          //     (OAViewObject)am.findViewObject("RIMTeamMembersEOVO1");
+            // OAViewObject membersVO = 
+            //   (OAViewObject)am.findViewObject("RIMTeamMembersEOVO1");
 
-          //   if( membersVO != null){
-          //     membersVO.reset();
-          //     Row memRow = membersVO.next();    
+            // if( membersVO != null){
+            //   membersVO.reset();
+            //   Row memRow = membersVO.next();    
 
-          //     memRow.setAttribute("FullName", "Gasis, Mr. Winson Rei Dalida");
-          //     memRow.setAttribute("Position", "Senior ICT Assistant");
-          //     memRow.setAttribute("Organization", "UPS UP Information Technology Development Center");
-          //     memRow.setAttribute("Attribute2", 31532);
+            //   memRow.setAttribute("FullName", "Gasis, Mr. Winson Rei Dalida");
+            //   memRow.setAttribute("Position", "Senior ICT Assistant");
+            //   memRow.setAttribute("Organization", "UPS UP Information Technology Development Center");
+            //   memRow.setAttribute("Attribute2", 31532);
 
-          //   }
+            // }
 
-          //   //   OAViewObject othermembersVO = 
-          //   //   (OAViewObject)am.findViewObject("RIMOtherTeamMembersVO1");
+            // //   OAViewObject othermembersVO = 
+            // //   (OAViewObject)am.findViewObject("RIMOtherTeamMembersVO1");
 
-          //   // if( othermembersVO != null){
-          //   //   othermembersVO.reset();
-          //   //   Row memRow = othermembersVO.next();    
+            // // if( othermembersVO != null){
+            // //   othermembersVO.reset();
+            // //   Row memRow = othermembersVO.next();    
 
-          //   //   memRow.setAttribute("FullName", "Gasis, Mr. Winson Rei Dalida");
-          //   //   memRow.setAttribute("Position", "Senior ICT Assistant");
-          //   //   memRow.setAttribute("Organization", "UPS UP Information Technology Development Center");
+            // //   memRow.setAttribute("FullName", "Gasis, Mr. Winson Rei Dalida");
+            // //   memRow.setAttribute("Position", "Senior ICT Assistant");
+            // //   memRow.setAttribute("Organization", "UPS UP Information Technology Development Center");
 
-          //   //   memRow.setAttribute("Attribute1", "Non-UP");
+            // //   memRow.setAttribute("Attribute1", "Non-UP");
 
-          //   // }
-
-
-          //   OAViewObject fiscVO = 
-          //       (OAViewObject)am.findViewObject("RIMFiscalDetailsEOVO1");
-          //   //@TEST: init fiscal
-          //   if( fiscVO != null){
-          //     fiscVO.reset();
-          //     Row fRow = fiscVO.next();
-
-          //     fRow.setAttribute("ConstituentUnit", "UP System");
-          //     fRow.setAttribute("ResponsibilityCenterDisp", "UPS System Budget Office");
-          //     fRow.setAttribute("ResponsibilityCenter", "SA03006001");
-
-          //   }
+            // // }
 
 
-          //   OAViewObject mileVO = 
-          //       (OAViewObject)am.findViewObject("RIMMilestonesEOVO1");
-          //   //@TEST: init fiscal
-          //   if( mileVO != null){
-          //     mileVO.reset();
-          //     Row mileRow = mileVO.next();
+            // OAViewObject fiscVO = 
+            //     (OAViewObject)am.findViewObject("RIMFiscalDetailsEOVO1");
+            // //@TEST: init fiscal
+            // if( fiscVO != null){
+            //   fiscVO.reset();
+            //   Row fRow = fiscVO.next();
 
-          //     mileRow.setAttribute("Milestone", "First Milestone");
-          //     mileRow.setAttribute("CompletionPercentage", "10");
+            //   fRow.setAttribute("ConstituentUnit", "UP System");
+            //   fRow.setAttribute("ResponsibilityCenterDisp", "UPS System Budget Office");
+            //   fRow.setAttribute("ResponsibilityCenter", "SA03006001");
 
-          //   }
+            // }
+
+
+            // OAViewObject mileVO = 
+            //     (OAViewObject)am.findViewObject("RIMMilestonesEOVO1");
+            // //@TEST: init fiscal
+            // if( mileVO != null){
+            //   mileVO.reset();
+            //   Row mileRow = mileVO.next();
+
+            //   mileRow.setAttribute("Milestone", "First Milestone");
+            //   mileRow.setAttribute("CompletionPercentage", "10");
+
+            // }
 
           // }else{
             
@@ -165,6 +165,7 @@ public class RIMBasicInfoSubCO extends OAControllerImpl {
             mRow.setAttribute("DisableBasicInfo", true); 
 
 
+        }
         }
 
         

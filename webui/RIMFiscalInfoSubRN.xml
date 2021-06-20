@@ -65,17 +65,21 @@
                               <oa:sortableHeader id="AmountSH" prompt="Amount"/>
                            </ui:columnHeader>
                            <ui:contents>
-                              <oa:messageTextInput id="Amount" dataType="NUMBER" prompt="Amount" viewAttr="Amount"/>
+                              <oa:messageTextInput id="Amount" dataType="NUMBER" prompt="Amount" viewAttr="Amount">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="CalculateTotalAmount"/>
+                                 </ui:primaryClientAction>
+                              </oa:messageTextInput>
                            </ui:contents>
                         </oa:column>
-                        <oa:column id="TotalAmountCol">
+                        <!-- <oa:column id="TotalAmountCol">
                            <ui:columnHeader>
                               <oa:sortableHeader id="TotalAmountSH" prompt="Total Amount"/>
                            </ui:columnHeader>
                            <ui:contents>
                               <oa:messageTextInput id="TotalAmount" dataType="NUMBER" prompt="Total Amount" viewAttr="TotalAmount"/>
                            </ui:contents>
-                        </oa:column>
+                        </oa:column> -->
                      </ui:contents>
                      <ui:footer>
                         <oa:tableFooter id="tableFooter7">
@@ -87,6 +91,7 @@
                   </oa:advancedTable>
                </ui:contents>
             </oa:messageLayout>
+            <oa:messageStyledText id="TotalAmount" viewName="RIMFiscalDetailsEOVO1" viewAttr="TotalAmount" dataType="NUMBER" styleClass="OraDataText" prompt="Total Amount"/>
             <oa:messageTextInput id="FundingAgency" dataType="VARCHAR2" prompt="Funding Agency" maximumLength="250" viewName="RIMFiscalDetailsEOVO1" viewAttr="FundingAgency" disabled="${oa.RIMFiscalDetailsEOVO1.DisableFundingAgency}"/>
             <oa:formValue id="SpCode" viewName="RIMFiscalDetailsEOVO1" viewAttr="SpCode" dataType="VARCHAR2"/>
             <oa:messageLovInput id="SpCodeDisp" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/RIMSPCodeLovRN" prompt="SP Code" selectiveSearchCriteria="false" lookAheadSearchType="contains" disabled="${oa.RIMFiscalDetailsEOVO1.DisableAccountingMode}" viewName="RIMFiscalDetailsEOVO1" viewAttr="SpCodeDisp">

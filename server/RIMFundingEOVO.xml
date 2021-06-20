@@ -17,7 +17,6 @@ SELECT RIMFundingEO.RIM_FUND_ID,
        RIMFundingEO.DESCRIPTION, 
        RIMFundingEO.AMOUNT, 
        RIMFundingEO.CURRENCY, 
-       RIMFundingEO.TOTAL_AMOUNT, 
        RIMFundingEO.ATTRIBUTE1, 
        RIMFundingEO.ATTRIBUTE2, 
        RIMFundingEO.ATTRIBUTE3, 
@@ -91,12 +90,6 @@ FROM XXUP.XXUP_RIM_FUNDING RIMFundingEO
       EntityAttrName="Currency"
       EntityUsage="RIMFundingEO"
       AliasName="CURRENCY" >
-   </ViewAttribute>
-   <ViewAttribute
-      Name="TotalAmount"
-      EntityAttrName="TotalAmount"
-      EntityUsage="RIMFundingEO"
-      AliasName="TOTAL_AMOUNT" >
    </ViewAttribute>
    <ViewAttribute
       Name="Attribute1"

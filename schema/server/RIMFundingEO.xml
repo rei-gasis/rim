@@ -121,19 +121,6 @@
       </DesignTime>
    </Attribute>
    <Attribute
-      Name="TotalAmount"
-      Precision="17"
-      Scale="2"
-      ColumnName="TOTAL_AMOUNT"
-      Type="oracle.jbo.domain.Number"
-      ColumnType="NUMBER"
-      SQLType="NUMERIC"
-      TableName="XXUP.XXUP_RIM_FUNDING" >
-      <DesignTime>
-         <Attr Name="_DisplaySize" Value="22" />
-      </DesignTime>
-   </Attribute>
-   <Attribute
       Name="Attribute1"
       Precision="140"
       ColumnName="ATTRIBUTE1"

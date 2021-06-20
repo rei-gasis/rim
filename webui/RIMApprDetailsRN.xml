@@ -109,11 +109,11 @@
                               <oa:messageStyledText id="Description" dataType="VARCHAR2" prompt="Description" viewName="RIMFundingEOVO1" viewAttr="Description" styleClass="OraDataText"/>
                               <oa:messageStyledText id="Amount" dataType="NUMBER" prompt="Amount" viewName="RIMFundingEOVO1" viewAttr="Amount" styleClass="OraDataText"/>
                               <oa:messageStyledText id="Currency" dataType="VARCHAR2" prompt="Currency" viewName="RIMFundingEOVO1" viewAttr="Currency" styleClass="OraDataText"/>
-                              <oa:messageStyledText id="TotalAmount" dataType="NUMBER" prompt="Total Amount" viewName="RIMFundingEOVO1" viewAttr="TotalAmount" styleClass="OraDataText"/>
                            </ui:contents>
                         </oa:table>
                      </ui:contents>
                   </oa:messageLayout>
+                  <oa:messageStyledText id="TotalAmount" dataType="NUMBER" prompt="Total Amount" viewName="RIMFiscalDetailsEOVO1" viewAttr="TotalAmount" styleClass="OraDataText"/>
                   <oa:messageStyledText id="FundingAgency" dataType="VARCHAR2" prompt="Funding Agency" viewName="RIMFiscalDetailsEOVO1" viewAttr="FundingAgency" styleClass="OraDataText"/>
                   <oa:messageStyledText id="SpCodeDisp" dataType="VARCHAR2" prompt="SP Code" viewName="RIMFiscalDetailsEOVO1" viewAttr="SpCodeDisp" styleClass="OraDataText"/>
                   <oa:messageStyledText id="FundControllerDisp" dataType="VARCHAR2" prompt="Fund Controller" viewName="RIMFiscalDetailsEOVO1" viewAttr="FundControllerDisp" styleClass="OraDataText"/>

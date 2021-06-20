@@ -265,6 +265,19 @@
          <Attr Name="_DisplaySize" Value="30" />
       </DesignTime>
    </Attribute>
+   <Attribute
+      Name="TotalAmount"
+      Precision="17"
+      Scale="2"
+      ColumnName="TOTAL_AMOUNT"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXUP.XXUP_RIM_FISCAL_DETAILS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
    <Key
       Name="RimFiscPk" >
       <AttrArray Name="Attributes">
@@ -350,6 +363,28 @@
          <Attr Name="_checkCondition" Value="&#34;FUNDING_AGENCY&#34; IS NOT NULL" />
          <Attr Name="_isCheck" Value="true" />
          <Attr Name="_DBObjectName" Value="SYS_C00768924" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC00773747" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxup.oracle.apps.per.rim.schema.server.RIMFiscalDetailsEO.TransactionNo" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;TRANSACTION_NO&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C00773747" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC00773748" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxup.oracle.apps.per.rim.schema.server.RIMFiscalDetailsEO.ResponsibilityCenter" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;RESPONSIBILITY_CENTER&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C00773748" />
       </DesignTime>
    </Key>
    <Key

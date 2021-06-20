@@ -135,7 +135,11 @@ public class RIMFiscalInfoSubCO extends OAControllerImpl {
                   fiscRow.setAttribute("DisableFundingAgency", true);
               }
             }
-            
-        } 
+        } else if("CalculateTotalAmount".equals(pageContext.getParameter(OAWebBeanConstants.EVENT_PARAM))) {
+          Row row = fiscVO.getCurrentRow();
+          System.out.println("totalFund" + am.invokeMethod("totalFundAmount"));
+
+          row.setAttribute("TotalAmount", am.invokeMethod("totalFundAmount"));
+        }
     }
 }

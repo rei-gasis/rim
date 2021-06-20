@@ -36,6 +36,7 @@ public class RIMFiscalDetailsEOImpl extends OAEntityImpl {
     public static final int CREATEDBY = 17;
     public static final int CREATIONDATE = 18;
     public static final int CONSTITUENTUNIT = 19;
+    public static final int TOTALAMOUNT = 20;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -330,6 +331,8 @@ public class RIMFiscalDetailsEOImpl extends OAEntityImpl {
             return getCreationDate();
         case CONSTITUENTUNIT:
             return getConstituentUnit();
+        case TOTALAMOUNT:
+            return getTotalAmount();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -400,6 +403,9 @@ public class RIMFiscalDetailsEOImpl extends OAEntityImpl {
         case CONSTITUENTUNIT:
             setConstituentUnit((String)value);
             return;
+        case TOTALAMOUNT:
+            setTotalAmount((Number)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -429,6 +435,18 @@ public class RIMFiscalDetailsEOImpl extends OAEntityImpl {
         setAttributeInternal(CONSTITUENTUNIT, value);
     }
 
+
+    /**Gets the attribute value for TotalAmount, using the alias name TotalAmount
+     */
+    public Number getTotalAmount() {
+        return (Number)getAttributeInternal(TOTALAMOUNT);
+    }
+
+    /**Sets <code>value</code> as the attribute value for TotalAmount
+     */
+    public void setTotalAmount(Number value) {
+        setAttributeInternal(TOTALAMOUNT, value);
+    }
 
     /**Creates a Key object based on given key constituents
      */

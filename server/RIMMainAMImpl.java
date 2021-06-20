@@ -1245,6 +1245,25 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
 
     }
 
+    public String totalFundAmount(){
+      double total = 0;
+
+      RIMFundingEOVOImpl fundVO = getRIMFundingEOVO1();
+      RowSetIterator rsFundVO = fundVO.createRowSetIterator(null);
+
+      rsFundVO.reset();
+      while(rsFundVO.hasNext()){
+        Row row = rsFundVO.next();
+
+        if(row.getAttribute("Amount") != null){
+          total += Double.valueOf(row.getAttribute("Amount").toString());
+        }
+      }
+
+
+      return Double.toString(total);
+    }
+
     public void returnNonMemberVO() {
         RIMTeamMembersEOVOImpl membersVO = 
             getRIMTeamMembersEOVO1();
