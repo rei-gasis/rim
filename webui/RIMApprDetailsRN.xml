@@ -47,6 +47,14 @@
                                     <oa:messageStyledText id="Position" viewAttr="Position" styleClass="OraDataText"/>
                                  </ui:contents>
                               </oa:column>
+                              <oa:column id="EndDateCol">
+                                 <ui:columnHeader>
+                                    <oa:sortableHeader id="EndDateSH" prompt="End Date"/>
+                                 </ui:columnHeader>
+                                 <ui:contents>
+                                    <oa:messageStyledText id="EndDateMember" viewAttr="EndDate" styleClass="OraDataText"/>
+                                 </ui:contents>
+                              </oa:column>
                               <oa:column id="OrganizationCol">
                                  <ui:columnHeader>
                                     <oa:sortableHeader id="OrganizationSH" prompt="Organization"/>

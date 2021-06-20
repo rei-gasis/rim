@@ -188,6 +188,7 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
             for (Row rowi: otherMembersVO.getAllRowsInRange()) {
                 String member = "";
                 String position = "";
+                String endDate = "";
                 String organization = "";
                 String projectRole = "";
 
@@ -199,6 +200,9 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
 
                     if (rowi.getAttribute("Position") != null)
                         position = rowi.getAttribute("Position").toString();
+
+                    if (rowi.getAttribute("EndDate") != null)
+                        endDate = rowi.getAttribute("EndDate").toString();
 
 
                     if (rowi.getAttribute("Organization") != null)
@@ -212,6 +216,7 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
 
                     memberRow.setAttribute("FullName", member);
                     memberRow.setAttribute("Position", position);
+                    memberRow.setAttribute("EndDate", endDate);
                     memberRow.setAttribute("Organization", organization);
                     memberRow.setAttribute("ProjectRole", projectRole);
                     memberRow.setAttribute("Attribute1", "Non-UP");
@@ -907,6 +912,7 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     String strTransactionNo = currRow.getAttribute("TransactionNo") != null ? currRow.getAttribute("TransactionNo").toString() : null;
                     String strFullName = currRow.getAttribute("FullName") != null ? currRow.getAttribute("FullName").toString() : null;
                     String strPosition = currRow.getAttribute("Position") != null ? currRow.getAttribute("Position").toString() : null;
+                    String strEndDate = currRow.getAttribute("EndDate") != null ? currRow.getAttribute("EndDate").toString() : null;
                     String strOrganization = currRow.getAttribute("Organization") != null ? currRow.getAttribute("Organization").toString() : null;
                     String strProjectRole = currRow.getAttribute("ProjectRole") != null ? currRow.getAttribute("ProjectRole").toString() : null;
                     String strAttribute1 = currRow.getAttribute("Attribute1") != null ? currRow.getAttribute("Attribute1").toString() : null;
@@ -928,6 +934,7 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     tRow.setAttribute("TransactionNo", strTransactionNo);
                     tRow.setAttribute("FullName", strFullName);
                     tRow.setAttribute("Position", strPosition);
+                    tRow.setAttribute("EndDate", strEndDate);
                     tRow.setAttribute("Organization", strOrganization);
                     tRow.setAttribute("ProjectRole", strProjectRole);
                     tRow.setAttribute("Attribute1", strAttribute1);

@@ -96,6 +96,17 @@
       </DesignTime>
    </Attribute>
    <Attribute
+      Name="EndDate"
+      ColumnName="END_DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      SQLType="DATE"
+      TableName="XXUP.XXUP_RIM_TEAM_MEMBERS" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
       Name="Organization"
       Precision="140"
       ColumnName="ORGANIZATION"
@@ -259,6 +270,17 @@
          <Attr Name="_checkCondition" Value="&#34;TRANSACTION_NO&#34; IS NOT NULL" />
          <Attr Name="_isCheck" Value="true" />
          <Attr Name="_DBObjectName" Value="SYS_C00768919" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC00772913" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxup.oracle.apps.per.rim.schema.server.RIMMembersEO.TransactionNo" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;TRANSACTION_NO&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C00772913" />
       </DesignTime>
    </Key>
    <Key

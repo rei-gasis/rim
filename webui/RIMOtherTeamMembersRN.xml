@@ -17,6 +17,14 @@
             <oa:messageTextInput id="OtherPosition" viewAttr="Position"/>
          </ui:contents>
       </oa:column>
+      <oa:column id="EndDateCol">
+         <ui:columnHeader>
+            <oa:sortableHeader id="EndDateSH" prompt="End Date"/>
+         </ui:columnHeader>
+         <ui:contents>
+            <oa:messageTextInput id="EndDate" viewAttr="EndDate" dataType="DATE"/>
+         </ui:contents>
+      </oa:column>
       <oa:column id="OrganizationCol">
          <ui:columnHeader>
             <oa:sortableHeader id="OrganizationSH" prompt="Organization"/>
