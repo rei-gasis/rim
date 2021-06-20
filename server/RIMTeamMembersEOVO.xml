@@ -15,6 +15,7 @@ SELECT RIMMembersEO.RIM_MEMBER_ID,
        RIMMembersEO.ITEM_KEY, 
        RIMMembersEO.FULL_NAME, 
        RIMMembersEO.POSITION, 
+       RIMMembersEO.END_DATE, 
        RIMMembersEO.ORGANIZATION, 
        RIMMembersEO.PROJECT_ROLE, 
        RIMMembersEO.ATTRIBUTE1, 
@@ -80,6 +81,12 @@ WHERE attribute1 IS NULL
       EntityUsage="RIMMembersEO"
       AliasName="POSITION" >
    </ViewAttribute>
+   <ViewAttribute
+      Name="EndDate"
+      EntityAttrName="EndDate"
+      EntityUsage="RIMMembersEO"
+      AliasName="END_DATE" >
+    </ViewAttribute>
    <ViewAttribute
       Name="Organization"
       EntityAttrName="Organization"

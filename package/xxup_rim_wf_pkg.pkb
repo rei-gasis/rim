@@ -1860,7 +1860,6 @@ IS
             lv_research_title := wf_engine.getitemattrtext(itemtype
                                                  ,l_itemkey
                                                  ,'PROJECT_NAME');
-
             /*Will update transaction and exit this procedure once done */                  
             IF lv_ntf_result = c_acctg_ac THEN                                
                 BEGIN
@@ -2035,7 +2034,8 @@ IS
                 RETURN;
                 
                 INSERT INTO test_tbl VALUES('exited', CURRENT_TIMESTAMP);  
-            END IF;
+            END IF;            
+            
 
             BEGIN
 
@@ -2205,6 +2205,7 @@ IS
                 ELSIF lv_ntf_result = 'APPROVE' THEN
 
                     INSERT INTO test_tbl VALUES('upd, appr', CURRENT_TIMESTAMP);
+                    
 
                     wf_engine.setitemattrtext(itemtype
                                              ,l_itemkey
@@ -2377,10 +2378,12 @@ IS
                 END IF;
 
 
-
+                    
 
                 --exit workflow and complete, if no 'Pending' approval remaining
                   BEGIN
+                    
+                  
                       SELECT 'N'
                       INTO lv_completed_approval
                       FROM xxup.xxup_per_ps_action_history
@@ -2402,36 +2405,25 @@ IS
                   END;
 
 
-
+            
 
 
                   IF lv_completed_approval = 'Y' THEN
-                    INSERT INTO test_tbl VALUES('lv_completed_approval: ' || lv_completed_approval, CURRENT_TIMESTAMP);
                       IF lv_ntf_result = 'APPROVE' THEN
-
-
-                        BEGIN
-                                UPDATE xxup.xxup_rim_header
-                                  SET approval_status = 'Approved'
-                                  WHERE item_key = l_itemkey;
-
-
-                                  UPDATE xxup.xxup_per_ps_action_history
-                                  SET action = 'Approved'
-                                     ,action_date = SYSDATE
-                                     ,note = wf_engine.context_user_comment
-                                  WHERE item_key = l_itemkey
-                                  AND approver_no = ln_cur_approver_no; 
+                      
+--                        BEGIN
+                        UPDATE xxup.xxup_rim_header
+                        SET approval_status = 'Approved'
+                        WHERE item_key = l_itemkey;
 
                         SELECT SUBSTR(l_itemkey,1,1)
                         INTO lv_action_prefix
                         FROM DUAL;
                         
                         
+                       
+                       
                         IF lv_action_prefix = 'U' THEN
-
-                            INSERT INTO test_tbl VALUES('lv_action_prefix: ' || lv_action_prefix, CURRENT_TIMESTAMP);
-
                             UPDATE xxup_rim_header main
                                 SET (transaction_no
                                 ,assignment_id
@@ -2494,9 +2486,6 @@ IS
                                 )
                                 WHERE main.approval_status = 'Approved'
                                 AND main.transaction_no = lv_tran_no;
-
-                                DELETE FROM xxup_rim_header tr
-                                WHERE item_key = l_itemkey;
 
 
                                 UPDATE xxup_rim_fiscal_details
@@ -2672,15 +2661,22 @@ IS
                                                   WHERE hd.approval_status = 'Approved'
                                                     AND hd.transaction_no = lv_tran_no)
                                 WHERE item_key = l_itemkey;
+                                
+                                DELETE FROM xxup_rim_header tr
+                                WHERE item_key = l_itemkey;
+                                
                             END IF;
-
+                            
+                            
+                                
+                            
                             INSERT INTO test_tbl VALUES('updated: ', CURRENT_TIMESTAMP);
 
-                        EXCEPTION
-                            WHEN OTHERS THEN
-                                ROLLBACK;
-                                raise_application_error(-20101, 'Update status, Error updating records!');
-                        END;
+--                        EXCEPTION
+--                            WHEN OTHERS THEN
+--                                ROLLBACK;
+--                                raise_application_error(-20101, 'Update status, Error updating records!');
+--                        END;
 
                         BEGIN
 

@@ -22,18 +22,19 @@ public class RIMMembersEOImpl extends OAEntityImpl {
     public static final int ITEMKEY = 3;
     public static final int FULLNAME = 4;
     public static final int POSITION = 5;
-    public static final int ORGANIZATION = 6;
-    public static final int PROJECTROLE = 7;
-    public static final int ATTRIBUTE1 = 8;
-    public static final int ATTRIBUTE2 = 9;
-    public static final int ATTRIBUTE3 = 10;
-    public static final int ATTRIBUTE4 = 11;
-    public static final int ATTRIBUTE5 = 12;
-    public static final int LASTUPDATEDATE = 13;
-    public static final int LASTUPDATEDBY = 14;
-    public static final int LASTUPDATELOGIN = 15;
-    public static final int CREATEDBY = 16;
-    public static final int CREATIONDATE = 17;
+    public static final int ENDDATE = 6;
+    public static final int ORGANIZATION = 7;
+    public static final int PROJECTROLE = 8;
+    public static final int ATTRIBUTE1 = 9;
+    public static final int ATTRIBUTE2 = 10;
+    public static final int ATTRIBUTE3 = 11;
+    public static final int ATTRIBUTE4 = 12;
+    public static final int ATTRIBUTE5 = 13;
+    public static final int LASTUPDATEDATE = 14;
+    public static final int LASTUPDATEDBY = 15;
+    public static final int LASTUPDATELOGIN = 16;
+    public static final int CREATEDBY = 17;
+    public static final int CREATIONDATE = 18;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -299,6 +300,8 @@ public class RIMMembersEOImpl extends OAEntityImpl {
             return getFullName();
         case POSITION:
             return getPosition();
+        case ENDDATE:
+            return getEndDate();
         case ORGANIZATION:
             return getOrganization();
         case PROJECTROLE:
@@ -351,6 +354,9 @@ public class RIMMembersEOImpl extends OAEntityImpl {
         case POSITION:
             setPosition((String)value);
             return;
+        case ENDDATE:
+            setEndDate((Date)value);
+            return;
         case ORGANIZATION:
             setOrganization((String)value);
             return;
@@ -393,6 +399,18 @@ public class RIMMembersEOImpl extends OAEntityImpl {
         }
     }
 
+
+    /**Gets the attribute value for EndDate, using the alias name EndDate
+     */
+    public Date getEndDate() {
+        return (Date)getAttributeInternal(ENDDATE);
+    }
+
+    /**Sets <code>value</code> as the attribute value for EndDate
+     */
+    public void setEndDate(Date value) {
+        setAttributeInternal(ENDDATE, value);
+    }
 
     /**Creates a Key object based on given key constituents
      */

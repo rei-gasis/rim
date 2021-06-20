@@ -12,6 +12,7 @@
 SELECT rim_member_id
       ,full_name
       ,position
+      ,end_date
       ,organization
       ,project_role
       ,line_no
@@ -70,6 +71,18 @@ WHERE attribute1 = 'Non-UP'
       SQLType="VARCHAR" >
       <DesignTime>
          <Attr Name="_DisplaySize" Value="140" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EndDate"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="END_DATE"
+      Expression="END_DATE"
+      SQLType="DATE" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
       </DesignTime>
    </ViewAttribute>
    <ViewAttribute
