@@ -369,13 +369,14 @@ public class RIMReviewCO extends OAControllerImpl
         dialogPage.setOkButtonItemName("DialogOk");
 
         dialogPage.setPostToCallingPage(true);
-        // am.invokeMethod("commitTransaction");
+        
+        am.invokeMethod("commitTransaction");
 
-        Serializable[] updateParams = { pItemKey, strProjectStatus };
+        Serializable[] updateParams = { pItemKey };
         am.invokeMethod("updateProjStatus", updateParams);
 
         
-        pageContext.redirectToDialogPage(dialogPage);
+        pageContext.redirectToDialogPage(dialogPage); 
         
       }
 
