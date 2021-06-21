@@ -20,24 +20,25 @@ public class RIMFiscalDetailsEOVORowImpl extends OAViewRowImpl {
     public static final int COLLABORATINGAGENCY = 4;
     public static final int FUNDINGAGENCY = 5;
     public static final int SPCODE = 6;
-    public static final int FUNDCONTROLLERID = 7;
-    public static final int FAREXCLUDED = 8;
-    public static final int ITEMKEY = 9;
-    public static final int ATTRIBUTE1 = 10;
-    public static final int ATTRIBUTE2 = 11;
-    public static final int ATTRIBUTE3 = 12;
-    public static final int ATTRIBUTE4 = 13;
-    public static final int ATTRIBUTE5 = 14;
-    public static final int LASTUPDATEDATE = 15;
-    public static final int LASTUPDATEDBY = 16;
-    public static final int LASTUPDATELOGIN = 17;
-    public static final int CREATEDBY = 18;
-    public static final int CREATIONDATE = 19;
-    public static final int FUNDCONTROLLERDISP = 20;
-    public static final int SPCODEDISP = 21;
-    public static final int RESPONSIBILITYCENTERDISP = 22;
-    public static final int DISABLEACCOUNTINGMODE = 23;
-    public static final int DISABLEFUNDINGAGENCY = 24;
+    public static final int TOTALAMOUNT = 7;
+    public static final int FUNDCONTROLLERID = 8;
+    public static final int FAREXCLUDED = 9;
+    public static final int ITEMKEY = 10;
+    public static final int ATTRIBUTE1 = 11;
+    public static final int ATTRIBUTE2 = 12;
+    public static final int ATTRIBUTE3 = 13;
+    public static final int ATTRIBUTE4 = 14;
+    public static final int ATTRIBUTE5 = 15;
+    public static final int LASTUPDATEDATE = 16;
+    public static final int LASTUPDATEDBY = 17;
+    public static final int LASTUPDATELOGIN = 18;
+    public static final int CREATEDBY = 19;
+    public static final int CREATIONDATE = 20;
+    public static final int FUNDCONTROLLERDISP = 21;
+    public static final int SPCODEDISP = 22;
+    public static final int RESPONSIBILITYCENTERDISP = 23;
+    public static final int DISABLEACCOUNTINGMODE = 24;
+    public static final int DISABLEFUNDINGAGENCY = 25;
 
     /**This is the default constructor (do not remove)
      */
@@ -369,6 +370,8 @@ public class RIMFiscalDetailsEOVORowImpl extends OAViewRowImpl {
             return getFundingAgency();
         case SPCODE:
             return getSpCode();
+        case TOTALAMOUNT:
+            return getTotalAmount();
         case FUNDCONTROLLERID:
             return getFundControllerId();
         case FAREXCLUDED:
@@ -436,6 +439,9 @@ public class RIMFiscalDetailsEOVORowImpl extends OAViewRowImpl {
         case SPCODE:
             setSpCode((String)value);
             return;
+        case TOTALAMOUNT:
+            setTotalAmount((Number)value);
+            return;
         case FUNDCONTROLLERID:
             setFundControllerId((Number)value);
             return;
@@ -497,4 +503,15 @@ public class RIMFiscalDetailsEOVORowImpl extends OAViewRowImpl {
     }
 
 
+    /**Gets the attribute value for the calculated attribute TotalAmount
+     */
+    public Number getTotalAmount() {
+        return (Number) getAttributeInternal(TOTALAMOUNT);
+    }
+
+    /**Sets <code>value</code> as the attribute value for the calculated attribute TotalAmount
+     */
+    public void setTotalAmount(Number value) {
+        setAttributeInternal(TOTALAMOUNT, value);
+    }
 }

@@ -17,6 +17,7 @@ SELECT
        RIMFiscalDetailsEO.COLLABORATING_AGENCY, 
        RIMFiscalDetailsEO.FUNDING_AGENCY, 
        RIMFiscalDetailsEO.SP_CODE, 
+       RIMFiscalDetailsEO.TOTAL_AMOUNT, 
        RIMFiscalDetailsEO.FUND_CONTROLLER_ID, 
        RIMFiscalDetailsEO.FAR_EXCLUDED, 
        RIMFiscalDetailsEO.ITEM_KEY, 
@@ -129,6 +130,12 @@ FROM XXUP.XXUP_RIM_FISCAL_DETAILS RIMFiscalDetailsEO
       EntityAttrName="SpCode"
       EntityUsage="RIMFiscalDetailsEO"
       AliasName="SP_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalAmount"
+      EntityAttrName="TotalAmount"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="TOTAL_AMOUNT">
    </ViewAttribute>
    <ViewAttribute
       Name="FundControllerId"

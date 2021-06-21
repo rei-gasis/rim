@@ -620,6 +620,7 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     String strResponsibilityCenter = currRow.getAttribute("ResponsibilityCenter") != null ? currRow.getAttribute("ResponsibilityCenter").toString() : null;
                     String strCollaboratingAgency = currRow.getAttribute("CollaboratingAgency") != null ? currRow.getAttribute("CollaboratingAgency").toString() : null;
                     String strFundingAgency = currRow.getAttribute("FundingAgency") != null ? currRow.getAttribute("FundingAgency").toString() : null;
+                    String strTotalAmount = currRow.getAttribute("TotalAmount") != null ? currRow.getAttribute("TotalAmount").toString() : null;
                     String strSpCode = currRow.getAttribute("SpCode") != null ? currRow.getAttribute("SpCode").toString() : null;
                     String strFundControllerId = currRow.getAttribute("FundControllerId") != null ? currRow.getAttribute("FundControllerId").toString() : null;
                     String strFarExcluded = currRow.getAttribute("FarExcluded") != null ? currRow.getAttribute("FarExcluded").toString() : null;
@@ -646,6 +647,7 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     tRow.setAttribute("ResponsibilityCenter", strResponsibilityCenter);
                     tRow.setAttribute("CollaboratingAgency", strCollaboratingAgency);
                     tRow.setAttribute("FundingAgency", strFundingAgency);
+                    tRow.setAttribute("TotalAmount", strTotalAmount);
                     tRow.setAttribute("SpCode", strSpCode);
                     tRow.setAttribute("FundControllerId", strFundControllerId);
                     tRow.setAttribute("FarExcluded", strFarExcluded);
@@ -774,7 +776,6 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     String strDescription = currRow.getAttribute("Description") != null ? currRow.getAttribute("Description").toString() : null;
                     String strAmount = currRow.getAttribute("Amount") != null ? currRow.getAttribute("Amount").toString() : null;
                     String strCurrency = currRow.getAttribute("Currency") != null ? currRow.getAttribute("Currency").toString() : null;
-                    String strTotalAmount = currRow.getAttribute("TotalAmount") != null ? currRow.getAttribute("TotalAmount").toString() : null;
                     String strAttribute1 = currRow.getAttribute("Attribute1") != null ? currRow.getAttribute("Attribute1").toString() : null;
                     String strAttribute2 = currRow.getAttribute("Attribute2") != null ? currRow.getAttribute("Attribute2").toString() : null;
                     String strAttribute3 = currRow.getAttribute("Attribute3") != null ? currRow.getAttribute("Attribute3").toString() : null;
@@ -796,7 +797,6 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     tRow.setAttribute("Description", strDescription);
                     tRow.setAttribute("Amount", strAmount);
                     tRow.setAttribute("Currency", strCurrency);
-                    tRow.setAttribute("TotalAmount", strTotalAmount);
                     tRow.setAttribute("Attribute1", strAttribute1);
                     tRow.setAttribute("Attribute2", strAttribute2);
                     tRow.setAttribute("Attribute3", strAttribute3);
@@ -1126,20 +1126,38 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
     }
 
     /*For CLOSE WF*/
-    public void updateProjStatus(String pItemKey, String pProjectStatus) {
+    public void updateProjStatus(String pItemKey) {
         try {
 
 
             Connection conn = getOADBTransaction().getJdbcConnection();
-            CallableStatement stmt = conn.prepareCall("{call xxup_rim_wf_pkg.upd_proj_stat(?,?)}");
+            CallableStatement stmt = conn.prepareCall("{call xxup_rim_wf_pkg.upd_proj_stat(?)}");
 
 
             stmt.setString(1, pItemKey);
-            stmt.setString(2, pProjectStatus);
             stmt.execute();
             stmt.close();
 
             System.out.println("done updateProjStatus");
+
+        } catch (Exception ex) {
+            throw new OAException("Error occured calling workflow " + ex);
+        }
+    }
+
+    public void completeProj(String pItemKey) {
+        try {
+
+
+            Connection conn = getOADBTransaction().getJdbcConnection();
+            CallableStatement stmt = conn.prepareCall("{call xxup_rim_wf_pkg.complete_proj(?)}");
+
+
+            stmt.setString(1, pItemKey);
+            stmt.execute();
+            stmt.close();
+
+            System.out.println("done completeProj");
 
         } catch (Exception ex) {
             throw new OAException("Error occured calling workflow " + ex);
@@ -1243,6 +1261,25 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
         }
 
 
+    }
+
+    public String totalFundAmount(){
+      double total = 0;
+
+      RIMFundingEOVOImpl fundVO = getRIMFundingEOVO1();
+      RowSetIterator rsFundVO = fundVO.createRowSetIterator(null);
+
+      rsFundVO.reset();
+      while(rsFundVO.hasNext()){
+        Row row = rsFundVO.next();
+
+        if(row.getAttribute("Amount") != null){
+          total += Double.valueOf(row.getAttribute("Amount").toString());
+        }
+      }
+
+
+      return Double.toString(total);
     }
 
     public void returnNonMemberVO() {
