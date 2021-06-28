@@ -8,11 +8,11 @@
          <ui:contents>
             <oa:messageLovInput id="FullName" viewAttr="FullName" externalListOfValues="/xxup/oracle/apps/per/publicservice/institutional/lov/webui/PerPSInstMemberRN" columns="30" unvalidated="false" lookAheadSearchType="contains" translatableDefaultValue="">
                <lovMappings>
-                  <lovMap id="FullNameLovMap" lovItem="FullName" resultTo="FullName" useForValidation="default" criteriaFrom="FullName"/>
+                  <lovMap id="FullNameLovMap" lovItem="FullName" useForValidation="default" resultTo="FullName" criteriaFrom="FullName"/>
                   <lovMap id="PositionLovMap" lovItem="Position" resultTo="Position" useForValidation="default"/>
                   <lovMap id="OrganizationLovMap" lovItem="Organization" resultTo="Organization" useForValidation="default"/>
-                  
                   <lovMap id="PersonIdLovMap" lovItem="PersonId" resultTo="PersonId" useForValidation="default"/>
+                  <!-- <lovMap id="EmpRecLovMap" lovItem="EmpRec"/> -->
                </lovMappings>
             </oa:messageLovInput>
             <oa:formValue id="PersonId" rendered="false" viewAttr="Attribute2"/>
@@ -24,6 +24,14 @@
          </ui:columnHeader>
          <ui:contents>
             <oa:messageTextInput id="Position" viewAttr="Position" columns="30"/>
+         </ui:contents>
+      </oa:column>
+      <oa:column id="EndDateCol">
+         <ui:columnHeader>
+            <oa:sortableHeader id="EndDateSH" prompt="End Date"/>
+         </ui:columnHeader>
+         <ui:contents>
+            <oa:messageTextInput id="EndDate" viewAttr="EndDate" dataType="DATE"/>
          </ui:contents>
       </oa:column>
       <oa:column id="OrganizationCol">
