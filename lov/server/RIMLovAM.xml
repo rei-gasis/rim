@@ -53,4 +53,8 @@
       Name="RIMFundingVO1"
       ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMFundingVO" >
    </ViewUsage>
+   <ViewUsage
+      Name="RIMCUVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMCUVO" >
+   </ViewUsage>
 </AppModule>
