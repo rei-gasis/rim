@@ -1705,6 +1705,18 @@ IS
 --          END;
 
           BEGIN
+                UPDATE xxup.xxup_per_ps_action_history
+                SET approver_no = approver_no + 1
+                WHERE action IN ('Pending'
+                                ,c_acctg_upd_ac
+                                ,c_prep_fin_rep_ac
+                                ,c_val_cls_rep_ac
+                                ,c_for_closing_ac
+                                ,c_for_completion_ac
+                ) 
+                AND item_key = lv_item_key;
+          
+          
               INSERT INTO xxup.xxup_per_ps_action_history(sequence_no,
                                                           approver_no,
                                                           from_employee_id,
@@ -2144,24 +2156,40 @@ IS
                        ,action_date = SYSDATE
                        ,note = wf_engine.context_user_comment
                     WHERE item_key = l_itemkey
-                    AND approver_no = ln_cur_approver_no;
+                    AND approver_no = (SELECT MIN(approver_no)
+                                       FROM xxup_per_ps_action_history hist_1
+                                       WHERE action IN ('Pending'
+                                                       ,'For Accounting Info Update'
+                                                       ,c_prep_fin_rep_ac
+                                                       ,c_val_cls_rep_ac
+                                                       ,c_for_closing_ac
+                                                       ,c_for_completion_ac
+                                                      )
+                                        AND hist_1.item_key = hist.item_key
+                                      );
+--                    AND approver_no = ln_cur_approver_no;
 --                                        (SELECT MAX(approver_no)
 --                                         FROM XXUP.XXUP_PER_PS_ACTION_HISTORY hist_1
 --                                         WHERE hist_1.item_key = hist.item_key
 --                                         AND action = 'Pending');
 
 
-
+                    
                     /*1. get all pending approvers and increment their approver no/sequence by 1  
                       2. insert record for the owner (pending resubmission)
                     */
 
 
---                    UPDATE xxup.xxup_per_ps_action_history
---                    SET approver_no = approver_no + 1
---                    WHERE action = 'Pending'
---                    
---                    AND sequence_no = lv_tran_no;
+                    UPDATE xxup.xxup_per_ps_action_history
+                    SET approver_no = approver_no + 1
+                    WHERE action IN ('Pending'
+                                    ,c_acctg_upd_ac
+                                    ,c_prep_fin_rep_ac
+                                    ,c_val_cls_rep_ac
+                                    ,c_for_closing_ac
+                                    ,c_for_completion_ac
+                    ) 
+                    AND item_key = l_itemkey;
 
                     BEGIN 
                     INSERT INTO xxup.xxup_per_ps_action_history(sequence_no,
@@ -2196,7 +2224,7 @@ IS
                                        WHERE hist_1.item_key = hist.item_key
                                        AND action IN ('Resubmit', 'Pending', 'Submit')); /*get latest employee resubmission*/
 
-
+                    
                   EXCEPTION
                     WHEN OTHERS THEN
                       lv_error := SQLERRM;
@@ -2226,13 +2254,26 @@ IS
                                           || lv_emp_name
                                           || ' needs your Approval'
                                              );
+                    
+--                    raise_application_error(-20101, 'ln_approver_counter' || ln_approver_counter);
 
-                    UPDATE XXUP.XXUP_PER_PS_ACTION_HISTORY
+                    UPDATE XXUP.XXUP_PER_PS_ACTION_HISTORY hist
                     SET action = 'Approved'
                        ,action_date = SYSDATE
                        ,note = wf_engine.context_user_comment
                     WHERE item_key = l_itemkey
-                    AND approver_no = ln_approver_counter;
+                    AND approver_no = (SELECT MIN(approver_no)
+                                       FROM xxup_per_ps_action_history hist_1
+                                       WHERE action IN ('Pending'
+                                                       ,'For Accounting Info Update'
+                                                       ,c_prep_fin_rep_ac
+                                                       ,c_val_cls_rep_ac
+                                                       ,c_for_closing_ac
+                                                       ,c_for_completion_ac
+                                                      )
+                                       AND hist_1.item_key = hist.item_key
+                                      );
+                    
 
                 ELSIF lv_ntf_result = 'REJECT' THEN
 
@@ -2245,17 +2286,38 @@ IS
                                              || lv_approver_name
                                              );
 
-                    UPDATE XXUP.XXUP_PER_PS_ACTION_HISTORY
+                    UPDATE XXUP.XXUP_PER_PS_ACTION_HISTORY hist
                     SET action = 'Rejected'
                        ,action_date = SYSDATE
                        ,note = wf_engine.context_user_comment
                     WHERE item_key = l_itemkey
-                    AND approver_no = ln_approver_counter;
+                    AND approver_no = (SELECT MIN(approver_no)
+                                       FROM xxup_per_ps_action_history hist_1
+                                       WHERE action IN ('Pending'
+                                                       ,'For Accounting Info Update'
+                                                       ,c_prep_fin_rep_ac
+                                                       ,c_val_cls_rep_ac
+                                                       ,c_for_closing_ac
+                                                       ,c_for_completion_ac
+                                                      )
+                                       AND hist_1.item_key = hist.item_key
+                                      );
+--                    AND approver_no = ln_approver_counter;
 
                     --remove next line of approvers
                     DELETE FROM xxup.xxup_per_ps_action_history
                     WHERE item_key = l_itemkey
-                    AND approver_no > ln_approver_counter;
+                    AND approver_no > (SELECT MIN(approver_no)
+                                       FROM xxup_per_ps_action_history
+                                       WHERE action IN ('Pending'
+                                                       ,'For Accounting Info Update'
+                                                       ,c_prep_fin_rep_ac
+                                                       ,c_val_cls_rep_ac
+                                                       ,c_for_closing_ac
+                                                       ,c_for_completion_ac
+                                                      )
+                                      );
+--                    AND approver_no > ln_approver_counter;
 
                 ELSIF funcmode = 'FORWARD' THEN
 
@@ -2749,27 +2811,18 @@ IS
 
             IF lv_ntf_result IN ('APPROVE', 'REJECT','RFC') THEN
             BEGIN
-                INSERT INTO test_tbl VALUES('upd, still here', CURRENT_TIMESTAMP);
-                wf_engine.setitemattrtext(itemtype
-                                     ,l_itemkey
-                                     ,'RESULT'
-                                     ,lv_ntf_result);
-
-                resultout := lv_ntf_result;
-
+            
+                
                 --previous approver
                 wf_engine.setitemattrtext(itemtype
                                          ,l_itemkey
                                          ,'FROM'
                                          ,lv_appr_user_name);
+                                         
+                                         
 
-
-                ln_approver_counter := ln_approver_counter + 1;
-                wf_engine.setitemattrnumber(itemtype
-                                         ,l_itemkey
-                                         ,'APPROVER_COUNTER'
-                                         ,ln_approver_counter);
-
+--                raise_application_error(-20101, 'l_itemkey' || l_itemkey || 'ln_approver_counter' || ln_approver_counter);
+                
                 SELECT user_name
                       ,(SELECT full_name
                         FROM per_all_people_f papf
@@ -2782,10 +2835,25 @@ IS
                 WHERE employee_id = (SELECT to_employee_id
                                      FROM xxup.xxup_per_ps_action_history pah
                                      WHERE item_key = l_itemkey     
-                                     AND approver_no = ln_approver_counter);                  
+                                     AND approver_no = ln_approver_counter);   
+                
+                ln_approver_counter := ln_approver_counter + 1;
+                
+                wf_engine.setitemattrnumber(itemtype
+                                         ,l_itemkey
+                                         ,'APPROVER_COUNTER'
+                                         ,ln_approver_counter);
+                                         
+                
+                INSERT INTO test_tbl VALUES('upd, still here', CURRENT_TIMESTAMP);
+                wf_engine.setitemattrtext(itemtype
+                                     ,l_itemkey
+                                     ,'RESULT'
+                                     ,lv_ntf_result);
 
+                resultout := lv_ntf_result;
 
-
+                
 
                 IF lv_ntf_result IN ('APPROVE', 'REJECT') THEN
                     BEGIN
