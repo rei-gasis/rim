@@ -7,7 +7,7 @@
                <ui:contents>
                   <oa:table id="OrganizationTbl">
                      <ui:contents>
-                        <oa:messageLovInput id="ConstituentUniversity" viewName="RIMFiscalDetailsEOVO1" viewAttr="ConstituentUnit" externalListOfValues="/xxup/oracle/apps/per/publicservice/institutional/lov/webui/PerPSPInstCULovRN" prompt="* Constituent University" selectiveSearchCriteria="false" lookAheadSearchType="contains">
+                        <oa:messageLovInput id="ConstituentUniversity" viewName="RIMFiscalDetailsEOVO1" viewAttr="ConstituentUnit" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/RIMCULovRN" prompt="* Constituent University" selectiveSearchCriteria="false" lookAheadSearchType="contains">
                            <lovMappings>
                               <lovMap id="CULov" lovItem="ConstituentUniversity" resultTo="ConstituentUniversity" criteriaFrom="ConstituentUniversity"/>
                            </lovMappings>

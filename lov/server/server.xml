@@ -20,6 +20,11 @@
       ObjectType="ViewObject" >
    </Containee>
    <Containee
+      Name="RIMCUVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMCUVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
       Name="RIMDistributionModeVO"
       FullName="xxup.oracle.apps.per.rim.lov.server.RIMDistributionModeVO"
       ObjectType="ViewObject" >

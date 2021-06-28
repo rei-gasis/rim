@@ -1,4 +1,4 @@
-package xxup.oracle.apps.per.rim.server;
+package xxup.oracle.apps.per.rim.lov.server;
 
 import oracle.apps.fnd.framework.server.OAViewObjectImpl;
 // ---------------------------------------------------------------------
@@ -6,17 +6,9 @@ import oracle.apps.fnd.framework.server.OAViewObjectImpl;
 // ---    Custom code may be added to this class.
 // ---    Warning: Do not modify method signatures of generated methods.
 // ---------------------------------------------------------------------
-public class RIMOtherTeamMembersEOVOImpl extends RIMVOParent {
+public class RIMCUVOImpl extends OAViewObjectImpl {
     /**This is the default constructor (do not remove)
      */
-    public RIMOtherTeamMembersEOVOImpl() {
-    }
-    
-    public void initNewRecord(){
-        super.initNewRecord();
-    }
-    
-    public void initExist(String itemKey) {
-        super.initExist(itemKey);
+    public RIMCUVOImpl() {
     }
 }
