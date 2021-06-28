@@ -68,6 +68,7 @@ FROM XXUP.XXUP_RIM_PUBLICATION RIMPublicationEO
    <ViewAttribute
       Name="IsPublished"
       IsNotNull="true"
+      DefaultValue="N"
       EntityAttrName="IsPublished"
       EntityUsage="RIMPublicationEO"
       AliasName="IS_PUBLISHED" >
