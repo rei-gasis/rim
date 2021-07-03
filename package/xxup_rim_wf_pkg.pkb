@@ -1841,6 +1841,8 @@ IS
     lv_appr_status xxup.xxup_per_ps_action_history.action%TYPE;
     lv_close_ac VARCHAR2(50);
     lv_prev_proj_status xxup.xxup_rim_header.project_status%TYPE;
+    
+    ln_emp_last_appr NUMBER;
 
     BEGIN
 
@@ -2122,6 +2124,23 @@ IS
               WHEN OTHERS THEN
                 raise_application_error(-20101, 'Error getting total approver count');
             END;
+            
+            
+            SELECT to_employee_id 
+            INTO ln_emp_last_appr
+            FROM xxup_per_ps_action_history hist
+            WHERE item_key = l_itemkey
+            AND approver_no = (SELECT MIN(approver_no)
+                                   FROM xxup_per_ps_action_history hist_1
+                                   WHERE action IN ('Pending'
+                                                   ,'For Accounting Info Update'
+                                                   ,c_prep_fin_rep_ac
+                                                   ,c_val_cls_rep_ac
+                                                   ,c_for_closing_ac
+                                                   ,c_for_completion_ac
+                                                  )
+                                   AND hist_1.item_key = hist.item_key
+                                  );
 
 
 
@@ -2285,6 +2304,8 @@ IS
                                              || ' has been rejected by '
                                              || lv_approver_name
                                              );
+                                             
+                    
 
                     UPDATE XXUP.XXUP_PER_PS_ACTION_HISTORY hist
                     SET action = 'Rejected'
@@ -2317,7 +2338,41 @@ IS
                                                        ,c_for_completion_ac
                                                       )
                                       );
---                    AND approver_no > ln_approver_counter;
+                    --revert to approved status on rejected application
+                      DELETE 
+                      FROM xxup_rim_header
+                      WHERE item_key = l_itemkey;
+                      
+                      DELETE 
+                      FROM xxup_rim_fiscal_details
+                      WHERE item_key = l_itemkey;
+                      
+                      
+                      DELETE 
+                      FROM xxup_rim_publication
+                      WHERE item_key = l_itemkey;
+                      
+                      DELETE 
+                      FROM xxup_rim_proj_impact
+                      WHERE item_key = l_itemkey;
+                      
+                      DELETE 
+                      FROM xxup_rim_team_members
+                      WHERE item_key = l_itemkey;
+                      
+                      DELETE 
+                      FROM xxup_rim_funding
+                      WHERE item_key = l_itemkey;
+                      
+                      DELETE 
+                      FROM xxup_rim_milestones
+                      WHERE item_key = l_itemkey;
+                      
+                      --orig state
+                      UPDATE xxup_rim_header
+                      SET approval_status = 'Approved'
+                      WHERE transaction_no = lv_tran_no; 
+                         
 
                 ELSIF funcmode = 'FORWARD' THEN
 
@@ -2488,6 +2543,11 @@ IS
                        
                        
                         IF lv_action_prefix = 'U' THEN
+                        
+                            /*
+                             * Delete transaction record
+                             * Update 
+                            */
                         
                             UPDATE xxup_rim_header main
                                 SET (transaction_no
@@ -2793,17 +2853,7 @@ IS
                                     || lv_approver_name
                                     );
 
---                          UPDATE xxup.xxup_rim_header
---                          SET approval_status = 'Rejected'
---                          WHERE item_key = l_itemkey;
 
-                          UPDATE xxup.xxup_per_ps_action_history
-                          SET action = 'Rejected'
-                             ,action_date = SYSDATE
-                             ,note = wf_engine.context_user_comment
-                          WHERE item_key = l_itemkey
-                          AND approver_no = ln_cur_approver_no
-                          ;
 
                       END IF;
 
@@ -2811,17 +2861,14 @@ IS
 
             IF lv_ntf_result IN ('APPROVE', 'REJECT','RFC') THEN
             BEGIN
+                                 
             
-                
                 --previous approver
                 wf_engine.setitemattrtext(itemtype
                                          ,l_itemkey
                                          ,'FROM'
                                          ,lv_appr_user_name);
                                          
-                                         
-
---                raise_application_error(-20101, 'l_itemkey' || l_itemkey || 'ln_approver_counter' || ln_approver_counter);
                 
                 SELECT user_name
                       ,(SELECT full_name
@@ -2832,11 +2879,8 @@ IS
                 INTO lv_appr_user_name
                     ,lv_approver_name
                 FROM fnd_user
-                WHERE employee_id = (SELECT to_employee_id
-                                     FROM xxup.xxup_per_ps_action_history pah
-                                     WHERE item_key = l_itemkey     
-                                     AND approver_no = ln_approver_counter);   
-                
+                WHERE employee_id = ln_emp_last_appr;   
+                                     
                 ln_approver_counter := ln_approver_counter + 1;
                 
                 wf_engine.setitemattrnumber(itemtype
@@ -2845,11 +2889,12 @@ IS
                                          ,ln_approver_counter);
                                          
                 
-                INSERT INTO test_tbl VALUES('upd, still here', CURRENT_TIMESTAMP);
+                
                 wf_engine.setitemattrtext(itemtype
                                      ,l_itemkey
                                      ,'RESULT'
                                      ,lv_ntf_result);
+                                     
 
                 resultout := lv_ntf_result;
 
@@ -3200,8 +3245,8 @@ IS
         DELETE FROM xxup_rim_proj_impact 
         WHERE item_key = p_item_key;
         
-        DELETE FROM xxup_per_ps_action_history 
-        WHERE item_key = p_item_key;
+--        DELETE FROM xxup_per_ps_action_history 
+--        WHERE item_key = p_item_key;
 
         COMMIT;
     EXCEPTION
