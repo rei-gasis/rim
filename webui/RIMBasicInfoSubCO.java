@@ -15,6 +15,7 @@ import oracle.apps.fnd.framework.OAException;
 import oracle.apps.fnd.framework.OAViewObject;
 import oracle.apps.fnd.framework.webui.OAControllerImpl;
 import oracle.apps.fnd.framework.webui.OAPageContext;
+import oracle.apps.fnd.framework.webui.OAWebBeanConstants;
 import oracle.apps.fnd.framework.webui.beans.OAWebBean;
 
 import oracle.jbo.Row;

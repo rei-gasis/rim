@@ -56,19 +56,10 @@ public class RIMRequestCO extends OAControllerImpl
     OAApplicationModule am = (OAApplicationModule)pageContext.getApplicationModule(webBean);
 
       if("yes".equals(backUsed)){
-//          OAViewObject projImpVO = (OAViewObject) am.findViewObject("RIMProjImpactEOVO1");
-//            String test = "";
-//          if (projImpVO != null){
-//            if(projImpVO.getRowCount() >= 1){
-//              Serializable [] projImpParams = { test };
-//              am.invokeMethod("LoadExistProjImpactInTable", projImpParams);
-//            }
-//
-//          }
-
-
           return; 
       }
+
+      
 
 
       if (RIMHelper.C_CREATE_AC.equals(actionFromURL) || actionFromURL == null) {
