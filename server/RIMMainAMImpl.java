@@ -5,6 +5,8 @@ import java.sql.Connection;
 
 import java.sql.Types;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import oracle.apps.fnd.framework.OAException;
@@ -91,6 +93,68 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                 }
             }
 
+            /*End Date (Extension)*/
+            try{
+              System.out.println("saving extension");
+              String strEndDate = headerRow.getAttribute("EndDate").toString();
+              RIMLatestExtVOImpl edVO = getRIMLatestExtVO1();
+              edVO.initExist("RIM-" + transactionNo); //retrieve original
+              
+              
+              if( edVO != null ) {
+                if( edVO.getRowCount() >= 1 ){
+
+                  //get latest end date
+                  Row edRow = (OAViewRowImpl) edVO.first();//edVO.getCurrentRow();
+                  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");        
+                  String strLatestDt = edRow.getAttribute("LatestEndDate").toString();
+                  System.out.println("strLatestDt: " + strLatestDt);
+
+                  try{
+                      //if latest end date is earlier the new end date entered, create record
+                      if(sdf.parse(strLatestDt).before(sdf.parse(strEndDate))){
+
+                        //delete exist (when using backbutton)
+                        delExtensions(itemKey);
+
+                        //init new record
+                        System.out.println("Later date: " + strEndDate);
+                        RIMEndDtExtEOVOImpl extVO = getRIMEndDtExtEOVO1(); 
+
+                        //create new record
+                        extVO.initNewRecord();
+                        Row eRow = extVO.getCurrentRow();
+                        eRow.setAttribute("EndDate", strEndDate);
+                        eRow.setAttribute("ItemKey", itemKey);
+                        eRow.setAttribute("TransactionNo", transactionNo);
+
+                        //append old record
+                        System.out.println("Appending old record");
+                        extVO.initNewRecord();
+                        eRow = extVO.getCurrentRow();
+                        eRow.setAttribute("EndDate", strLatestDt);
+                        eRow.setAttribute("ItemKey", itemKey);
+                        eRow.setAttribute("TransactionNo", transactionNo);
+                      } else{ //if entered is earlier than latest end date
+                        throw new OAException("You have entered date earlier than last MOA End Date" + strLatestDt);
+                      }
+
+
+                  }catch(ParseException ex){
+                      throw new OAException("Error parsing Dates: " + ex);
+                  }catch(Exception ex){
+                      throw new OAException("Error comparing End Dates: " + ex);
+                  }
+                  
+
+                } else{
+                  RIMEndDtExtEOVOImpl extVO = getRIMEndDtExtEOVO1(); 
+                  extVO.initNewRecord();
+
+                  Row eRow = extVO.getCurrentRow();
+                  eRow.setAttribute("EndDate", strEndDate);
+                  eRow.setAttribute("ItemKey", itemKey);
+                  eRow.setAttribute("TransactionNo", transactionNo);
 
             /*Handle Research Type - Others*/
             if(headerRow.getAttribute("MainAreaInterest") != null){
@@ -683,7 +747,12 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     String strMainAreaInterest = currRow.getAttribute("MainAreaInterest") != null ? currRow.getAttribute("MainAreaInterest").toString() : null;
                     String strProjectLeaderId = currRow.getAttribute("ProjectLeaderId") != null ? currRow.getAttribute("ProjectLeaderId").toString() : null;
                     String strStartDate = currRow.getAttribute("StartDate") != null ? currRow.getAttribute("StartDate").toString() : null;
-                    String strEndDate = currRow.getAttribute("EndDate") != null ? currRow.getAttribute("EndDate").toString() : null;
+
+                    RIMLatestExtVOImpl edVO = getRIMLatestExtVO1();
+                    edVO.initExist(pItemKey);
+                    Row edRow = (OAViewRowImpl) edVO.next();
+                    String strEndDate = edRow.getAttribute("LatestEndDate") != null ? edRow.getAttribute("LatestEndDate").toString() : null;
+                    // String strEndDate = currRow.getAttribute("EndDate") != null ? currRow.getAttribute("EndDate").toString() : null;
                     String strActualEndDate = currRow.getAttribute("ActualEndDate") != null ? currRow.getAttribute("ActualEndDate").toString() : null;
                     String strProjectStatus = currRow.getAttribute("ProjectStatus") != null ? currRow.getAttribute("ProjectStatus").toString() : null;
                     String strProjectRemarks = currRow.getAttribute("ProjectRemarks") != null ? currRow.getAttribute("ProjectRemarks").toString() : null;
@@ -1408,6 +1477,9 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
 
             RIMMainAreaIntEOVOImpl intVO = getRIMMainAreaIntEOVO1();
             intVO.initExist(pItemKey);
+            RIMEndDtExtEOVOImpl extVO = getRIMEndDtExtEOVO1();
+            extVO.initExist(pItemKey);
+
             setApproversTable(pItemKey);
 
         } catch (Exception ex) {
@@ -1631,6 +1703,29 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
         
     }
 
+    public void delExtensions(String paramItemKey) {
+        try {
+
+            RIMEndDtExtEOVOImpl extVO = getRIMEndDtExtEOVO1();
+            extVO.initExist(paramItemKey);
+
+
+            while(extVO.hasNext()){
+              OAViewRowImpl extRow = (OAViewRowImpl) extVO.next();
+              extRow.remove();
+            }
+
+            // getTransaction().commit();
+
+            
+
+        } catch (Exception ex) {
+            throw new OAException("Error occured deleting extensions" + ex);
+        }
+    }
+
+
+
 //    public void setAttachments(String paramItemKey) {
 //        try {
 //
@@ -1764,14 +1859,18 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
     }
 
     /**Container's getter for RIMProjectStatusVO1
+    /**Container's getter for RIMLatestExtVO1
      */
     public RIMProjectStatusVOImpl getRIMProjectStatusVO1() {
         return (RIMProjectStatusVOImpl)findViewObject("RIMProjectStatusVO1");
     }
 
     /**Container's getter for RIMMembersVO1
+    /**Container's getter for RIMEndDtExtEOVO1
      */
     public RIMMembersVOImpl getRIMMembersVO1() {
         return (RIMMembersVOImpl)findViewObject("RIMMembersVO1");
+    public RIMEndDtExtEOVOImpl getRIMEndDtExtEOVO1() {
+        return (RIMEndDtExtEOVOImpl)findViewObject("RIMEndDtExtEOVO1");
     }
 }

@@ -23,7 +23,6 @@ SELECT transaction_no,
     project_impact_desc,
     project_leader_id,
     start_date,
-    end_date,
     actual_end_date,
     project_status,
     project_remarks,
@@ -218,7 +217,7 @@ WHERE appr_stat_rn = 1
          <Attr Name="_DisplaySize" Value="7" />
       </DesignTime>
    </ViewAttribute>
-   <ViewAttribute
+   <!-- <ViewAttribute
       Name="EndDate"
       IsUpdateable="false"
       IsPersistent="false"
@@ -231,7 +230,7 @@ WHERE appr_stat_rn = 1
       <DesignTime>
          <Attr Name="_DisplaySize" Value="7" />
       </DesignTime>
-   </ViewAttribute>
+   </ViewAttribute> -->
    <ViewAttribute
       Name="ActualEndDate"
       IsUpdateable="false"

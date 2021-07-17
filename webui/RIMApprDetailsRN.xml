@@ -85,7 +85,16 @@
                      </ui:contents>
                   </oa:messageLayout>
                   <oa:messageStyledText id="StartDate" dataType="VARCHAR2" prompt="MOA / Contract Start date" viewName="RIMHeaderEOVO1" viewAttr="StartDate" styleClass="OraDataText"/>
-                  <oa:messageStyledText id="EndDate" dataType="VARCHAR2" prompt="MOA / Contract End date" viewName="RIMHeaderEOVO1" viewAttr="EndDate" styleClass="OraDataText"/>
+                  <oa:messageLayout id="ExtensionML" prompt="Extensions">
+                     <ui:contents>
+                        <oa:table id="ExtensionTbl">
+                           <ui:contents>
+                              <oa:messageStyledText id="EndDate" dataType="VARCHAR2" styleClass="OraDataText" viewName="RIMEndDtExtEOVO1" viewAttr="EndDate" prompt="MOA / Contract End date"/>
+                           </ui:contents>
+                        </oa:table>
+                     </ui:contents>
+                  </oa:messageLayout>
+                  <!-- <oa:messageStyledText id="EndDate" dataType="VARCHAR2" prompt="MOA / Contract End date" viewName="RIMHeaderEOVO1" viewAttr="EndDate" styleClass="OraDataText"/> -->
                   <oa:messageStyledText id="ActualEndDate" dataType="VARCHAR2" prompt="Actual End date" viewName="RIMHeaderEOVO1" viewAttr="ActualEndDate" styleClass="OraDataText"/>
                   <oa:messageStyledText id="ProjectStatus" dataType="VARCHAR2" prompt="Project Status" viewName="RIMHeaderEOVO1" viewAttr="ProjectStatus" styleClass="OraDataText"/>
                   <oa:messageStyledText id="LastUpdateDate" dataType="VARCHAR2" prompt="Date Updated" viewName="RIMHeaderEOVO1" viewAttr="LastUpdateDate" styleClass="OraDataText"/>

@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RIMEndDtExtEOVO"
+   OrderBy="end_date"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxup.oracle.apps.per.rim.server.RIMEndDtExtEOVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT RIMEndDtExtEO.RIM_EXT_ID, 
+       RIMEndDtExtEO.LINE_NO, 
+       RIMEndDtExtEO.TRANSACTION_NO, 
+       RIMEndDtExtEO.ITEM_KEY, 
+       RIMEndDtExtEO.END_DATE, 
+       RIMEndDtExtEO.ATTRIBUTE1, 
+       RIMEndDtExtEO.ATTRIBUTE2, 
+       RIMEndDtExtEO.ATTRIBUTE3, 
+       RIMEndDtExtEO.ATTRIBUTE4, 
+       RIMEndDtExtEO.ATTRIBUTE5, 
+       RIMEndDtExtEO.LAST_UPDATE_DATE, 
+       RIMEndDtExtEO.LAST_UPDATED_BY, 
+       RIMEndDtExtEO.LAST_UPDATE_LOGIN, 
+       RIMEndDtExtEO.CREATED_BY, 
+       RIMEndDtExtEO.CREATION_DATE
+FROM XXUP.XXUP_RIM_END_DT_EXT RIMEndDtExtEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RIMEndDtExtEO"
+      Entity="xxup.oracle.apps.per.rim.schema.server.RIMEndDtExtEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="RimExtId"
+      IsNotNull="true"
+      EntityAttrName="RimExtId"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="RIM_EXT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LineNo"
+      EntityAttrName="LineNo"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="LINE_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionNo"
+      EntityAttrName="TransactionNo"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="TRANSACTION_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemKey"
+      EntityAttrName="ItemKey"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="ITEM_KEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EndDate"
+      EntityAttrName="EndDate"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="END_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="RIMEndDtExtEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+</ViewObject>
