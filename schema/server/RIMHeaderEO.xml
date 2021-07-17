@@ -35,7 +35,6 @@
    </Attribute>
    <Attribute
       Name="AssignmentId"
-      IsNotNull="true"
       Precision="10"
       Scale="0"
       ColumnName="ASSIGNMENT_ID"

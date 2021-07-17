@@ -5,7 +5,7 @@
          <ui:contents>
             <oa:formValue id="AssignmentId" viewName="RIMHeaderEOVO1" viewAttr="AssignmentId" prompt="Assignment ID" dataType="NUMBER"/>
             <oa:messageStyledText id="TransactionNo" dataType="VARCHAR2" prompt="Research Sequence No" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="TransactionNoDisp"/>
-            <oa:messageLovInput id="PositionName" dataType="VARCHAR2" prompt="* Assignment Position" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/PerPositionLovRN" lookAheadSearchType="contains" lookAheadEnabled="true" viewName="RIMHeaderEOVO1" viewAttr="PositionName" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}">
+            <oa:messageLovInput id="PositionName" dataType="VARCHAR2" prompt="* Assignment Position" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/PerPositionLovRN" lookAheadSearchType="contains" lookAheadEnabled="true" viewName="RIMHeaderEOVO1" viewAttr="PositionName" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}" unvalidated="false">
                <lovMappings>
                   <lovMap id="lovPosName" lovItem="PositionName" resultTo="PositionName" criteriaFrom="PositionName"/>
                   <lovMap id="lovPosId" lovItem="AssignmentId" resultTo="AssignmentId" requiredForLOV="false"/>
@@ -21,7 +21,7 @@
             <oa:messageTextInput id="ResearchTitle" dataType="VARCHAR2" prompt="* Title of Research" viewName="RIMHeaderEOVO1" viewAttr="ResearchTitle" maximumLength="250" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
             <oa:messageTextInput id="ResearchTitle2" dataType="VARCHAR2" prompt="Title of Research (Line 2)" viewName="RIMHeaderEOVO1" viewAttr="ResearchTitle2" maximumLength="250" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
             <oa:messageTextInput id="ResearchTitle3" dataType="VARCHAR2" prompt="Title of Research (Line 3)" viewName="RIMHeaderEOVO1" viewAttr="ResearchTitle3" maximumLength="250" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
-            <oa:messageTextInput id="BriefDescription" dataType="VARCHAR2" prompt="Brief Description" maximumLength="4000" columns="100" rows="3" viewName="RIMHeaderEOVO1" viewAttr="BriefDescription"/>
+            <oa:messageTextInput id="BriefDescription" dataType="VARCHAR2" prompt="* Brief Description" maximumLength="4000" columns="100" rows="3" viewName="RIMHeaderEOVO1" viewAttr="BriefDescription"/>
             <!-- <oa:messageLovInput id="MainAreaInterest" dataType="VARCHAR2" prompt="* Main Area of Interest" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/RIMMainAreaIntLovRN" lookAheadSearchType="contains" lookAheadEnabled="true" viewName="RIMHeaderEOVO1" viewAttr="MainAreaInterest" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}">
                <lovMappings>
                   <lovMap id="lovMap3" lovItem="MainAreaInterest" resultTo="MainAreaInterest" criteriaFrom="MainAreaInterest"/>
@@ -82,7 +82,7 @@
             </oa:messageLayout>
             <oa:messageTextInput id="ProjectImpactDesc" dataType="VARCHAR2" prompt="* Project Impact Description" maximumLength="4000" columns="100" rows="3" viewName="RIMHeaderEOVO1" viewAttr="ProjectImpactDesc" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
             <oa:formValue id="ProjectLeaderId" viewName="RIMHeaderEOVO1" viewAttr="ProjectLeaderId" dataType="NUMBER"/>
-            <oa:messageLovInput id="ProjectLeaderDisp" dataType="VARCHAR2" prompt="* Project Leader" externalListOfValues="/xxup/oracle/apps/per/publicservice/institutional/lov/webui/PerPSInstMemberRN" maximumLength="200" viewName="RIMHeaderEOVO1" viewAttr="ProjectLeaderDisp" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}">
+            <oa:messageLovInput id="ProjectLeaderDisp" dataType="VARCHAR2" prompt="* Project Leader" externalListOfValues="/xxup/oracle/apps/per/publicservice/institutional/lov/webui/PerPSInstMemberRN" maximumLength="200" viewName="RIMHeaderEOVO1" viewAttr="ProjectLeaderDisp">
                <lovMappings>
                   <lovMap id="FullNameLOV" lovItem="FullName" resultTo="ProjectLeaderDisp" criteriaFrom="ProjectLeaderDisp"/>
                   <lovMap id="ProjLeaderLOV" lovItem="PersonId" resultTo="ProjectLeaderId" requiredForLOV="false"/>

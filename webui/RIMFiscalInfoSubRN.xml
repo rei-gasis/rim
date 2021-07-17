@@ -33,15 +33,7 @@
                               <oa:sortableHeader id="FundingSourceSH" prompt="Funding Source"/>
                            </ui:columnHeader>
                            <ui:contents>
-                              <oa:messageChoice id="FundingSource" pickListViewDef="xxup.oracle.apps.per.rim.lov.server.RIMFundingVO" pickListViewName="Funding" pickListDispAttr="Funding" pickListValAttr="Funding" viewAttr="FundingSource" defaultValue="Revolving Fund">
-                                 <ui:primaryClientAction>
-                                    <ui:firePartialAction id="firePartialAction1" event="EnableFundingAgency">
-                                       <ui:parameters>
-                                          <ui:parameter key="pFundingAgency" value="${oa.RIMFundingEOVO1.FundingSource}"/>
-                                       </ui:parameters>
-                                    </ui:firePartialAction>
-                                 </ui:primaryClientAction>
-                              </oa:messageChoice>
+                              <oa:messageChoice id="FundingSource" pickListViewDef="xxup.oracle.apps.per.rim.lov.server.RIMFundingVO" pickListViewName="Funding" pickListDispAttr="Funding" pickListValAttr="Funding" viewAttr="FundingSource" defaultValue="Revolving Fund"/>
                            </ui:contents>
                         </oa:column>
                         <oa:column id="DescriptionCol" rendered="true">
@@ -108,7 +100,7 @@
                </ui:contents>
             </oa:messageLayout>
             <oa:messageStyledText id="TotalAmount" viewName="RIMFiscalDetailsEOVO1" viewAttr="TotalAmount" dataType="NUMBER" styleClass="OraDataText" prompt="Total Amount"/>
-            <oa:messageTextInput id="FundingAgency" dataType="VARCHAR2" prompt="Funding Agency" maximumLength="250" viewName="RIMFiscalDetailsEOVO1" viewAttr="FundingAgency" disabled="${oa.RIMFiscalDetailsEOVO1.DisableFundingAgency}"/>
+            <oa:messageTextInput id="FundingAgency" dataType="VARCHAR2" prompt="* Funding Agency" maximumLength="250" viewName="RIMFiscalDetailsEOVO1" viewAttr="FundingAgency"/>
             <oa:formValue id="SpCode" viewName="RIMFiscalDetailsEOVO1" viewAttr="SpCode" dataType="VARCHAR2"/>
             <oa:messageLovInput id="SpCodeDisp" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/RIMSPCodeLovRN" prompt="SP Code" selectiveSearchCriteria="false" lookAheadSearchType="contains" disabled="${oa.RIMFiscalDetailsEOVO1.DisableAccountingMode}" viewName="RIMFiscalDetailsEOVO1" viewAttr="SpCodeDisp">
                <lovMappings>

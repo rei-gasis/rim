@@ -36,8 +36,6 @@ public class RIMFiscalInfoSubCO extends OAControllerImpl {
     {
       super.processRequest(pageContext, webBean);
 
-      System.out.println("Fisc RN");
-
       OAApplicationModule am = 
             (OAApplicationModule)pageContext.getApplicationModule(webBean);
 

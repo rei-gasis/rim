@@ -163,10 +163,15 @@ public class RIMRequestCO extends OAControllerImpl
                                           OAException.ERROR));
            }
 
-           if (row.getAttribute("MainAreaInterest") == null) {
-               errMsg.add(new OAException("Main Area of Interest is required", 
+           if (row.getAttribute("BriefDescription") == null) {
+               errMsg.add(new OAException("Brief Description is required", 
                                           OAException.ERROR));
            }
+
+           // if (row.getAttribute("MainAreaInterest") == null) {
+           //     errMsg.add(new OAException("Main Area of Interest is required", 
+           //                                OAException.ERROR));
+           // }
 
            if (row.getAttribute("ProjectImpactDesc") == null) {
                errMsg.add(new OAException("Project Impact Description is required", 
@@ -236,6 +241,39 @@ public class RIMRequestCO extends OAControllerImpl
                                            OAException.ERROR));
             }
 
+            /*Validate if Main Area Interest  is empty*/
+            OAViewObject intVO = 
+                (OAViewObject)am.findViewObject("RIMMainAreaIntEOVO1");
+
+
+            selectedRows = null;
+
+            if (intVO != null) {
+                selectedRows = intVO.getFilteredRows("Selected", "Y");
+            }
+
+            if (selectedRows.length <= 0) {
+                errMsg.add(new OAException("Please select at least one Main Area of Interest", 
+                                           OAException.ERROR));
+            }
+
+
+            /*Validate if Main Area Interest  is empty*/
+            OAViewObject goalVO = 
+                (OAViewObject)am.findViewObject("RIMDevGoalEOVO1");
+
+
+            selectedRows = null;
+
+            if (goalVO != null) {
+                selectedRows = goalVO.getFilteredRows("Selected", "Y");
+            }
+
+            if (selectedRows.length <= 0) {
+                errMsg.add(new OAException("Please select at least one Sustainable Development Goal", 
+                                           OAException.ERROR));
+            }
+
             
           }
 
@@ -260,14 +298,13 @@ public class RIMRequestCO extends OAControllerImpl
                    errMsg.add(new OAException("Responsibility Center is required", 
                                               OAException.ERROR));
                }
+
+               if (fiscRow.getAttribute("FundingAgency") == null) {
+                   errMsg.add(new OAException("Funding Agency is required", 
+                                              OAException.ERROR));
+               }
             }
 
-            
-
-             // if (fiscRow.getAttribute("FundingAgency") == null) {
-             //     errMsg.add(new OAException("Funding  Center is required", 
-             //                                OAException.ERROR));
-             // }
           }
 
 
@@ -412,6 +449,7 @@ public class RIMRequestCO extends OAControllerImpl
             }
 
           try{
+
             
             am.invokeMethod("saveDetails"); //store child tables  
 
