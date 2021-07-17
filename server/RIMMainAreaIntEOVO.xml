@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RIMMainAreaIntEOVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxup.oracle.apps.per.rim.server.RIMMainAreaIntEOVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT RIMMainAreaIntEO.RIM_MAI_ID, 
+       RIMMainAreaIntEO.LINE_NO, 
+       RIMMainAreaIntEO.TRANSACTION_NO, 
+       RIMMainAreaIntEO.ITEM_KEY, 
+       RIMMainAreaIntEO.MAIN_AREA_INTEREST, 
+       RIMMainAreaIntEO.SELECTED, 
+       RIMMainAreaIntEO.ATTRIBUTE1, 
+       RIMMainAreaIntEO.ATTRIBUTE2, 
+       RIMMainAreaIntEO.ATTRIBUTE3, 
+       RIMMainAreaIntEO.ATTRIBUTE4, 
+       RIMMainAreaIntEO.ATTRIBUTE5, 
+       RIMMainAreaIntEO.LAST_UPDATE_DATE, 
+       RIMMainAreaIntEO.LAST_UPDATED_BY, 
+       RIMMainAreaIntEO.LAST_UPDATE_LOGIN, 
+       RIMMainAreaIntEO.CREATED_BY, 
+       RIMMainAreaIntEO.CREATION_DATE
+FROM XXUP.XXUP_RIM_MAIN_AREA_INT RIMMainAreaIntEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RIMMainAreaIntEO"
+      Entity="xxup.oracle.apps.per.rim.schema.server.RIMMainAreaIntEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="RimMaiId"
+      IsNotNull="true"
+      EntityAttrName="RimMaiId"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="RIM_MAI_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LineNo"
+      EntityAttrName="LineNo"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="LINE_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionNo"
+      IsNotNull="true"
+      EntityAttrName="TransactionNo"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="TRANSACTION_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemKey"
+      EntityAttrName="ItemKey"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="ITEM_KEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MainAreaInterest"
+      EntityAttrName="MainAreaInterest"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="MAIN_AREA_INTEREST" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Selected"
+      EntityAttrName="Selected"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="SELECTED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="RIMMainAreaIntEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+</ViewObject>
