@@ -5,7 +5,7 @@
          <ui:contents>
             <oa:formValue id="AssignmentId" viewName="RIMHeaderEOVO1" viewAttr="AssignmentId" prompt="Assignment ID" dataType="NUMBER"/>
             <oa:messageStyledText id="TransactionNo" dataType="VARCHAR2" prompt="Research Sequence No" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="TransactionNoDisp"/>
-            <oa:messageLovInput id="PositionName" dataType="VARCHAR2" prompt="* Assignment Position" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/PerPositionLovRN" lookAheadSearchType="contains" lookAheadEnabled="true" viewName="RIMHeaderEOVO1" viewAttr="PositionName" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}">
+            <oa:messageLovInput id="PositionName" dataType="VARCHAR2" prompt="* Assignment Position" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/PerPositionLovRN" lookAheadSearchType="contains" lookAheadEnabled="true" viewName="RIMHeaderEOVO1" viewAttr="PositionName" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}" unvalidated="false">
                <lovMappings>
                   <lovMap id="lovPosName" lovItem="PositionName" resultTo="PositionName" criteriaFrom="PositionName"/>
                   <lovMap id="lovPosId" lovItem="AssignmentId" resultTo="AssignmentId" requiredForLOV="false"/>
