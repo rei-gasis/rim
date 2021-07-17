@@ -134,6 +134,8 @@
                            <ui:contents>
                               <oa:messageStyledText id="FundingSource" dataType="VARCHAR2" prompt="FundingSource" viewName="RIMFundingEOVO1" viewAttr="FundingSource" styleClass="OraDataText"/>
                               <oa:messageStyledText id="Description" dataType="VARCHAR2" prompt="Description" viewName="RIMFundingEOVO1" viewAttr="Description" styleClass="OraDataText"/>
+                              <oa:messageStyledText id="FundStartDate" dataType="VARCHAR2" prompt="StartDate" viewName="RIMFundingEOVO1" viewAttr="StartDate" styleClass="OraDataText"/>
+                              <oa:messageStyledText id="FundEndDate" dataType="VARCHAR2" prompt="EndDate" viewName="RIMFundingEOVO1" viewAttr="EndDate" styleClass="OraDataText"/>
                               <oa:messageStyledText id="Amount" dataType="NUMBER" prompt="Amount" viewName="RIMFundingEOVO1" viewAttr="Amount" styleClass="OraDataText"/>
                               <oa:messageStyledText id="Currency" dataType="VARCHAR2" prompt="Currency" viewName="RIMFundingEOVO1" viewAttr="Currency" styleClass="OraDataText"/>
                            </ui:contents>

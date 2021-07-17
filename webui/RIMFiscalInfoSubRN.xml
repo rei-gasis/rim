@@ -52,6 +52,22 @@
                               <oa:messageTextInput id="Description" dataType="VARCHAR2" prompt="Funding Description" maximumLength="200" viewAttr="Description"/>
                            </ui:contents>
                         </oa:column>
+                        <oa:column id="StartDateCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="StartDateSH" prompt="Start Date"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="StartDate" dataType="DATE" prompt="Start Date" viewAttr="StartDate"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="EndDateCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="EndDateSH" prompt="End Date"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="EndDate" dataType="DATE" prompt="End Date" viewAttr="EndDate"/>
+                           </ui:contents>
+                        </oa:column>
                         <oa:column id="CurrencyCol">
                            <ui:columnHeader>
                               <oa:sortableHeader id="CurrencySH" prompt="Currency"/>
