@@ -128,13 +128,6 @@ FROM XXUP.XXUP_RIM_HEADER RIMHeaderEO
       AliasName="BRIEF_DESCRIPTION" >
    </ViewAttribute>
    <ViewAttribute
-      Name="MainAreaInterest"
-      IsNotNull="true"
-      EntityAttrName="MainAreaInterest"
-      EntityUsage="RIMHeaderEO"
-      AliasName="MAIN_AREA_INTEREST" >
-   </ViewAttribute>
-   <ViewAttribute
       Name="ProjectLeaderId"
       IsNotNull="true"
       EntityAttrName="ProjectLeaderId"

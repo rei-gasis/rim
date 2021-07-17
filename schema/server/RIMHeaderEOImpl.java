@@ -149,17 +149,6 @@ public class RIMHeaderEOImpl extends OAEntityImpl {
         setAttributeInternal(BRIEFDESCRIPTION, value);
     }
 
-    /**Gets the attribute value for MainAreaInterest, using the alias name MainAreaInterest
-     */
-    public String getMainAreaInterest() {
-        return (String)getAttributeInternal(MAINAREAINTEREST);
-    }
-
-    /**Sets <code>value</code> as the attribute value for MainAreaInterest
-     */
-    public void setMainAreaInterest(String value) {
-        setAttributeInternal(MAINAREAINTEREST, value);
-    }
 
     /**Gets the attribute value for ProjectImpactDesc, using the alias name ProjectImpactDesc
      */
@@ -420,8 +409,6 @@ public class RIMHeaderEOImpl extends OAEntityImpl {
             return getResearchTitle3();
         case BRIEFDESCRIPTION:
             return getBriefDescription();
-        case MAINAREAINTEREST:
-            return getMainAreaInterest();
         case PROJECTIMPACTDESC:
             return getProjectImpactDesc();
         case PROJECTLEADERID:
@@ -492,9 +479,6 @@ public class RIMHeaderEOImpl extends OAEntityImpl {
             return;
         case BRIEFDESCRIPTION:
             setBriefDescription((String)value);
-            return;
-        case MAINAREAINTEREST:
-            setMainAreaInterest((String)value);
             return;
         case PROJECTIMPACTDESC:
             setProjectImpactDesc((String)value);

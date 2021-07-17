@@ -22,11 +22,39 @@
             <oa:messageTextInput id="ResearchTitle2" dataType="VARCHAR2" prompt="Title of Research (Line 2)" viewName="RIMHeaderEOVO1" viewAttr="ResearchTitle2" maximumLength="250" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
             <oa:messageTextInput id="ResearchTitle3" dataType="VARCHAR2" prompt="Title of Research (Line 3)" viewName="RIMHeaderEOVO1" viewAttr="ResearchTitle3" maximumLength="250" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
             <oa:messageTextInput id="BriefDescription" dataType="VARCHAR2" prompt="Brief Description" maximumLength="4000" columns="100" rows="3" viewName="RIMHeaderEOVO1" viewAttr="BriefDescription"/>
-            <oa:messageLovInput id="MainAreaInterest" dataType="VARCHAR2" prompt="* Main Area of Interest" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/RIMMainAreaIntLovRN" lookAheadSearchType="contains" lookAheadEnabled="true" viewName="RIMHeaderEOVO1" viewAttr="MainAreaInterest" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}">
+            <!-- <oa:messageLovInput id="MainAreaInterest" dataType="VARCHAR2" prompt="* Main Area of Interest" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/RIMMainAreaIntLovRN" lookAheadSearchType="contains" lookAheadEnabled="true" viewName="RIMHeaderEOVO1" viewAttr="MainAreaInterest" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}">
                <lovMappings>
                   <lovMap id="lovMap3" lovItem="MainAreaInterest" resultTo="MainAreaInterest" criteriaFrom="MainAreaInterest"/>
                </lovMappings>
-            </oa:messageLovInput>
+            </oa:messageLovInput> -->
+            <oa:messageLayout id="MainAreaIntML" prompt="* Main Area of Interest">
+               <ui:contents>
+                  <oa:advancedTable id="MainAreaIntAT" viewName="RIMMainAreaIntEOVO1">
+                     <ui:contents>
+                        <oa:column id="SelectedMAICol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="SelectedMAISH" prompt="Select"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageCheckBox id="SelMAI" viewAttr="Selected" defaultValue="" checkedValue="Y" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="RenderMainAreaIntOthers"/>
+                                 </ui:primaryClientAction>
+                              </oa:messageCheckBox>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="MainAreaIntCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="MainAreaIntSH" prompt="Main Area of Interest"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="MainAreaInterest" viewAttr="MainAreaInterest"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:messageLayout>
             <oa:messageTextInput id="MainAreaIntOthers" dataType="VARCHAR2" prompt="Specify:" viewName="RIMHeaderEOVO1" viewAttr="MainAreaIntOthers" rendered="${oa.RIMHeaderEOVO1.RenderMainAreaIntOthers}" maximumLength="255" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
             <oa:messageLayout id="ProjectImpactML" prompt="* Project Impact">
                <ui:contents>

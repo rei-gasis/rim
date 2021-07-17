@@ -3,6 +3,7 @@
 
 <ViewObject
    Name="RIMMainAreaIntVO"
+   OrderBy="main_area_interest DESC"
    BindingStyle="Oracle"
    CustomQuery="true"
    RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"

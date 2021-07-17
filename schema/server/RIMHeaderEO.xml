@@ -110,19 +110,6 @@
       </DesignTime>
    </Attribute>
    <Attribute
-      Name="MainAreaInterest"
-      IsNotNull="true"
-      Precision="240"
-      ColumnName="MAIN_AREA_INTEREST"
-      Type="java.lang.String"
-      ColumnType="VARCHAR2"
-      SQLType="VARCHAR"
-      TableName="XXUP.XXUP_RIM_HEADER" >
-      <DesignTime>
-         <Attr Name="_DisplaySize" Value="240" />
-      </DesignTime>
-   </Attribute>
-   <Attribute
       Name="ProjectImpactDesc"
       IsNotNull="true"
       Precision="4000"

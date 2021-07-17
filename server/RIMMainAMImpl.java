@@ -18,6 +18,7 @@ import oracle.jbo.Row;
 import oracle.jbo.RowSetIterator;
 import oracle.jbo.Transaction;
 
+import xxup.oracle.apps.per.rim.lov.server.RIMMainAreaIntVOImpl;
 import xxup.oracle.apps.per.rim.lov.server.RIMProjectImpactVOImpl;
 import xxup.oracle.apps.per.rim.lov.server.RIMProjectStatusVOImpl;
 
@@ -306,6 +307,67 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
            System.out.println("Done Save Milestone");
 
 
+           //Main Area Interest
+            lineNumber = 1;
+            System.out.println("Start save Main Area Interest");
+            RIMMainAreaIntEOVOImpl intVO = getRIMMainAreaIntEOVO1();
+
+
+            selectedRows = intVO.getFilteredRows("Selected", "Y");
+            deselectedRows = intVO.getFilteredRows("Selected", "N");
+            deselectedRows1 = intVO.getFilteredRows("Selected", null);
+
+            for (Row rowi: selectedRows) {
+
+                if("Others".equals(rowi.getAttribute("MainAreaInterest").toString())){
+                  rowi.remove();
+                }else {
+                  rowi.setAttribute("TransactionNo", transactionNo);
+                  rowi.setAttribute("LineNo", lineNumber);
+                  rowi.setAttribute("ItemKey", itemKey);
+
+                  lineNumber += 1;
+                }
+            }
+
+            
+
+            //Append Others Value
+            if (headerRow.getAttribute("MainAreaIntOthers") != null) {
+                String strMainAreaInterest = 
+                    headerRow.getAttribute("MainAreaIntOthers").toString();
+
+                if(!"".equals(strMainAreaInterest)){ //dont create record if empty
+                    lineNumber += 1;
+                    Row othersRow = intVO.createRow();
+                    
+                    othersRow.setAttribute("Selected", "Y");
+                    othersRow.setAttribute("MainAreaInterest", "Others");
+                    othersRow.setAttribute("Attribute1", strMainAreaInterest);
+                    othersRow.setAttribute("LineNo", lineNumber);
+                    othersRow.setAttribute("TransactionNo", transactionNo);
+                    othersRow.setAttribute("ItemKey", itemKey);
+
+                    intVO.insertRow(othersRow);
+                }
+            }
+
+
+
+
+           for (Row rowi: deselectedRows) {                
+                rowi.remove();
+           }
+
+           for (Row rowi: deselectedRows1) {
+                rowi.remove();
+           }
+
+            selectedRows = null;
+            deselectedRows = null;
+            deselectedRows1 = null;
+
+            System.out.println("Done save Main Area Int");
 
             
         }
@@ -359,6 +421,33 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
 
     }
 
+    public void LoadNewMainAreaIntInTable(){
+        RIMMainAreaIntEOVOImpl intVO = getRIMMainAreaIntEOVO1();
+
+        intVO.setMaxFetchSize(0);
+        
+        if (intVO.getRowCount() < 1) {
+            RIMMainAreaIntVOImpl lovVO = 
+                getRIMMainAreaIntVO1();
+
+            lovVO.executeQuery();
+            Integer line = lovVO.getRowCount();
+            Row newRow = null;
+            Row row = null;
+
+            for (row = (OAViewRowImpl)lovVO.first(); row != null; 
+                 row = (OAViewRowImpl)lovVO.next()) {
+                newRow = intVO.createRow();
+                
+                
+                newRow.setAttribute("MainAreaInterest", 
+                                              row.getAttribute("MainAreaInterest"));
+                intVO.insertRow(newRow);
+                //line = line - 1;
+            }
+        }
+
+    }
     public void LoadExistProjImpactInTable(RIMProjImpactEOVOImpl pTrVO) {
         String strAttributeTarget = "ProjectImpact";
         RIMProjImpactEOVOImpl pImpVO = pTrVO;
@@ -416,6 +505,62 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
 
     }
 
+    public void LoadExistMainAreaIntInTable(RIMMainAreaIntEOVOImpl pTrVO) {
+        String strAttributeTarget = "MainAreaInterest";
+        RIMMainAreaIntEOVOImpl pIntVO = pTrVO;
+//        benefTypeVO.initTranPS(paramItemKey);
+
+
+        RIMMainAreaIntVOImpl sourceVO = getRIMMainAreaIntVO1();
+        sourceVO.executeQuery();
+
+        Integer line = sourceVO.getRowCount();
+        Row rowTarget = null;
+        Row rowSource = null;
+
+
+        RowSetIterator rs = pIntVO.createRowSetIterator(null);
+        String[] arrExistLov = new String[rs.getRowCount()];
+        rs.reset();
+
+
+        int ctr = 0;
+        while (rs.hasNext()) {
+            Row r = rs.next();
+            arrExistLov[ctr] = 
+                    r.getAttribute(strAttributeTarget).toString();
+            ctr++;
+        }
+
+
+        rs.closeRowSetIterator();
+
+        for (rowSource = (OAViewRowImpl)sourceVO.first(); rowSource != null; 
+             rowSource = (OAViewRowImpl)sourceVO.next()) {
+
+
+
+            String strAttributeVal = 
+                rowSource.getAttribute(strAttributeTarget).toString();
+
+            
+
+            if (!Arrays.asList(arrExistLov).contains(strAttributeVal)) {
+
+                rowTarget = pIntVO.createRow();
+                rowTarget.setAttribute(strAttributeTarget, 
+                                          rowSource.getAttribute(strAttributeTarget));
+                pIntVO.insertRow(rowTarget);
+
+                
+            }
+            //line = line - 1;
+        }
+
+        pIntVO.setOrderByClause("MAIN_AREA_INTEREST");
+        //        benefTypeVO.executeQuery();
+
+    }
 
 
     public String initApprovers(String assignmentId, String transactionNo, String action) {
@@ -1083,6 +1228,69 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
             throw new OAException("Error occured initializing Milestone info " + ex);
         }
 
+        // Main Area Interest
+        RIMMainAreaIntEOVOImpl sIntVO = getRIMMainAreaIntEOVO2();
+
+        try{
+
+           System.out.println("Copy Main Area Interest start");
+           sIntVO.reset();
+
+           Row mRow = null;
+           RIMMainAreaIntEOVOImpl tIntVO = getRIMMainAreaIntEOVO1();
+           if(sIntVO != null){
+               sIntVO.initExist(pItemKey);
+               
+               while(sIntVO.hasNext()){
+                   OAViewRowImpl currRow = (OAViewRowImpl) sIntVO.next();
+
+                    String strLineNo = currRow.getAttribute("LineNo") != null ? currRow.getAttribute("LineNo").toString() : "";
+                    String strTransactionNo = currRow.getAttribute("TransactionNo") != null ? currRow.getAttribute("TransactionNo").toString() : "";
+                    String strSelected = currRow.getAttribute("Selected") != null ? currRow.getAttribute("Selected").toString() : "";
+                    String strMainAreaInterest = currRow.getAttribute("MainAreaInterest") != null ? currRow.getAttribute("MainAreaInterest").toString() : "";
+                    String strAttribute1 = currRow.getAttribute("Attribute1") != null ? currRow.getAttribute("Attribute1").toString() : "";
+                    String strAttribute2 = currRow.getAttribute("Attribute2") != null ? currRow.getAttribute("Attribute2").toString() : "";
+                    String strAttribute3 = currRow.getAttribute("Attribute3") != null ? currRow.getAttribute("Attribute3").toString() : "";
+                    String strAttribute4 = currRow.getAttribute("Attribute4") != null ? currRow.getAttribute("Attribute4").toString() : "";
+                    String strAttribute5 = currRow.getAttribute("Attribute5") != null ? currRow.getAttribute("Attribute5").toString() : "";
+
+
+                    
+                    tIntVO.initNewRecord();
+                    Row tRow = tIntVO.getCurrentRow();
+
+                    //Set ID
+                    OADBTransaction tr = getOADBTransaction();
+                    String strRimMaiId = tr.getSequenceValue("XXUP.XXUP_RIM_MAIN_AREA_INT_SEQ").toString();
+                    tRow.setAttribute("RimMaiId", strRimMaiId);
+                    tRow.setAttribute("LineNo", strLineNo);
+                    tRow.setAttribute("TransactionNo", strTransactionNo);
+                    tRow.setAttribute("Selected", strSelected);
+                    tRow.setAttribute("MainAreaInterest", strMainAreaInterest);
+                    tRow.setAttribute("Attribute1", strAttribute1);
+                    tRow.setAttribute("Attribute2", strAttribute2);
+                    tRow.setAttribute("Attribute3", strAttribute3);
+                    tRow.setAttribute("Attribute4", strAttribute4);
+                    tRow.setAttribute("Attribute5", strAttribute5);
+
+            
+                    
+
+               }
+           }
+
+           if(tIntVO.getRowCount() >= 1){
+                LoadExistMainAreaIntInTable(tIntVO);
+            }else{
+                LoadNewMainAreaIntInTable();
+            }
+
+            System.out.println("Copy Main Area Interest info done");
+
+
+        }catch(Exception ex){
+            throw new OAException("Error occured initializing Main Area Interest info " + ex);
+        }
             
             
     }
@@ -1198,6 +1406,8 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
             RIMProjImpactEOVOImpl sProjImpVO = getRIMProjImpactEOVO1();
             sProjImpVO.initExist(pItemKey);
 
+            RIMMainAreaIntEOVOImpl intVO = getRIMMainAreaIntEOVO1();
+            intVO.initExist(pItemKey);
             setApproversTable(pItemKey);
 
         } catch (Exception ex) {
@@ -1369,6 +1579,15 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
             }
 
 
+            RIMMainAreaIntEOVOImpl sIntVO = getRIMMainAreaIntEOVO1();
+            sIntVO.initExist(pItemKey);
+
+
+            if(sIntVO.getRowCount() >= 1){
+                LoadExistMainAreaIntInTable(sIntVO);
+            }else{
+                LoadNewMainAreaIntInTable();
+            }
         } catch (Exception ex) {
             throw OAException.wrapperException(ex);
         }
