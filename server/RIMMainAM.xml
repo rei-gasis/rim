@@ -74,6 +74,14 @@
       ViewObjectName="xxup.oracle.apps.per.rim.server.RIMPublicationEOVO" >
    </ViewUsage>
    <ViewUsage
+      Name="RIMDevGoalEOVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMDevGoalEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMDevGoalEOVO2"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMDevGoalEOVO" >
+   </ViewUsage>
+   <ViewUsage
       Name="RIMHeaderEOVO1"
       ViewObjectName="xxup.oracle.apps.per.rim.server.RIMHeaderEOVO" >
    </ViewUsage>
@@ -84,6 +92,8 @@
    <ViewUsage
       Name="RIMHeaderSummVO1"
       ViewObjectName="xxup.oracle.apps.per.rim.server.RIMHeaderSummVO" >
+      Name="RIMDevGoalVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMDevGoalVO" >
    </ViewUsage>
    <ViewUsage
       Name="RIMProjectStatusVO1"

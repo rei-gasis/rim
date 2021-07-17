@@ -2371,6 +2371,11 @@ IS
                       DELETE 
                       FROM xxup_rim_main_area_int
                       WHERE item_key = l_itemkey;
+
+                      DELETE 
+                      FROM xxup_rim_dev_goal
+                      WHERE item_key = l_itemkey;
+                      
                       DELETE 
                       FROM xxup_rim_end_dt_ext
                       WHERE item_key = l_itemkey;
@@ -2802,6 +2807,15 @@ IS
                                 WHERE item_key = l_itemkey;
                                 
                                 
+                                UPDATE xxup_rim_dev_goal
+                                SET item_key = (SELECT item_key
+                                                  FROM xxup_rim_header hd
+                                                  WHERE hd.approval_status = 'Approved'
+                                                    AND hd.transaction_no = lv_tran_no)
+                                WHERE item_key = l_itemkey;
+                                
+                                DELETE FROM xxup_rim_dev_goal tr
+                                WHERE item_key = l_itemkey;
                                 UPDATE xxup_rim_end_dt_ext
                                 SET item_key = (SELECT item_key
                                                   FROM xxup_rim_header hd
@@ -3260,6 +3274,8 @@ IS
         DELETE FROM xxup_rim_proj_impact 
         WHERE item_key = p_item_key;
         
+        DELETE FROM xxup_rim_dev_goal
+        WHERE item_key = p_item_key;
         DELETE FROM xxup_rim_end_dt_ext
         WHERE item_key = p_item_key;
 --        DELETE FROM xxup_per_ps_action_history 

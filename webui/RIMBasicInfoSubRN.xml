@@ -110,6 +110,30 @@
             <oa:messageStyledText id="DateUpdated" dataType="DATE" prompt="Date Updated" viewName="RIMHeaderEOVO1" viewAttr="LastUpdateDate" styleClass="OraDataText"/>
             <oa:messageStyledText id="UpdatedBy" dataType="VARCHAR2" prompt="Updated By" viewName="RIMHeaderEOVO1" viewAttr="LastUpdatedByDisp" styleClass="OraDataText"/>
             <oa:messageTextInput id="ProjectRemarks" dataType="VARCHAR2" prompt="Project Remarks" maximumLength="2000" columns="100" rows="3" viewName="RIMHeaderEOVO1" viewAttr="ProjectRemarks"/>
+            <oa:messageLayout id="DevGoalML" prompt="* Sustainable Development Goal/s Addressed">
+               <ui:contents>
+                  <oa:advancedTable id="DevGoalAT" viewName="RIMDevGoalEOVO1">
+                     <ui:contents>
+                        <oa:column id="SelectedDevGoalCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="SelectedDevGoalSH" prompt="Select"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageCheckBox id="SelectedDevGoal" viewAttr="Selected" defaultValue="" checkedValue="Y"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DevGoalCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="DevGoalSH" prompt="Development Goal"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DevelopmentGoal" viewAttr="DevelopmentGoal"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:messageLayout>
          </ui:contents>
       </oa:messageComponentLayout>
    </ui:contents>

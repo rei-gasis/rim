@@ -69,4 +69,8 @@
       Name="PerPosVO1"
       ViewObjectName="xxup.oracle.apps.per.rim.lov.server.PerPosVO" >
    </ViewUsage>
+   <ViewUsage
+      Name="RIMDevGoalVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMDevGoalVO" >
+   </ViewUsage>
 </AppModule>

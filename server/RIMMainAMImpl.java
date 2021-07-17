@@ -20,6 +20,7 @@ import oracle.jbo.Row;
 import oracle.jbo.RowSetIterator;
 import oracle.jbo.Transaction;
 
+import xxup.oracle.apps.per.rim.lov.server.RIMDevGoalVOImpl;
 import xxup.oracle.apps.per.rim.lov.server.RIMMainAreaIntVOImpl;
 import xxup.oracle.apps.per.rim.lov.server.RIMProjectImpactVOImpl;
 import xxup.oracle.apps.per.rim.lov.server.RIMProjectStatusVOImpl;
@@ -67,6 +68,7 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
         fundVO.initNewRecord();
 
         LoadNewProjectImpactInTable();
+        LoadNewDevGoalInTable();
 
 
     }
@@ -213,6 +215,10 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
            for (Row rowi: deselectedRows1) {
                 rowi.remove();
            }
+
+           selectedRows = null;
+           deselectedRows = null;
+           deselectedRows1 = null;
 
             System.out.println("Done save Proj Impact");
 
@@ -433,6 +439,44 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
 
             System.out.println("Done save Main Area Int");
 
+
+            //Development Goal
+            System.out.println("Start save Development Goal");
+            lineNumber = 1;
+            RIMDevGoalEOVOImpl goalVO = getRIMDevGoalEOVO1();
+
+
+            selectedRows = goalVO.getFilteredRows("Selected", "Y");
+            deselectedRows = goalVO.getFilteredRows("Selected", "N");
+            deselectedRows1 = goalVO.getFilteredRows("Selected", null);
+
+            for (Row rowi: selectedRows) {
+
+                rowi.setAttribute("TransactionNo", transactionNo);
+                rowi.setAttribute("LineNo", lineNumber);
+                rowi.setAttribute("ItemKey", itemKey);
+
+                lineNumber += 1;
+            }
+
+
+
+           for (Row rowi: deselectedRows) {                
+                rowi.remove();
+           }
+
+           for (Row rowi: deselectedRows1) {
+                rowi.remove();
+           }
+
+           // selectedRows = null;
+           // deselectedRows = null;
+           // deselectedRows1 = null;
+
+            System.out.println("Done save Development Goal");
+
+
+
             
         }
     }
@@ -512,6 +556,40 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
         }
 
     }
+
+    public void LoadNewDevGoalInTable(){
+        RIMDevGoalEOVOImpl goalVO = getRIMDevGoalEOVO1();
+
+        goalVO.setMaxFetchSize(0);
+        
+        if (goalVO.getRowCount() < 1) {
+            RIMDevGoalVOImpl lovVO = 
+                getRIMDevGoalVO1();
+
+            lovVO.executeQuery();
+            Integer line = lovVO.getRowCount();
+            Row newRow = null;
+            Row row = null;
+
+            for (row = (OAViewRowImpl)lovVO.first(); row != null; 
+                 row = (OAViewRowImpl)lovVO.next()) {
+                newRow = goalVO.createRow();
+                
+                
+                newRow.setAttribute("DevelopmentGoal", 
+                                              row.getAttribute("DevGoal"));
+                goalVO.insertRow(newRow);
+                
+            }
+        }
+
+        // projVO.setOrderByClause("PROJECT_IMPACT");
+        // projVO.executeQuery();
+
+
+    }
+
+
     public void LoadExistProjImpactInTable(RIMProjImpactEOVOImpl pTrVO) {
         String strAttributeTarget = "ProjectImpact";
         RIMProjImpactEOVOImpl pImpVO = pTrVO;
@@ -625,6 +703,63 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
         //        benefTypeVO.executeQuery();
 
     }
+
+    public void LoadExistDevGoalInTable(RIMDevGoalEOVOImpl pTrVO) {
+        String strAttributeTarget = "DevelopmentGoal";
+        RIMDevGoalEOVOImpl pGoalVO = pTrVO;
+//        benefTypeVO.initTranPS(paramItemKey);
+
+
+        RIMDevGoalVOImpl sourceVO = getRIMDevGoalVO1();
+        sourceVO.executeQuery();
+
+        Integer line = sourceVO.getRowCount();
+        Row rowTarget = null;
+        Row rowSource = null;
+
+
+        RowSetIterator rs = pGoalVO.createRowSetIterator(null);
+        String[] arrExistLov = new String[rs.getRowCount()];
+        rs.reset();
+
+
+        int ctr = 0;
+        while (rs.hasNext()) {
+            Row r = rs.next();
+            arrExistLov[ctr] = 
+                    r.getAttribute(strAttributeTarget).toString();
+            ctr++;
+        }
+
+
+        rs.closeRowSetIterator();
+
+        for (rowSource = (OAViewRowImpl)sourceVO.first(); rowSource != null; 
+             rowSource = (OAViewRowImpl)sourceVO.next()) {
+
+
+
+            String strAttributeVal = 
+                rowSource.getAttribute("DevGoal").toString();
+
+            
+
+            if (!Arrays.asList(arrExistLov).contains(strAttributeVal)) {
+
+                rowTarget = pGoalVO.createRow();
+                rowTarget.setAttribute(strAttributeTarget, 
+                                          rowSource.getAttribute("DevGoal"));
+                pGoalVO.insertRow(rowTarget);
+
+                
+            }
+            //line = line - 1;
+        }
+
+        pGoalVO.setOrderByClause("DEVELOPMENT_GOAL");
+
+    }
+
 
 
     public String initApprovers(String assignmentId, String transactionNo, String action) {
@@ -1360,6 +1495,72 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
         }catch(Exception ex){
             throw new OAException("Error occured initializing Main Area Interest info " + ex);
         }
+
+
+        // Development Goal
+        RIMDevGoalEOVOImpl sGoalVO = getRIMDevGoalEOVO2();
+
+        try{
+
+           System.out.println("Copy Dev Goal start");
+           sGoalVO.reset();
+
+           Row mRow = null;
+           RIMDevGoalEOVOImpl tGoalVO = getRIMDevGoalEOVO1();
+           if(sGoalVO != null){
+               sGoalVO.initExist(pItemKey);
+               
+               while(sGoalVO.hasNext()){
+                   OAViewRowImpl currRow = (OAViewRowImpl) sGoalVO.next();
+
+                    String strLineNo = currRow.getAttribute("LineNo") != null ? currRow.getAttribute("LineNo").toString() : "";
+                    String strTransactionNo = currRow.getAttribute("TransactionNo") != null ? currRow.getAttribute("TransactionNo").toString() : "";
+                    String strSelected = currRow.getAttribute("Selected") != null ? currRow.getAttribute("Selected").toString() : "";
+                    String strDevelopmentGoal = currRow.getAttribute("DevelopmentGoal") != null ? currRow.getAttribute("DevelopmentGoal").toString() : "";
+                    String strAttribute1 = currRow.getAttribute("Attribute1") != null ? currRow.getAttribute("Attribute1").toString() : "";
+                    String strAttribute2 = currRow.getAttribute("Attribute2") != null ? currRow.getAttribute("Attribute2").toString() : "";
+                    String strAttribute3 = currRow.getAttribute("Attribute3") != null ? currRow.getAttribute("Attribute3").toString() : "";
+                    String strAttribute4 = currRow.getAttribute("Attribute4") != null ? currRow.getAttribute("Attribute4").toString() : "";
+                    String strAttribute5 = currRow.getAttribute("Attribute5") != null ? currRow.getAttribute("Attribute5").toString() : "";
+
+
+                    
+                    tGoalVO.initNewRecord();
+                    Row tRow = tGoalVO.getCurrentRow();
+
+                    //Set ID
+                    OADBTransaction tr = getOADBTransaction();
+                    String strRimDevGoalId = tr.getSequenceValue("XXUP.XXUP_RIM_DEV_GOAL_SEQ").toString();
+                    tRow.setAttribute("RimDevGoalId", strRimDevGoalId);
+                    tRow.setAttribute("LineNo", strLineNo);
+                    tRow.setAttribute("TransactionNo", strTransactionNo);
+                    tRow.setAttribute("Selected", strSelected);
+                    tRow.setAttribute("DevelopmentGoal", strDevelopmentGoal);
+                    tRow.setAttribute("Attribute1", strAttribute1);
+                    tRow.setAttribute("Attribute2", strAttribute2);
+                    tRow.setAttribute("Attribute3", strAttribute3);
+                    tRow.setAttribute("Attribute4", strAttribute4);
+                    tRow.setAttribute("Attribute5", strAttribute5);
+
+            
+                    
+
+               }
+           }
+
+          if(tGoalVO.getRowCount() >= 1){
+               LoadExistDevGoalInTable(tGoalVO);
+           }else{
+               LoadNewDevGoalInTable();
+           }
+
+           System.out.println("Copy Development Goal info done");
+
+
+        }catch(Exception ex){
+            throw new OAException("Error occured initializing Development Goal info " + ex);
+        }
+
             
             
     }
@@ -1477,6 +1678,11 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
 
             RIMMainAreaIntEOVOImpl intVO = getRIMMainAreaIntEOVO1();
             intVO.initExist(pItemKey);
+
+            RIMDevGoalEOVOImpl goalVO = getRIMDevGoalEOVO1();
+            goalVO.initExist(pItemKey);
+
+
             RIMEndDtExtEOVOImpl extVO = getRIMEndDtExtEOVO1();
             extVO.initExist(pItemKey);
 
@@ -1660,6 +1866,16 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
             }else{
                 LoadNewMainAreaIntInTable();
             }
+
+
+            RIMDevGoalEOVOImpl sGoalVO = getRIMDevGoalEOVO1();
+            if(sGoalVO.getRowCount() >= 1){
+                LoadExistDevGoalInTable(sGoalVO);
+            }else{
+                LoadNewDevGoalInTable();
+            }
+
+
         } catch (Exception ex) {
             throw OAException.wrapperException(ex);
         }
@@ -1840,6 +2056,18 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
         return (RIMPublicationEOVOImpl)findViewObject("RIMPublicationEOVO1");
     }
 
+    /**Container's getter for RIMDevGoalEOVO1
+     */
+    public RIMDevGoalEOVOImpl getRIMDevGoalEOVO1() {
+        return (RIMDevGoalEOVOImpl)findViewObject("RIMDevGoalEOVO1");
+    }
+
+    /**Container's getter for RIMDevGoalEOVO2
+     */
+    public RIMDevGoalEOVOImpl getRIMDevGoalEOVO2() {
+        return (RIMDevGoalEOVOImpl)findViewObject("RIMDevGoalEOVO2");
+    }
+
     /**Container's getter for RIMHeaderEOVO1
      */
     public RIMHeaderEOVOImpl getRIMHeaderEOVO1() {
@@ -1853,9 +2081,12 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
     }
 
     /**Container's getter for RIMHeaderSummVO1
+    /**Container's getter for RIMDevGoalVO1
      */
     public RIMHeaderSummVOImpl getRIMHeaderSummVO1() {
         return (RIMHeaderSummVOImpl)findViewObject("RIMHeaderSummVO1");
+    public RIMDevGoalVOImpl getRIMDevGoalVO1() {
+        return (RIMDevGoalVOImpl)findViewObject("RIMDevGoalVO1");
     }
 
     /**Container's getter for RIMProjectStatusVO1

@@ -111,4 +111,9 @@ public class RIMLovAMImpl extends OAApplicationModuleImpl {
     public RIMCUVOImpl getRIMCUVO1() {
         return (RIMCUVOImpl)findViewObject("RIMCUVO1");
     }
+    /**Container's getter for RIMDevGoalVO1
+     */
+    public RIMDevGoalVOImpl getRIMDevGoalVO1() {
+        return (RIMDevGoalVOImpl)findViewObject("RIMDevGoalVO1");
+    }
 }

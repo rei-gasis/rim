@@ -15,6 +15,11 @@
       ObjectType="ViewObject" >
    </Containee>
    <Containee
+      Name="RIMDevGoalEOVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMDevGoalEOVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
       Name="RIMFiscalDetailsEOVO"
       FullName="xxup.oracle.apps.per.rim.server.RIMFiscalDetailsEOVO"
       ObjectType="ViewObject" >
