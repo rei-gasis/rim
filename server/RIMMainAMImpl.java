@@ -158,12 +158,21 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                   eRow.setAttribute("ItemKey", itemKey);
                   eRow.setAttribute("TransactionNo", transactionNo);
 
-            /*Handle Research Type - Others*/
-            if(headerRow.getAttribute("MainAreaInterest") != null){
-                if("Others".equals(headerRow.getAttribute("MainAreaInterest").toString())){
-                    headerRow.setAttribute("MainAreaInterest", headerRow.getAttribute("MainAreaIntOthers").toString());
                 }
+              }
+
+            }catch(Exception ex){
+              throw new OAException("Error saving extension " + ex);
             }
+            
+
+            /*Handle Main Area Interest*/
+            // if(headerRow.getAttribute("MainAreaInterest") != null){
+            //     if("Others".equals(headerRow.getAttribute("MainAreaInterest").toString())){
+            //         headerRow.setAttribute("MainAreaInterest", headerRow.getAttribute("MainAreaIntOthers").toString());
+            //     }
+            // }
+
 
             System.out.println("Start save Fiscal");
 
@@ -2065,6 +2074,25 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
     public RIMMembersVOImpl getRIMMembersVO1() {
         return (RIMMembersVOImpl)findViewObject("RIMMembersVO1");
     }
+
+    /**Container's getter for RIMMainAreaIntEOVO1
+     */
+    public RIMMainAreaIntEOVOImpl getRIMMainAreaIntEOVO1() {
+        return (RIMMainAreaIntEOVOImpl)findViewObject("RIMMainAreaIntEOVO1");
+    }
+
+    /**Container's getter for RIMMainAreaIntEOVO2
+     */
+    public RIMMainAreaIntEOVOImpl getRIMMainAreaIntEOVO2() {
+        return (RIMMainAreaIntEOVOImpl)findViewObject("RIMMainAreaIntEOVO2");
+    }
+
+    /**Container's getter for RIMMainAreaIntVO1
+     */
+    public RIMMainAreaIntVOImpl getRIMMainAreaIntVO1() {
+        return (RIMMainAreaIntVOImpl)findViewObject("RIMMainAreaIntVO1");
+    }
+
     /**Container's getter for RIMDevGoalEOVO1
      */
     public RIMDevGoalEOVOImpl getRIMDevGoalEOVO1() {

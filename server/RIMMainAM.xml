@@ -74,6 +74,18 @@
       ViewObjectName="xxup.oracle.apps.per.rim.server.RIMPublicationEOVO" >
    </ViewUsage>
    <ViewUsage
+      Name="RIMMainAreaIntEOVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMMainAreaIntEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMMainAreaIntEOVO2"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMMainAreaIntEOVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMMainAreaIntVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMMainAreaIntVO" >
+   </ViewUsage>
+   <ViewUsage
       Name="RIMDevGoalEOVO1"
       ViewObjectName="xxup.oracle.apps.per.rim.server.RIMDevGoalEOVO" >
    </ViewUsage>

@@ -45,6 +45,11 @@
       ObjectType="AppModule" >
    </Containee>
    <Containee
+      Name="RIMMainAreaIntEOVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMMainAreaIntEOVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
       Name="RIMMembersVO"
       FullName="xxup.oracle.apps.per.rim.server.RIMMembersVO"
       ObjectType="ViewObject" >
