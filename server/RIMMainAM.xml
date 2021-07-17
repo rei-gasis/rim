@@ -74,6 +74,18 @@
       ViewObjectName="xxup.oracle.apps.per.rim.server.RIMPublicationEOVO" >
    </ViewUsage>
    <ViewUsage
+      Name="RIMHeaderSummVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMHeaderSummVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMProjectStatusVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMProjectStatusVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMMembersVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMMembersVO" >
+   </ViewUsage>
+   <ViewUsage
       Name="RIMMainAreaIntEOVO1"
       ViewObjectName="xxup.oracle.apps.per.rim.server.RIMMainAreaIntEOVO" >
    </ViewUsage>
@@ -102,17 +114,15 @@
       ViewObjectName="xxup.oracle.apps.per.rim.server.RIMHeaderEOVO" >
    </ViewUsage>
    <ViewUsage
-      Name="RIMHeaderSummVO1"
-      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMHeaderSummVO" >
       Name="RIMDevGoalVO1"
       ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMDevGoalVO" >
    </ViewUsage>
    <ViewUsage
-      Name="RIMProjectStatusVO1"
-      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMProjectStatusVO" >
+      Name="RIMLatestExtVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMLatestExtVO" >
    </ViewUsage>
    <ViewUsage
-      Name="RIMMembersVO1"
-      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMMembersVO" >
+      Name="RIMEndDtExtEOVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.server.RIMEndDtExtEOVO" >
    </ViewUsage>
 </AppModule>

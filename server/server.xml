@@ -20,6 +20,11 @@
       ObjectType="ViewObject" >
    </Containee>
    <Containee
+      Name="RIMEndDtExtEOVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMEndDtExtEOVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
       Name="RIMFiscalDetailsEOVO"
       FullName="xxup.oracle.apps.per.rim.server.RIMFiscalDetailsEOVO"
       ObjectType="ViewObject" >
@@ -37,6 +42,11 @@
    <Containee
       Name="RIMHeaderSummVO"
       FullName="xxup.oracle.apps.per.rim.server.RIMHeaderSummVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMLatestExtVO"
+      FullName="xxup.oracle.apps.per.rim.server.RIMLatestExtVO"
       ObjectType="ViewObject" >
    </Containee>
    <Containee

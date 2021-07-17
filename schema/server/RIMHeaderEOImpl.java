@@ -4,6 +4,7 @@ import oracle.apps.fnd.framework.server.OADBTransaction;
 import oracle.apps.fnd.framework.server.OAEntityDefImpl;
 import oracle.apps.fnd.framework.server.OAEntityImpl;
 
+import oracle.jbo.AttributeList;
 import oracle.jbo.Key;
 import oracle.jbo.RowIterator;
 import oracle.jbo.domain.Date;
@@ -18,33 +19,39 @@ import oracle.jbo.AttributeList;
 // ---------------------------------------------------------------------
 public class RIMHeaderEOImpl extends OAEntityImpl {
     public static final int TRANSACTIONNO = 0;
+    public static final int RIMFISCALDETAILSEO = 28;
+    public static final int RIMMILESTONESEO = 29;
+    public static final int RIMFUNDINGEO = 30;
+    public static final int RIMPROJIMPACTEO = 31;
+    public static final int RIMMEMBERSEO = 32;
     public static final int ASSIGNMENTID = 1;
     public static final int RESEARCHTYPE = 2;
     public static final int RESEARCHTITLE = 3;
     public static final int RESEARCHTITLE2 = 4;
     public static final int RESEARCHTITLE3 = 5;
     public static final int BRIEFDESCRIPTION = 6;
-    public static final int MAINAREAINTEREST = 7;
-    public static final int PROJECTIMPACTDESC = 8;
-    public static final int PROJECTLEADERID = 9;
-    public static final int STARTDATE = 10;
-    public static final int ENDDATE = 11;
-    public static final int ACTUALENDDATE = 12;
-    public static final int PROJECTSTATUS = 13;
-    public static final int PROJECTREMARKS = 14;
-    public static final int ITEMKEY = 15;
-    public static final int APPROVALSTATUS = 16;
-    public static final int ATTRIBUTE1 = 17;
-    public static final int ATTRIBUTE2 = 18;
-    public static final int ATTRIBUTE3 = 19;
-    public static final int ATTRIBUTE4 = 20;
-    public static final int ATTRIBUTE5 = 21;
-    public static final int LASTUPDATEDATE = 22;
-    public static final int LASTUPDATEDBY = 23;
-    public static final int LASTUPDATELOGIN = 24;
-    public static final int CREATEDBY = 25;
-    public static final int CREATIONDATE = 26;
-    public static final int RESEARCHTYPESPEC = 27;
+    public static final int PROJECTIMPACTDESC = 7;
+    public static final int PROJECTLEADERID = 8;
+    public static final int STARTDATE = 9;
+    public static final int ACTUALENDDATE = 10;
+    public static final int PROJECTSTATUS = 11;
+    public static final int PROJECTREMARKS = 12;
+    public static final int ITEMKEY = 13;
+    public static final int APPROVALSTATUS = 14;
+    public static final int ATTRIBUTE1 = 15;
+    public static final int ATTRIBUTE2 = 16;
+    public static final int ATTRIBUTE3 = 17;
+    public static final int ATTRIBUTE4 = 18;
+    public static final int ATTRIBUTE5 = 19;
+    public static final int LASTUPDATEDATE = 20;
+    public static final int LASTUPDATEDBY = 21;
+    public static final int LASTUPDATELOGIN = 22;
+    public static final int CREATEDBY = 23;
+    public static final int CREATIONDATE = 24;
+    public static final int RESEARCHTYPESPEC = 25;
+    public static final int STUDBSNO = 26;
+    public static final int STUDMSNO = 27;
+    public static final int STUDPHDNO = 28;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -186,17 +193,6 @@ public class RIMHeaderEOImpl extends OAEntityImpl {
         setAttributeInternal(STARTDATE, value);
     }
 
-    /**Gets the attribute value for EndDate, using the alias name EndDate
-     */
-    public Date getEndDate() {
-        return (Date)getAttributeInternal(ENDDATE);
-    }
-
-    /**Sets <code>value</code> as the attribute value for EndDate
-     */
-    public void setEndDate(Date value) {
-        setAttributeInternal(ENDDATE, value);
-    }
 
     /**Gets the attribute value for ActualEndDate, using the alias name ActualEndDate
      */
@@ -390,6 +386,17 @@ public class RIMHeaderEOImpl extends OAEntityImpl {
         setAttributeInternal(RESEARCHTYPESPEC, value);
     }
 
+    /**Add attribute defaulting logic in this method.
+     */
+    public void create(AttributeList attributeList) {
+        super.create(attributeList);
+        
+         if (getTransactionNo() == null) {
+            OADBTransaction tr = getOADBTransaction();
+            setTransactionNo(tr.getSequenceValue("XXUP.XXUP_RIM_TRANSACTION_NO_SEQ"));
+        }
+    }
+
     /**getAttrInvokeAccessor: generated method. Do not modify.
      */
     protected Object getAttrInvokeAccessor(int index, 
@@ -415,8 +422,6 @@ public class RIMHeaderEOImpl extends OAEntityImpl {
             return getProjectLeaderId();
         case STARTDATE:
             return getStartDate();
-        case ENDDATE:
-            return getEndDate();
         case ACTUALENDDATE:
             return getActualEndDate();
         case PROJECTSTATUS:
@@ -546,18 +551,71 @@ public class RIMHeaderEOImpl extends OAEntityImpl {
         }
     }
 
-    /**Add attribute defaulting logic in this method.
+    /**Gets the associated entity oracle.jbo.RowIterator
      */
-    public void create(AttributeList attributeList) {
-        super.create(attributeList);
-        
-        if (getTransactionNo() == null) {
-            OADBTransaction tr = getOADBTransaction();
-            setTransactionNo(tr.getSequenceValue("XXUP.XXUP_RIM_TRANSACTION_NO_SEQ"));
-        }
-
+    public RowIterator getRIMFiscalDetailsEO() {
+        return (RowIterator)getAttributeInternal(RIMFISCALDETAILSEO);
     }
 
+    /**Gets the associated entity oracle.jbo.RowIterator
+     */
+    public RowIterator getRIMMilestonesEO() {
+        return (RowIterator)getAttributeInternal(RIMMILESTONESEO);
+    }
+
+    /**Gets the associated entity oracle.jbo.RowIterator
+     */
+    public RowIterator getRIMFundingEO() {
+        return (RowIterator)getAttributeInternal(RIMFUNDINGEO);
+    }
+
+    /**Gets the associated entity oracle.jbo.RowIterator
+     */
+    public RowIterator getRIMProjImpactEO() {
+        return (RowIterator)getAttributeInternal(RIMPROJIMPACTEO);
+    }
+
+    /**Gets the associated entity oracle.jbo.RowIterator
+     */
+    public RowIterator getRIMMembersEO() {
+        return (RowIterator)getAttributeInternal(RIMMEMBERSEO);
+    }
+
+    /**Gets the attribute value for StudBsNo, using the alias name StudBsNo
+     */
+    public Number getStudBsNo() {
+        return (Number)getAttributeInternal(STUDBSNO);
+    }
+
+    /**Sets <code>value</code> as the attribute value for StudBsNo
+     */
+    public void setStudBsNo(Number value) {
+        setAttributeInternal(STUDBSNO, value);
+    }
+
+    /**Gets the attribute value for StudMsNo, using the alias name StudMsNo
+     */
+    public Number getStudMsNo() {
+        return (Number)getAttributeInternal(STUDMSNO);
+    }
+
+    /**Sets <code>value</code> as the attribute value for StudMsNo
+     */
+    public void setStudMsNo(Number value) {
+        setAttributeInternal(STUDMSNO, value);
+    }
+
+    /**Gets the attribute value for StudPhdNo, using the alias name StudPhdNo
+     */
+    public Number getStudPhdNo() {
+        return (Number)getAttributeInternal(STUDPHDNO);
+    }
+
+    /**Sets <code>value</code> as the attribute value for StudPhdNo
+     */
+    public void setStudPhdNo(Number value) {
+        setAttributeInternal(STUDPHDNO, value);
+    }
 
     /**Creates a Key object based on given key constituents
      */

@@ -1681,14 +1681,6 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
             sMemVO.initExist(pItemKey);
 
 
-            // RIMTeamMembersEOVOImpl sMembersVO = getRIMTeamMembersEOVO1();
-            // sMembersVO.initExist(pItemKey);
-
-
-            // RIMOtherTeamMembersVOImpl sOtherMembersVO = getRIMOtherTeamMembersVO1();
-            // sOtherMembersVO.initExist(pItemKey);
-
-
             RIMMilestonesEOVOImpl sMileVO = getRIMMilestonesEOVO1();
             sMileVO.initExist(pItemKey);
 
@@ -2076,6 +2068,19 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
         return (RIMPublicationEOVOImpl)findViewObject("RIMPublicationEOVO1");
     }
 
+
+    /**Container's getter for RIMHeaderSummVO1
+     */
+    public RIMHeaderSummVOImpl getRIMHeaderSummVO1() {
+        return (RIMHeaderSummVOImpl)findViewObject("RIMHeaderSummVO1");
+    }
+
+    /**Container's getter for RIMProjectStatusVO1
+     */
+    public RIMProjectStatusVOImpl getRIMProjectStatusVO1() {
+        return (RIMProjectStatusVOImpl)findViewObject("RIMProjectStatusVO1");
+    }
+
     /**Container's getter for RIMMembersVO1
      */
     public RIMMembersVOImpl getRIMMembersVO1() {
@@ -2124,27 +2129,20 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
         return (RIMHeaderEOVOImpl)findViewObject("RIMHeaderEOVO2");
     }
 
-    /**Container's getter for RIMHeaderSummVO1
     /**Container's getter for RIMDevGoalVO1
      */
-    public RIMHeaderSummVOImpl getRIMHeaderSummVO1() {
-        return (RIMHeaderSummVOImpl)findViewObject("RIMHeaderSummVO1");
     public RIMDevGoalVOImpl getRIMDevGoalVO1() {
         return (RIMDevGoalVOImpl)findViewObject("RIMDevGoalVO1");
     }
 
-    /**Container's getter for RIMProjectStatusVO1
     /**Container's getter for RIMLatestExtVO1
      */
-    public RIMProjectStatusVOImpl getRIMProjectStatusVO1() {
-        return (RIMProjectStatusVOImpl)findViewObject("RIMProjectStatusVO1");
+    public RIMLatestExtVOImpl getRIMLatestExtVO1() {
+        return (RIMLatestExtVOImpl)findViewObject("RIMLatestExtVO1");
     }
 
-    /**Container's getter for RIMMembersVO1
     /**Container's getter for RIMEndDtExtEOVO1
      */
-    public RIMMembersVOImpl getRIMMembersVO1() {
-        return (RIMMembersVOImpl)findViewObject("RIMMembersVO1");
     public RIMEndDtExtEOVOImpl getRIMEndDtExtEOVO1() {
         return (RIMEndDtExtEOVOImpl)findViewObject("RIMEndDtExtEOVO1");
     }
