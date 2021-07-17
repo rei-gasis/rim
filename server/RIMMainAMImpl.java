@@ -2060,6 +2060,11 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
         return (RIMPublicationEOVOImpl)findViewObject("RIMPublicationEOVO1");
     }
 
+    /**Container's getter for RIMMembersVO1
+     */
+    public RIMMembersVOImpl getRIMMembersVO1() {
+        return (RIMMembersVOImpl)findViewObject("RIMMembersVO1");
+    }
     /**Container's getter for RIMDevGoalEOVO1
      */
     public RIMDevGoalEOVOImpl getRIMDevGoalEOVO1() {

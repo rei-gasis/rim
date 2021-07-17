@@ -10,8 +10,23 @@
       <Attr Name="_version" Value="10.1.3.41.57" />
    </DesignTime>
    <Containee
+      Name="PerEmpVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.PerEmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerOrgVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.PerOrgVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
       Name="PerPositionsVO"
       FullName="xxup.oracle.apps.per.rim.lov.server.PerPositionsVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerPosVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.PerPosVO"
       ObjectType="ViewObject" >
    </Containee>
    <Containee
@@ -22,6 +37,11 @@
    <Containee
       Name="RIMCUVO"
       FullName="xxup.oracle.apps.per.rim.lov.server.RIMCUVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMDevGoalVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMDevGoalVO"
       ObjectType="ViewObject" >
    </Containee>
    <Containee

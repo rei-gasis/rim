@@ -111,6 +111,25 @@ public class RIMLovAMImpl extends OAApplicationModuleImpl {
     public RIMCUVOImpl getRIMCUVO1() {
         return (RIMCUVOImpl)findViewObject("RIMCUVO1");
     }
+
+    /**Container's getter for PerEmpVO1
+     */
+    public PerEmpVOImpl getPerEmpVO1() {
+        return (PerEmpVOImpl)findViewObject("PerEmpVO1");
+    }
+
+    /**Container's getter for PerOrgVO1
+     */
+    public PerOrgVOImpl getPerOrgVO1() {
+        return (PerOrgVOImpl)findViewObject("PerOrgVO1");
+    }
+
+    /**Container's getter for PerPosVO1
+     */
+    public PerPosVOImpl getPerPosVO1() {
+        return (PerPosVOImpl)findViewObject("PerPosVO1");
+    }
+
     /**Container's getter for RIMDevGoalVO1
      */
     public RIMDevGoalVOImpl getRIMDevGoalVO1() {
