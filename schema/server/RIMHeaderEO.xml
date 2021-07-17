@@ -353,6 +353,39 @@
          <Attr Name="_DisplaySize" Value="4000" />
       </DesignTime>
    </Attribute>
+   <Attribute
+      Name="StudBsNo"
+      ColumnName="STUD_BS_NO"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="StudMsNo"
+      ColumnName="STUD_MS_NO"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="StudPhdNo"
+      ColumnName="STUD_PHD_NO"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
    <Key
       Name="RimHdPk" >
       <AttrArray Name="Attributes">
