@@ -57,4 +57,16 @@
       Name="RIMCUVO1"
       ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMCUVO" >
    </ViewUsage>
+   <ViewUsage
+      Name="PerEmpVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.PerEmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerOrgVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.PerOrgVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerPosVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.PerPosVO" >
+   </ViewUsage>
 </AppModule>
