@@ -260,14 +260,13 @@ public class RIMRequestCO extends OAControllerImpl
                    errMsg.add(new OAException("Responsibility Center is required", 
                                               OAException.ERROR));
                }
+
+               if (fiscRow.getAttribute("FundingAgency") == null) {
+                   errMsg.add(new OAException("Funding Agency is required", 
+                                              OAException.ERROR));
+               }
             }
 
-            
-
-             // if (fiscRow.getAttribute("FundingAgency") == null) {
-             //     errMsg.add(new OAException("Funding  Center is required", 
-             //                                OAException.ERROR));
-             // }
           }
 
 
