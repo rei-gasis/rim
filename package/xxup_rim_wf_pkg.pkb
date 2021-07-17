@@ -2379,6 +2379,7 @@ IS
                       DELETE 
                       FROM xxup_rim_end_dt_ext
                       WHERE item_key = l_itemkey;
+                      
                       --orig state
                       UPDATE xxup_rim_header
                       SET approval_status = 'Approved'
@@ -2557,8 +2558,9 @@ IS
                         
                             /*
                              * Delete transaction record
-                             * Update 
-                            */
+                             * //For multiple record table, update itemkey of transaction record into 
+                             * //original item key to match item key of original record
+                            */ 
                         
                             UPDATE xxup_rim_header main
                                 SET (transaction_no
@@ -2743,17 +2745,19 @@ IS
                                                   FROM xxup_rim_header hd
                                                   WHERE hd.approval_status = 'Approved'
                                                     AND hd.transaction_no = lv_tran_no);
-
+                                
                                 DELETE FROM xxup_rim_publication tr
                                 WHERE item_key = l_itemkey;
 
+
+                                
                                 --
                                 DELETE FROM xxup_rim_team_members main
                                 WHERE item_key = (SELECT item_key
                                                   FROM xxup_rim_header hd
                                                   WHERE hd.approval_status = 'Approved'
                                                     AND hd.transaction_no = lv_tran_no);
-
+    
                                 UPDATE xxup_rim_team_members
                                 SET item_key = (SELECT item_key
                                                   FROM xxup_rim_header hd
@@ -2807,6 +2811,17 @@ IS
                                 WHERE item_key = l_itemkey;
                                 
                                 
+                                UPDATE xxup_rim_main_area_int
+                                SET item_key = (SELECT item_key
+                                                  FROM xxup_rim_header hd
+                                                  WHERE hd.approval_status = 'Approved'
+                                                    AND hd.transaction_no = lv_tran_no)
+                                WHERE item_key = l_itemkey;
+                                
+                                DELETE FROM xxup_rim_main_area_int tr
+                                WHERE item_key = l_itemkey;
+                                
+                                
                                 UPDATE xxup_rim_dev_goal
                                 SET item_key = (SELECT item_key
                                                   FROM xxup_rim_header hd
@@ -2816,6 +2831,8 @@ IS
                                 
                                 DELETE FROM xxup_rim_dev_goal tr
                                 WHERE item_key = l_itemkey;
+                                
+                                
                                 UPDATE xxup_rim_end_dt_ext
                                 SET item_key = (SELECT item_key
                                                   FROM xxup_rim_header hd
@@ -2825,6 +2842,8 @@ IS
                                 
                                 DELETE FROM xxup_rim_end_dt_ext tr
                                 WHERE item_key = l_itemkey;
+                                
+                                
                                 
                             END IF;
                             
@@ -3274,10 +3293,15 @@ IS
         DELETE FROM xxup_rim_proj_impact 
         WHERE item_key = p_item_key;
         
+        DELETE FROM xxup_rim_main_area_int
+        WHERE item_key = p_item_key;
+        
         DELETE FROM xxup_rim_dev_goal
         WHERE item_key = p_item_key;
+        
         DELETE FROM xxup_rim_end_dt_ext
         WHERE item_key = p_item_key;
+        
 --        DELETE FROM xxup_per_ps_action_history 
 --        WHERE item_key = p_item_key;
 

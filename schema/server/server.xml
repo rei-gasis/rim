@@ -35,6 +35,11 @@
       ObjectType="Entity" >
    </Containee>
    <Containee
+      Name="RIMMainAreaIntEO"
+      FullName="xxup.oracle.apps.per.rim.schema.server.RIMMainAreaIntEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
       Name="RIMMembersEO"
       FullName="xxup.oracle.apps.per.rim.schema.server.RIMMembersEO"
       ObjectType="Entity" >

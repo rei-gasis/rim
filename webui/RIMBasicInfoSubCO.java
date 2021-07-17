@@ -203,21 +203,59 @@ public class RIMBasicInfoSubCO extends OAControllerImpl {
                   row.setAttribute("RenderResearchType", true);
               else
                   row.setAttribute("RenderResearchType", false);
-          } else if ("MainAreaInterest".equals(lovInputId)) {
-            if(row.getAttribute("MainAreaInterest") == null)
-                return;
+          } 
+          // else if ("MainAreaInterest".equals(lovInputId)) {
+          //   if(row.getAttribute("MainAreaInterest") == null)
+          //       return;
 
-              String showOthersField = "Others".equals(row.getAttribute("MainAreaInterest").toString()) ? "Y" : "N";
+          //     String showOthersField = "Others".equals(row.getAttribute("MainAreaInterest").toString()) ? "Y" : "N";
 
-              if ("Y".equals(showOthersField))
+          //     if ("Y".equals(showOthersField))
 
-                  row.setAttribute("RenderMainAreaIntOthers", true);
-              else 
-                  row.setAttribute("RenderMainAreaIntOthers", false);
+          //         row.setAttribute("RenderMainAreaIntOthers", true);
+          //     else 
+          //         row.setAttribute("RenderMainAreaIntOthers", false);
               
-          }
-        
+          // } 
+          // else if ("FullName1".equals(lovInputId)) {
+          //     System.out.println("entered mem");
+          //     OAViewObject membersVO = (OAViewObject) am.findViewObject("RIMTeamMembersEOVO1");
+          //     Row mRow = membersVO.getCurrentRow();
+
+          //     if(mRow.getAttribute("FullName") != null){
+          //       System.out.println("FullName: " + mRow.getAttribute("FullName").toString());
+          //       if(mRow.getAttribute("Attribute2") != null)
+          //         System.out.println("PersonId: " + mRow.getAttribute("Attribute2").toString());
+          //     }
+              
+          // }
+
       }
+
+      if ("RenderMainAreaIntOthers".equals(pageContext.getParameter(OAWebBeanConstants.EVENT_PARAM))) {
+
+            String eventRowSourceParam = 
+                pageContext.getParameter(EVENT_SOURCE_ROW_REFERENCE);
+            Row row = am.findRowByRef(eventRowSourceParam);
+
+            //            System.out.println(eventRowSourceParam);
+
+            String selectedActivity = row.getAttribute("MainAreaInterest").toString();
+            String isSelected = row.getAttribute("Selected").toString();
+
+            Row mainRow = mainVO.getCurrentRow();
+
+
+            if ("Y".equals(isSelected) && "Others".equals(selectedActivity)) {
+
+                mainRow.setAttribute("RenderMainAreaIntOthers", Boolean.TRUE);
+
+            } else if ("N".equals(isSelected) && 
+                       "Others".equals(selectedActivity)) {
+                mainRow.setAttribute("RenderMainAreaIntOthers", Boolean.FALSE);
+            }
+
+        }
 
     }
 }
