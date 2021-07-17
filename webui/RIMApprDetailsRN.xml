@@ -80,14 +80,6 @@
                                     <oa:messageStyledText id="ProjectRole" viewAttr="ProjectRole" styleClass="OraDataText"/>
                                  </ui:contents>
                               </oa:column>
-                              <oa:column id="MemberTypeCol">
-                                 <ui:columnHeader>
-                                    <oa:sortableHeader id="MemberTypeSH" prompt="Member Type"/>
-                                 </ui:columnHeader>
-                                 <ui:contents>
-                                    <oa:messageStyledText id="MemberType" viewAttr="MemberType" styleClass="OraDataText"/>
-                                 </ui:contents>
-                              </oa:column>
                            </ui:contents>
                         </oa:advancedTable>
                      </ui:contents>
