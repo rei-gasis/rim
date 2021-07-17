@@ -1123,6 +1123,8 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     String strTransactionNo = currRow.getAttribute("TransactionNo") != null ? currRow.getAttribute("TransactionNo").toString() : null;
                     String strFundingSource = currRow.getAttribute("FundingSource") != null ? currRow.getAttribute("FundingSource").toString() : null;
                     String strDescription = currRow.getAttribute("Description") != null ? currRow.getAttribute("Description").toString() : null;
+                    String strStartDate = currRow.getAttribute("StartDate") != null ? currRow.getAttribute("EndDate").toString() : null;
+                    String strEndDate = currRow.getAttribute("EndDate") != null ? currRow.getAttribute("StartDate").toString() : null;
                     String strAmount = currRow.getAttribute("Amount") != null ? currRow.getAttribute("Amount").toString() : null;
                     String strCurrency = currRow.getAttribute("Currency") != null ? currRow.getAttribute("Currency").toString() : null;
                     String strAttribute1 = currRow.getAttribute("Attribute1") != null ? currRow.getAttribute("Attribute1").toString() : null;
@@ -1144,6 +1146,8 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     tRow.setAttribute("TransactionNo", strTransactionNo);
                     tRow.setAttribute("FundingSource", strFundingSource);
                     tRow.setAttribute("Description", strDescription);
+                    tRow.setAttribute("StartDate", strStartDate);
+                    tRow.setAttribute("EndDate", strEndDate);
                     tRow.setAttribute("Amount", strAmount);
                     tRow.setAttribute("Currency", strCurrency);
                     tRow.setAttribute("Attribute1", strAttribute1);

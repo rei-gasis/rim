@@ -3,7 +3,7 @@
 
 <ViewObject
    Name="RIMFundingEOVO"
-   BindingStyle="Oracle"
+   BindingStyle="OracleName"
    CustomQuery="true"
    RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
    ComponentClass="xxup.oracle.apps.per.rim.server.RIMFundingEOVOImpl"
@@ -17,6 +17,8 @@ SELECT RIMFundingEO.RIM_FUND_ID,
        RIMFundingEO.DESCRIPTION, 
        RIMFundingEO.AMOUNT, 
        RIMFundingEO.CURRENCY, 
+       RIMFundingEO.START_DATE, 
+       RIMFundingEO.END_DATE, 
        RIMFundingEO.ATTRIBUTE1, 
        RIMFundingEO.ATTRIBUTE2, 
        RIMFundingEO.ATTRIBUTE3, 
@@ -90,6 +92,18 @@ FROM XXUP.XXUP_RIM_FUNDING RIMFundingEO
       EntityAttrName="Currency"
       EntityUsage="RIMFundingEO"
       AliasName="CURRENCY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StartDate"
+      EntityAttrName="StartDate"
+      EntityUsage="RIMFundingEO"
+      AliasName="START_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EndDate"
+      EntityAttrName="EndDate"
+      EntityUsage="RIMFundingEO"
+      AliasName="END_DATE" >
    </ViewAttribute>
    <ViewAttribute
       Name="Attribute1"

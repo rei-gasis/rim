@@ -17,6 +17,7 @@ import oracle.jbo.server.EntityDefImpl;
 // ---------------------------------------------------------------------
 public class RIMFundingEOImpl extends OAEntityImpl {
     public static final int RIMFUNDID = 0;
+    public static final int TOTALAMOUNT = 8;
     public static final int LINENO = 1;
     public static final int TRANSACTIONNO = 2;
     public static final int ITEMKEY = 3;
@@ -24,17 +25,18 @@ public class RIMFundingEOImpl extends OAEntityImpl {
     public static final int DESCRIPTION = 5;
     public static final int AMOUNT = 6;
     public static final int CURRENCY = 7;
-    public static final int TOTALAMOUNT = 8;
-    public static final int ATTRIBUTE1 = 9;
-    public static final int ATTRIBUTE2 = 10;
-    public static final int ATTRIBUTE3 = 11;
-    public static final int ATTRIBUTE4 = 12;
-    public static final int ATTRIBUTE5 = 13;
-    public static final int LASTUPDATEDATE = 14;
-    public static final int LASTUPDATEDBY = 15;
-    public static final int LASTUPDATELOGIN = 16;
-    public static final int CREATEDBY = 17;
-    public static final int CREATIONDATE = 18;
+    public static final int ATTRIBUTE1 = 8;
+    public static final int ATTRIBUTE2 = 9;
+    public static final int ATTRIBUTE3 = 10;
+    public static final int ATTRIBUTE4 = 11;
+    public static final int ATTRIBUTE5 = 12;
+    public static final int LASTUPDATEDATE = 13;
+    public static final int LASTUPDATEDBY = 14;
+    public static final int LASTUPDATELOGIN = 15;
+    public static final int CREATEDBY = 16;
+    public static final int CREATIONDATE = 17;
+    public static final int ENDDATE = 18;
+    public static final int STARTDATE = 19;
 
 
     private static OAEntityDefImpl mDefinitionObject;
@@ -304,8 +306,6 @@ public class RIMFundingEOImpl extends OAEntityImpl {
             return getAmount();
         case CURRENCY:
             return getCurrency();
-        case TOTALAMOUNT:
-            return getTotalAmount();
         case ATTRIBUTE1:
             return getAttribute1();
         case ATTRIBUTE2:
@@ -326,6 +326,10 @@ public class RIMFundingEOImpl extends OAEntityImpl {
             return getCreatedBy();
         case CREATIONDATE:
             return getCreationDate();
+        case ENDDATE:
+            return getEndDate();
+        case STARTDATE:
+            return getStartDate();
         default:
             return super.getAttrInvokeAccessor(index, attrDef);
         }
@@ -360,9 +364,6 @@ public class RIMFundingEOImpl extends OAEntityImpl {
         case CURRENCY:
             setCurrency((String)value);
             return;
-        case TOTALAMOUNT:
-            setTotalAmount((Number)value);
-            return;
         case ATTRIBUTE1:
             setAttribute1((String)value);
             return;
@@ -393,6 +394,12 @@ public class RIMFundingEOImpl extends OAEntityImpl {
         case CREATIONDATE:
             setCreationDate((Date)value);
             return;
+        case ENDDATE:
+            setEndDate((Date)value);
+            return;
+        case STARTDATE:
+            setStartDate((Date)value);
+            return;
         default:
             super.setAttrInvokeAccessor(index, value, attrDef);
             return;
@@ -410,6 +417,30 @@ public class RIMFundingEOImpl extends OAEntityImpl {
         }
     }
 
+
+    /**Gets the attribute value for EndDate, using the alias name EndDate
+     */
+    public Date getEndDate() {
+        return (Date)getAttributeInternal(ENDDATE);
+    }
+
+    /**Sets <code>value</code> as the attribute value for EndDate
+     */
+    public void setEndDate(Date value) {
+        setAttributeInternal(ENDDATE, value);
+    }
+
+    /**Gets the attribute value for StartDate, using the alias name StartDate
+     */
+    public Date getStartDate() {
+        return (Date)getAttributeInternal(STARTDATE);
+    }
+
+    /**Sets <code>value</code> as the attribute value for StartDate
+     */
+    public void setStartDate(Date value) {
+        setAttributeInternal(STARTDATE, value);
+    }
 
     /**Creates a Key object based on given key constituents
      */
