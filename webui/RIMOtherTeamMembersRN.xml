@@ -27,10 +27,10 @@
       </oa:column>
       <oa:column id="OrganizationCol">
          <ui:columnHeader>
-            <oa:sortableHeader id="OrganizationSH" prompt="Organization"/>
+            <oa:sortableHeader id="OrganizationSH" prompt="Unit"/>
          </ui:columnHeader>
          <ui:contents>
-            <oa:messageTextInput id="OtherOrganization" viewAttr="Organization"/>
+            <oa:messageTextInput id="OtherOrganization" viewAttr="Organization" columns="30"/>
          </ui:contents>
       </oa:column>
       <oa:column id="ProjectRoleCol">
