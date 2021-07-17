@@ -20,7 +20,6 @@ SELECT RIMHeaderEO.TRANSACTION_NO,
        RIMHeaderEO.MAIN_AREA_INTEREST, 
        RIMHeaderEO.PROJECT_LEADER_ID, 
        RIMHeaderEO.START_DATE, 
-       RIMHeaderEO.END_DATE, 
        RIMHeaderEO.ACTUAL_END_DATE, 
        RIMHeaderEO.PROJECT_STATUS, 
        RIMHeaderEO.PROJECT_REMARKS, 
@@ -140,13 +139,6 @@ FROM XXUP.XXUP_RIM_HEADER RIMHeaderEO
       EntityAttrName="StartDate"
       EntityUsage="RIMHeaderEO"
       AliasName="START_DATE" >
-   </ViewAttribute>
-   <ViewAttribute
-      Name="EndDate"
-      IsNotNull="true"
-      EntityAttrName="EndDate"
-      EntityUsage="RIMHeaderEO"
-      AliasName="END_DATE" >
    </ViewAttribute>
    <ViewAttribute
       Name="ActualEndDate"
@@ -361,5 +353,14 @@ FROM XXUP.XXUP_RIM_HEADER RIMHeaderEO
       ColumnType="NUMBER"
       AliasName="VIEW_ATTR"
       SQLType="BIT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EndDate"
+      IsSelected="false"
+      IsPersistent="false"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      AliasName="VIEW_ATTR"
+      SQLType="DATE" >
    </ViewAttribute>
 </ViewObject>
