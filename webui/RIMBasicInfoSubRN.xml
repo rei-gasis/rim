@@ -134,6 +134,17 @@
                   </oa:advancedTable>
                </ui:contents>
             </oa:messageLayout>
+            <oa:messageLayout id="StudentsML" prompt="Number of Mentored Students">
+               <ui:contents>
+                  <oa:table id="MentoredStudTbl">
+                     <ui:contents>
+                        <oa:messageTextInput id="StudBsNo" dataType="Number" prompt="BS" viewName="RIMHeaderEOVO1" viewAttr="StudBsNo"/>
+                        <oa:messageTextInput id="StudMsNo" dataType="Number" prompt="MS" viewName="RIMHeaderEOVO1" viewAttr="StudMsNo"/>
+                        <oa:messageTextInput id="StudPhdNo" dataType="Number" prompt="PHD" viewName="RIMHeaderEOVO1" viewAttr="StudPhdNo"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:messageLayout>
          </ui:contents>
       </oa:messageComponentLayout>
    </ui:contents>

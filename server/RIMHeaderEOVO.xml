@@ -59,7 +59,9 @@ SELECT RIMHeaderEO.TRANSACTION_NO,
         AND paaf.position_id = pap.position_id
         AND paaf.assignment_id = RIMHeaderEO.ASSIGNMENT_ID)
         POSITION_NAME,
-        DECODE(RIMHeaderEO.approval_status, 'Approved', 'ENABLED', 'DISABLED') SUMM_PG_AC
+        RIMHeaderEO.STUD_BS_NO,
+        RIMHeaderEO.STUD_MS_NO,
+        RIMHeaderEO.STUD_PHD_NO
 FROM XXUP.XXUP_RIM_HEADER RIMHeaderEO
    ]]></SQLQuery>
    <DesignTime>
@@ -292,17 +294,22 @@ FROM XXUP.XXUP_RIM_HEADER RIMHeaderEO
       </DesignTime>
    </ViewAttribute>
    <ViewAttribute
-      Name="SummPgAc"
-      IsPersistent="false"
-      Precision="8"
-      Type="java.lang.String"
-      ColumnType="VARCHAR2"
-      AliasName="SUMM_PG_AC"
-      Expression="SUMM_PG_AC"
-      SQLType="VARCHAR" >
-      <DesignTime>
-         <Attr Name="_DisplaySize" Value="8" />
-      </DesignTime>
+      Name="StudBsNo"
+      EntityAttrName="StudBsNo"
+      EntityUsage="RIMHeaderEO"
+      AliasName="STUD_BS_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StudMsNo"
+      EntityAttrName="StudMsNo"
+      EntityUsage="RIMHeaderEO"
+      AliasName="STUD_MS_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StudPhdNo"
+      EntityAttrName="StudPhdNo"
+      EntityUsage="RIMHeaderEO"
+      AliasName="STUD_PHD_NO" >
    </ViewAttribute>
    <ViewAttribute
       Name="RenderResearchType"

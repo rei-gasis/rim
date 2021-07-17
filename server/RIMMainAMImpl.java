@@ -910,6 +910,10 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     String strTransactionNoDisp = currRow.getAttribute("TransactionNoDisp") != null ? currRow.getAttribute("TransactionNoDisp").toString() : null;
                     String strPositionName = currRow.getAttribute("PositionName") != null ? currRow.getAttribute("PositionName").toString() : null;
                     String strLastUpdatedByDisp = currRow.getAttribute("LastUpdatedByDisp") != null ? currRow.getAttribute("LastUpdatedByDisp").toString() : null;
+                    String strStudBsNo = currRow.getAttribute("StudBsNo") != null ? currRow.getAttribute("StudBsNo").toString() : null;
+                    String strStudMsNo = currRow.getAttribute("StudMsNo") != null ? currRow.getAttribute("StudMsNo").toString() : null;
+                    String strStudPhdNo = currRow.getAttribute("StudPhdNo") != null ? currRow.getAttribute("StudPhdNo").toString() : null;
+                    
                     
 
                     System.out.println("got Attributes");
@@ -946,6 +950,9 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
                     tRow.setAttribute("TransactionNoDisp", strTransactionNoDisp);
                     tRow.setAttribute("PositionName", strPositionName);
                     tRow.setAttribute("LastUpdatedByDisp", strLastUpdatedByDisp);
+                    tRow.setAttribute("StudBsNo", strStudBsNo);
+                    tRow.setAttribute("StudMsNo", strStudMsNo);
+                    tRow.setAttribute("StudPhdNo", strStudPhdNo);
 
                     System.out.println("done assign target");
 
