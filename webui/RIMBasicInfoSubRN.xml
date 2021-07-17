@@ -82,7 +82,7 @@
             </oa:messageLayout>
             <oa:messageTextInput id="ProjectImpactDesc" dataType="VARCHAR2" prompt="* Project Impact Description" maximumLength="4000" columns="100" rows="3" viewName="RIMHeaderEOVO1" viewAttr="ProjectImpactDesc" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
             <oa:formValue id="ProjectLeaderId" viewName="RIMHeaderEOVO1" viewAttr="ProjectLeaderId" dataType="NUMBER"/>
-            <oa:messageLovInput id="ProjectLeaderDisp" dataType="VARCHAR2" prompt="* Project Leader" externalListOfValues="/xxup/oracle/apps/per/publicservice/institutional/lov/webui/PerPSInstMemberRN" maximumLength="200" viewName="RIMHeaderEOVO1" viewAttr="ProjectLeaderDisp" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}">
+            <oa:messageLovInput id="ProjectLeaderDisp" dataType="VARCHAR2" prompt="* Project Leader" externalListOfValues="/xxup/oracle/apps/per/publicservice/institutional/lov/webui/PerPSInstMemberRN" maximumLength="200" viewName="RIMHeaderEOVO1" viewAttr="ProjectLeaderDisp">
                <lovMappings>
                   <lovMap id="FullNameLOV" lovItem="FullName" resultTo="ProjectLeaderDisp" criteriaFrom="ProjectLeaderDisp"/>
                   <lovMap id="ProjLeaderLOV" lovItem="PersonId" resultTo="ProjectLeaderId" requiredForLOV="false"/>
