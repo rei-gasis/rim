@@ -1779,7 +1779,8 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
       }
 
 
-      return Double.toString(total);
+      return String.format("%.02f", total);
+      //Double.toString(total);
     }
 
     public void returnNonMemberVO() {
