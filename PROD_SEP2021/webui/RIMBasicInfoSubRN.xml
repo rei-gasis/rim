@@ -1,0 +1,151 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:flowLayout version="10.1.3_1312" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" controllerClass="xxup.oracle.apps.per.rim.webui.RIMBasicInfoSubCO">
+   <ui:contents>
+      <oa:messageComponentLayout id="BasicInfoCL" adminCustomizable="false" promptWidth="20%">
+         <ui:contents>
+            <oa:formValue id="AssignmentId" viewName="RIMHeaderEOVO1" viewAttr="AssignmentId" prompt="Assignment ID" dataType="NUMBER"/>
+            <oa:messageStyledText id="TransactionNo" dataType="VARCHAR2" prompt="Research Sequence No" styleClass="OraDataText" viewName="RIMHeaderEOVO1" viewAttr="TransactionNoDisp"/>
+            <oa:messageLovInput id="PositionName" dataType="VARCHAR2" prompt="* Assignment Position" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/PerPositionLovRN" lookAheadSearchType="contains" lookAheadEnabled="true" viewName="RIMHeaderEOVO1" viewAttr="PositionName" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}" unvalidated="false">
+               <lovMappings>
+                  <lovMap id="lovPosName" lovItem="PositionName" resultTo="PositionName" criteriaFrom="PositionName"/>
+                  <lovMap id="lovPosId" lovItem="AssignmentId" resultTo="AssignmentId" requiredForLOV="false"/>
+               </lovMappings>
+            </oa:messageLovInput>
+            <oa:messageLovInput id="ResearchType" dataType="VARCHAR2" prompt="* Type of Research" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/RIMResearchTypeLovRN" lookAheadSearchType="contains" lookAheadEnabled="true" viewName="RIMHeaderEOVO1" viewAttr="ResearchType" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}">
+               <lovMappings>
+                  <lovMap id="lovResearchType" lovItem="ResearchType" resultTo="ResearchType" criteriaFrom="ResearchType"/>
+               </lovMappings>
+            </oa:messageLovInput>
+            <oa:messageTextInput id="ResearchTypeSpec" dataType="VARCHAR2" prompt="Type of Research (Specifics)" viewName="RIMHeaderEOVO1" viewAttr="ResearchTypeSpec" maximumLength="4000" rows="3" columns="100" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
+            <oa:messageTextInput id="ResearchTypeOthers" dataType="VARCHAR2" prompt="Specify:" viewName="RIMHeaderEOVO1" viewAttr="ResearchTypeOthers" rendered="${oa.RIMHeaderEOVO1.RenderResearchType}" maximumLength="255" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
+            <oa:messageTextInput id="ResearchTitle" dataType="VARCHAR2" prompt="* Title of Research" viewName="RIMHeaderEOVO1" viewAttr="ResearchTitle" maximumLength="250" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
+            <oa:messageTextInput id="ResearchTitle2" dataType="VARCHAR2" prompt="Title of Research (Line 2)" viewName="RIMHeaderEOVO1" viewAttr="ResearchTitle2" maximumLength="250" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
+            <oa:messageTextInput id="ResearchTitle3" dataType="VARCHAR2" prompt="Title of Research (Line 3)" viewName="RIMHeaderEOVO1" viewAttr="ResearchTitle3" maximumLength="250" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
+            <oa:messageTextInput id="BriefDescription" dataType="VARCHAR2" prompt="* Brief Description" maximumLength="4000" columns="100" rows="3" viewName="RIMHeaderEOVO1" viewAttr="BriefDescription"/>
+            <!-- <oa:messageLovInput id="MainAreaInterest" dataType="VARCHAR2" prompt="* Main Area of Interest" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/RIMMainAreaIntLovRN" lookAheadSearchType="contains" lookAheadEnabled="true" viewName="RIMHeaderEOVO1" viewAttr="MainAreaInterest" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}">
+               <lovMappings>
+                  <lovMap id="lovMap3" lovItem="MainAreaInterest" resultTo="MainAreaInterest" criteriaFrom="MainAreaInterest"/>
+               </lovMappings>
+            </oa:messageLovInput> -->
+            <oa:messageLayout id="MainAreaIntML" prompt="* Main Area of Interest">
+               <ui:contents>
+                  <oa:advancedTable id="MainAreaIntAT" viewName="RIMMainAreaIntEOVO1">
+                     <ui:contents>
+                        <oa:column id="SelectedMAICol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="SelectedMAISH" prompt="Select"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageCheckBox id="SelMAI" viewAttr="Selected" defaultValue="" checkedValue="Y" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="RenderMainAreaIntOthers"/>
+                                 </ui:primaryClientAction>
+                              </oa:messageCheckBox>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="MainAreaIntCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="MainAreaIntSH" prompt="Main Area of Interest"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="MainAreaInterest" viewAttr="MainAreaInterest"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:messageLayout>
+            <oa:messageTextInput id="MainAreaIntOthers" dataType="VARCHAR2" prompt="Specify:" viewName="RIMHeaderEOVO1" viewAttr="MainAreaIntOthers" rendered="${oa.RIMHeaderEOVO1.RenderMainAreaIntOthers}" maximumLength="255" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
+            <oa:messageLayout id="ProjectImpactML" prompt="* Project Impact">
+               <ui:contents>
+                  <oa:advancedTable id="ProjectImpactAT" viewName="RIMProjImpactEOVO1">
+                     <ui:contents>
+                        <oa:column id="SelectedProjImpactCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="SelectedProjImpactSH" prompt="Select"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageCheckBox id="SelProjectImpact" viewAttr="Selected" defaultValue="" checkedValue="Y" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ProjectImpactCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="ProjectImpactSH" prompt="Project Impact"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ProjectImpact" viewAttr="ProjectImpact"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:messageLayout>
+            <oa:messageTextInput id="ProjectImpactDesc" dataType="VARCHAR2" prompt="* Project Impact Description" maximumLength="4000" columns="100" rows="3" viewName="RIMHeaderEOVO1" viewAttr="ProjectImpactDesc" disabled="${oa.RIMHeaderEOVO1.DisableBasicInfo}"/>
+            <oa:formValue id="ProjectLeaderId" viewName="RIMHeaderEOVO1" viewAttr="ProjectLeaderId" dataType="NUMBER"/>
+            <oa:messageLovInput id="ProjectLeaderDisp" dataType="VARCHAR2" prompt="* Project Leader" externalListOfValues="/xxup/oracle/apps/per/publicservice/institutional/lov/webui/PerPSInstMemberRN" maximumLength="200" viewName="RIMHeaderEOVO1" viewAttr="ProjectLeaderDisp">
+               <lovMappings>
+                  <lovMap id="FullNameLOV" lovItem="FullName" resultTo="ProjectLeaderDisp" criteriaFrom="ProjectLeaderDisp"/>
+                  <lovMap id="ProjLeaderLOV" lovItem="PersonId" resultTo="ProjectLeaderId" requiredForLOV="false"/>
+               </lovMappings>
+            </oa:messageLovInput>
+            <oa:messageLayout id="TeamMemberML" prompt="Team Members (UP)">
+               <ui:contents>
+                  <oa:advancedTable id="TeamMembersAT" extends="/xxup/oracle/apps/per/rim/webui/RIMTeamMembersRN"/>
+               </ui:contents>
+            </oa:messageLayout>
+            <oa:messageLayout id="OtherTeamMemberML" prompt="* Team Members (Non-UP)">
+               <ui:contents>
+                  <oa:advancedTable id="OtherTeamMemberAT" extends="/xxup/oracle/apps/per/rim/webui/RIMOtherTeamMembersRN"/>
+               </ui:contents>
+            </oa:messageLayout>
+            <oa:messageTextInput id="StartDate" dataType="DATE" prompt="* MOA / Contract Start date" viewName="RIMHeaderEOVO1" viewAttr="StartDate"/>
+            <oa:messageTextInput id="EndDate" dataType="DATE" prompt="* MOA / Contract End date" viewName="RIMHeaderEOVO1" viewAttr="EndDate"/>
+            <oa:messageTextInput id="ActualEndDate" dataType="DATE" prompt="Actual End date" viewName="RIMHeaderEOVO1" viewAttr="ActualEndDate"/>
+            <oa:messageLovInput id="ProjectStatus" dataType="VARCHAR2" prompt="* Project Status" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/RIMProjectStatusLovRN" lookAheadSearchType="contains" lookAheadEnabled="true" viewName="RIMHeaderEOVO1" viewAttr="ProjectStatus">
+               <lovMappings>
+                  <lovMap id="lovProjectStatus" lovItem="ProjectStatus" resultTo="ProjectStatus" criteriaFrom="ProjectStatus"/>
+               </lovMappings>
+            </oa:messageLovInput>
+            <!-- <oa:messageChoice id="ProjectStatus" dataType="VARCHAR2" prompt="Project Status" pickListViewDef="xxup.oracle.apps.per.rim.lov.server.RIMProjectStatusVO" pickListViewName="ProjectStatus" pickListDispAttr="ProjectStatus" pickListValAttr="ProjectStatus" defaultValue="Execution and Control" viewName="RIMHeaderEOVO1" viewAttr="ProjectStatus"/> -->
+            <oa:messageStyledText id="DateUpdated" dataType="DATE" prompt="Date Updated" viewName="RIMHeaderEOVO1" viewAttr="LastUpdateDate" styleClass="OraDataText"/>
+            <oa:messageStyledText id="UpdatedBy" dataType="VARCHAR2" prompt="Updated By" viewName="RIMHeaderEOVO1" viewAttr="LastUpdatedByDisp" styleClass="OraDataText"/>
+            <oa:messageTextInput id="ProjectRemarks" dataType="VARCHAR2" prompt="Project Remarks" maximumLength="2000" columns="100" rows="3" viewName="RIMHeaderEOVO1" viewAttr="ProjectRemarks"/>
+            <oa:messageLayout id="DevGoalML" prompt="* Sustainable Development Goal/s Addressed">
+               <ui:contents>
+                  <oa:advancedTable id="DevGoalAT" viewName="RIMDevGoalEOVO1">
+                     <ui:contents>
+                        <oa:column id="SelectedDevGoalCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="SelectedDevGoalSH" prompt="Select"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageCheckBox id="SelectedDevGoal" viewAttr="Selected" defaultValue="" checkedValue="Y"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DevGoalCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="DevGoalSH" prompt="Development Goal"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="DevelopmentGoal" viewAttr="DevelopmentGoal"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:messageLayout>
+            <oa:messageLayout id="StudentsML" prompt="Number of Mentored Students">
+               <ui:contents>
+                  <oa:table id="MentoredStudTbl">
+                     <ui:contents>
+                        <oa:messageTextInput id="StudBsNo" dataType="Number" prompt="BS" viewName="RIMHeaderEOVO1" viewAttr="StudBsNo"/>
+                        <oa:messageTextInput id="StudMsNo" dataType="Number" prompt="MS" viewName="RIMHeaderEOVO1" viewAttr="StudMsNo"/>
+                        <oa:messageTextInput id="StudPhdNo" dataType="Number" prompt="PHD" viewName="RIMHeaderEOVO1" viewAttr="StudPhdNo"/>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:messageLayout>
+         </ui:contents>
+      </oa:messageComponentLayout>
+   </ui:contents>
+</oa:flowLayout>

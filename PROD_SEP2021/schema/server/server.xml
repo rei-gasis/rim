@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="xxup.oracle.apps.per.rim.schema.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="RIMDevGoalEO"
+      FullName="xxup.oracle.apps.per.rim.schema.server.RIMDevGoalEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="RIMEndDtExtEO"
+      FullName="xxup.oracle.apps.per.rim.schema.server.RIMEndDtExtEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="RIMFiscalDetailsEO"
+      FullName="xxup.oracle.apps.per.rim.schema.server.RIMFiscalDetailsEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="RIMFundingEO"
+      FullName="xxup.oracle.apps.per.rim.schema.server.RIMFundingEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="RIMHeaderEO"
+      FullName="xxup.oracle.apps.per.rim.schema.server.RIMHeaderEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="RIMMainAreaIntEO"
+      FullName="xxup.oracle.apps.per.rim.schema.server.RIMMainAreaIntEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="RIMMembersEO"
+      FullName="xxup.oracle.apps.per.rim.schema.server.RIMMembersEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="RIMMilestonesEO"
+      FullName="xxup.oracle.apps.per.rim.schema.server.RIMMilestonesEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="RIMOtherMembersEO"
+      FullName="xxup.oracle.apps.per.rim.schema.server.RIMOtherMembersEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="RIMProjImpactEO"
+      FullName="xxup.oracle.apps.per.rim.schema.server.RIMProjImpactEO"
+      ObjectType="Entity" >
+   </Containee>
+   <Containee
+      Name="RIMPublicationEO"
+      FullName="xxup.oracle.apps.per.rim.schema.server.RIMPublicationEO"
+      ObjectType="Entity" >
+   </Containee>
+</JboPackage>

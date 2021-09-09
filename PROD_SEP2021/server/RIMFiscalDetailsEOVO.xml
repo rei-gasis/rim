@@ -1,0 +1,291 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RIMFiscalDetailsEOVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="xxup.oracle.apps.per.rim.server.RIMFiscalDetailsEOVORowImpl"
+   ComponentClass="xxup.oracle.apps.per.rim.server.RIMFiscalDetailsEOVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT 
+        RIMFiscalDetailsEO.RIM_FISC_ID, 
+       RIMFiscalDetailsEO.TRANSACTION_NO, 
+       RIMFiscalDetailsEO.CONSTITUENT_UNIT, 
+       RIMFiscalDetailsEO.RESPONSIBILITY_CENTER, 
+       RIMFiscalDetailsEO.COLLABORATING_AGENCY, 
+       RIMFiscalDetailsEO.FUNDING_AGENCY, 
+       RIMFiscalDetailsEO.SP_CODE, 
+       RIMFiscalDetailsEO.TOTAL_AMOUNT, 
+       RIMFiscalDetailsEO.FUND_CONTROLLER_ID, 
+       RIMFiscalDetailsEO.FAR_EXCLUDED, 
+       RIMFiscalDetailsEO.ITEM_KEY, 
+       RIMFiscalDetailsEO.ATTRIBUTE1, 
+       RIMFiscalDetailsEO.ATTRIBUTE2, 
+       RIMFiscalDetailsEO.ATTRIBUTE3, 
+       RIMFiscalDetailsEO.ATTRIBUTE4, 
+       RIMFiscalDetailsEO.ATTRIBUTE5, 
+       RIMFiscalDetailsEO.LAST_UPDATE_DATE, 
+       RIMFiscalDetailsEO.LAST_UPDATED_BY, 
+       RIMFiscalDetailsEO.LAST_UPDATE_LOGIN, 
+       RIMFiscalDetailsEO.CREATED_BY, 
+       RIMFiscalDetailsEO.CREATION_DATE,
+       NVL((SELECT FULL_NAME   
+        FROM HR.PER_ALL_PEOPLE_F
+        WHERE PERSON_ID = RIMFiscalDetailsEO.FUND_CONTROLLER_ID
+        AND SYSDATE BETWEEN EFFECTIVE_START_DATE AND EFFECTIVE_END_DATE
+       ), (SELECT fund_controller_disp
+          FROM xxup_rim_acctg_info acc
+          WHERE item_key = RIMFiscalDetailsEO.item_key
+          )
+       ) FUND_CONTROLLER_DISP,
+       NVL((SELECT description
+        FROM (
+            SELECT flex_value sp_code
+                  ,description
+            FROM fnd_flex_values_vl
+            WHERE flex_value_set_id = (SELECT flex_value_set_id
+                                       FROM fnd_flex_value_sets
+                                       WHERE flex_value_set_name = 'UP_Special_Code_VS'
+                               )
+        
+        )
+        WHERE sp_code = RIMFiscalDetailsEO.sp_code
+        ), (SELECT sp_code_disp
+            FROM xxup_rim_acctg_info acc
+            WHERE item_key = RIMFiscalDetailsEO.item_key
+            )
+        ) SP_CODE_DISP,
+       (SELECT description
+        FROM (
+            SELECT flex_value rc_code
+                  ,description
+            FROM fnd_flex_values_vl
+            WHERE flex_value_set_id = (SELECT flex_value_set_id
+                                       FROM fnd_flex_value_sets
+                                       WHERE flex_value_set_name = 'UP_Responsibility_Center_VS'
+                               )
+        
+        )
+        WHERE rc_code = RIMFiscalDetailsEO.RESPONSIBILITY_CENTER
+        ) RESPONSIBILITY_CENTER_DISP,
+      to_char(RIMFiscalDetailsEO.TOTAL_AMOUNT, 'fm9G999G999G999G999G999D00') FM_TOTAL_AMOUNT 
+FROM XXUP.XXUP_RIM_FISCAL_DETAILS RIMFiscalDetailsEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RIMFiscalDetailsEO"
+      Entity="xxup.oracle.apps.per.rim.schema.server.RIMFiscalDetailsEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="RimFiscId"
+      IsNotNull="true"
+      EntityAttrName="RimFiscId"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="RIM_FISC_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionNo"
+      IsNotNull="true"
+      EntityAttrName="TransactionNo"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="TRANSACTION_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConstituentUnit"
+      EntityAttrName="ConstituentUnit"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="CONSTITUENT_UNIT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ResponsibilityCenter"
+      IsNotNull="true"
+      EntityAttrName="ResponsibilityCenter"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="RESPONSIBILITY_CENTER" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CollaboratingAgency"
+      EntityAttrName="CollaboratingAgency"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="COLLABORATING_AGENCY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FundingAgency"
+      IsNotNull="true"
+      EntityAttrName="FundingAgency"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="FUNDING_AGENCY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SpCode"
+      EntityAttrName="SpCode"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="SP_CODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TotalAmount"
+      EntityAttrName="TotalAmount"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="TOTAL_AMOUNT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FundControllerId"
+      EntityAttrName="FundControllerId"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="FUND_CONTROLLER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FarExcluded"
+      EntityAttrName="FarExcluded"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="FAR_EXCLUDED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemKey"
+      EntityAttrName="ItemKey"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="ITEM_KEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="RIMFiscalDetailsEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FundControllerDisp"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="FUND_CONTROLLER_DISP"
+      Expression="FUND_CONTROLLER_DISP"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="SpCodeDisp"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="SP_CODE_DISP"
+      Expression="SP_CODE_DISP"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ResponsibilityCenterDisp"
+      IsPersistent="false"
+      Precision="240"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="RESPONSIBILITY_CENTER_DISP"
+      Expression="RESPONSIBILITY_CENTER_DISP"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DisableAccountingMode"
+      IsSelected="false"
+      IsPersistent="false"
+      DefaultValue="true"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="BIT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DisableFundingAgency"
+      IsSelected="false"
+      IsPersistent="false"
+      DefaultValue="true"
+      Type="java.lang.Boolean"
+      ColumnType="NUMBER"
+      AliasName="VIEW_ATTR"
+      SQLType="BIT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FmTotalAmount"
+      IsPersistent="false"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="FM_TOTAL_AMOUNT"
+      Expression="FM_TOTAL_AMOUNT"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

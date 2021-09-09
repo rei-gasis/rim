@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:flowLayout version="10.1.3_1312" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" controllerClass="xxup.oracle.apps.per.rim.webui.RIMPubInfoSubCO">
+   <ui:contents>
+      <oa:messageComponentLayout id="PubInfoCL" adminCustomizable="false" promptWidth="20%">
+         <ui:contents>
+            <oa:messageRadioGroup id="IsPublished" dataType="VARCHAR2" prompt="Is Published?" pickListViewDef="xxup.oracle.apps.per.rim.lov.server.RIMYesNoVO" pickListViewName="Ans" pickListDispAttr="Ans" pickListValAttr="Val" defaultValue="N" viewName="RIMPublicationEOVO1" viewAttr="IsPublished"/>
+         	<oa:messageChoice id="DistributionMode" dataType="VARCHAR2" prompt="Mode of Distribution" pickListViewDef="xxup.oracle.apps.per.rim.lov.server.RIMDistributionModeVO" pickListViewName="DistributionMode" pickListDispAttr="DistributionMode" pickListValAttr="DistributionMode" defaultValue="Electronic" viewName="RIMPublicationEOVO1" viewAttr="DistributionMode"/>
+            <oa:messageRadioGroup id="HasAward" dataType="VARCHAR2" prompt="Has Award?" pickListViewDef="xxup.oracle.apps.per.rim.lov.server.RIMYesNoVO" pickListViewName="Ans" pickListDispAttr="Ans" pickListValAttr="Val" defaultValue="N" viewName="RIMPublicationEOVO1" viewAttr="HasAward"/>
+            <oa:messageTextInput id="AwardTitle" dataType="VARCHAR2" prompt="Award Title" viewName="RIMPublicationEOVO1" viewAttr="AwardTitle" maximumLength="100"/>
+            <oa:messageTextInput id="AwardDate" dataType="DATE" prompt="Date Awarded" viewName="RIMPublicationEOVO1" viewAttr="AwardDate"/>
+            <oa:messageTextInput id="ConferringBody" dataType="VARCHAR2" prompt="Conferring Body" viewName="RIMPublicationEOVO1" viewAttr="ConferringBody" maximumLength="100"/>
+            <oa:messageTextInput id="Points" dataType="NUMBER" prompt="Points" viewName="RIMPublicationEOVO1" viewAttr="Points"/>
+            <oa:messageTextInput id="PostActEvalRating" dataType="VARCHAR2" prompt="Post Activity Evaluation Rating (Good and Better rating)" viewName="RIMPublicationEOVO1" viewAttr="PostActEvalRating" maximumLength="30"/>
+            <oa:messageTextInput id="Remarks" dataType="VARCHAR2" prompt="Remarks" columns="100" rows="3" viewName="RIMPublicationEOVO1" viewAttr="Remarks" maximumLength="4000"/>
+         </ui:contents>
+     </oa:messageComponentLayout>
+   </ui:contents>
+</oa:flowLayout>

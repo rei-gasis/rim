@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE AppModule SYSTEM "jbo_03_01.dtd">
+
+<AppModule
+   Name="RIMLovAM"
+   ComponentClass="xxup.oracle.apps.per.rim.lov.server.RIMLovAMImpl" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_deployType" Value="0" />
+   </DesignTime>
+   <ViewUsage
+      Name="RIMMainAreaIntVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMMainAreaIntVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMProjectImpactVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMProjectImpactVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMYesNoVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMYesNoVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMProjectStatusVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMProjectStatusVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMRespCenterVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMRespCenterVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMCurrencyVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMCurrencyVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMDistributionModeVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMDistributionModeVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMSPCodeVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMSPCodeVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMResearchTypeVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMResearchTypeVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerPositionsVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.PerPositionsVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMFundingVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMFundingVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMCUVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMCUVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerEmpVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.PerEmpVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerOrgVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.PerOrgVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="PerPosVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.PerPosVO" >
+   </ViewUsage>
+   <ViewUsage
+      Name="RIMDevGoalVO1"
+      ViewObjectName="xxup.oracle.apps.per.rim.lov.server.RIMDevGoalVO" >
+   </ViewUsage>
+</AppModule>

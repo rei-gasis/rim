@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RIMFundingEOVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxup.oracle.apps.per.rim.server.RIMFundingEOVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+    SELECT RIMFundingEO.RIM_FUND_ID, 
+           RIMFundingEO.LINE_NO, 
+           RIMFundingEO.TRANSACTION_NO, 
+           RIMFundingEO.ITEM_KEY, 
+           RIMFundingEO.FUNDING_SOURCE, 
+           RIMFundingEO.DESCRIPTION, 
+           RIMFundingEO.AMOUNT, 
+           RIMFundingEO.CURRENCY, 
+           RIMFundingEO.START_DATE, 
+           RIMFundingEO.END_DATE, 
+           RIMFundingEO.ATTRIBUTE1, 
+           RIMFundingEO.ATTRIBUTE2, 
+           RIMFundingEO.ATTRIBUTE3, 
+           RIMFundingEO.ATTRIBUTE4, 
+           RIMFundingEO.ATTRIBUTE5, 
+           RIMFundingEO.LAST_UPDATE_DATE, 
+           RIMFundingEO.LAST_UPDATED_BY, 
+           RIMFundingEO.LAST_UPDATE_LOGIN, 
+           RIMFundingEO.CREATED_BY, 
+           RIMFundingEO.CREATION_DATE
+    FROM XXUP.XXUP_RIM_FUNDING RIMFundingEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RIMFundingEO"
+      Entity="xxup.oracle.apps.per.rim.schema.server.RIMFundingEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="RimFundId"
+      IsNotNull="true"
+      EntityAttrName="RimFundId"
+      EntityUsage="RIMFundingEO"
+      AliasName="RIM_FUND_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LineNo"
+      EntityAttrName="LineNo"
+      EntityUsage="RIMFundingEO"
+      AliasName="LINE_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionNo"
+      IsNotNull="true"
+      EntityAttrName="TransactionNo"
+      EntityUsage="RIMFundingEO"
+      AliasName="TRANSACTION_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemKey"
+      EntityAttrName="ItemKey"
+      EntityUsage="RIMFundingEO"
+      AliasName="ITEM_KEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FundingSource"
+      EntityAttrName="FundingSource"
+      EntityUsage="RIMFundingEO"
+      AliasName="FUNDING_SOURCE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Description"
+      EntityAttrName="Description"
+      EntityUsage="RIMFundingEO"
+      AliasName="DESCRIPTION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Amount"
+      EntityAttrName="Amount"
+      EntityUsage="RIMFundingEO"
+      AliasName="AMOUNT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Currency"
+      EntityAttrName="Currency"
+      EntityUsage="RIMFundingEO"
+      AliasName="CURRENCY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="StartDate"
+      EntityAttrName="StartDate"
+      EntityUsage="RIMFundingEO"
+      AliasName="START_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EndDate"
+      EntityAttrName="EndDate"
+      EntityUsage="RIMFundingEO"
+      AliasName="END_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="RIMFundingEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="RIMFundingEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="RIMFundingEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="RIMFundingEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="RIMFundingEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="RIMFundingEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="RIMFundingEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="RIMFundingEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="RIMFundingEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="RIMFundingEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+</ViewObject>

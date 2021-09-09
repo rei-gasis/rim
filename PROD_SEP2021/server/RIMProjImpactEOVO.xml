@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RIMProjImpactEOVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxup.oracle.apps.per.rim.server.RIMProjImpactEOVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT RIMProjImpactEO.RIM_PROJ_IMPACT_ID, 
+       RIMProjImpactEO.LINE_NO, 
+       RIMProjImpactEO.TRANSACTION_NO, 
+       RIMProjImpactEO.ITEM_KEY, 
+       RIMProjImpactEO.SELECTED, 
+       RIMProjImpactEO.PROJECT_IMPACT, 
+       RIMProjImpactEO.ATTRIBUTE1, 
+       RIMProjImpactEO.ATTRIBUTE2, 
+       RIMProjImpactEO.ATTRIBUTE3, 
+       RIMProjImpactEO.ATTRIBUTE4, 
+       RIMProjImpactEO.ATTRIBUTE5, 
+       RIMProjImpactEO.LAST_UPDATE_DATE, 
+       RIMProjImpactEO.LAST_UPDATED_BY, 
+       RIMProjImpactEO.LAST_UPDATE_LOGIN, 
+       RIMProjImpactEO.CREATED_BY, 
+       RIMProjImpactEO.CREATION_DATE
+FROM XXUP.XXUP_RIM_PROJ_IMPACT RIMProjImpactEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RIMProjImpactEO"
+      Entity="xxup.oracle.apps.per.rim.schema.server.RIMProjImpactEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="RimProjImpactId"
+      IsNotNull="true"
+      EntityAttrName="RimProjImpactId"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="RIM_PROJ_IMPACT_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LineNo"
+      EntityAttrName="LineNo"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="LINE_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionNo"
+      IsNotNull="true"
+      EntityAttrName="TransactionNo"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="TRANSACTION_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemKey"
+      EntityAttrName="ItemKey"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="ITEM_KEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Selected"
+      EntityAttrName="Selected"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="SELECTED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectImpact"
+      EntityAttrName="ProjectImpact"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="PROJECT_IMPACT" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="RIMProjImpactEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+</ViewObject>

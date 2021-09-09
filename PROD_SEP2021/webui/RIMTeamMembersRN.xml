@@ -1,0 +1,136 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:advancedTable version="10.1.3_1312" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" viewName="RIMTeamMembersEOVO1">
+   <ui:contents>
+      <oa:column id="FullName1Col">
+         <ui:columnHeader>
+            <oa:sortableHeader id="FullName1SH" prompt="Full Name" />
+         </ui:columnHeader>
+         <ui:contents>
+            <oa:messageLovInput id="FullName" selectiveSearchCriteria="false" prompt="Full Name" viewAttr="FullName" columns="30">
+               <lovContents>
+                  <oa:listOfValues id="region1" amDefName="xxup.oracle.apps.per.rim.lov.server.RIMLovAM">
+                     <ui:contents>
+                        <oa:table name="region1" id="PerEmpVO1">
+                           <ui:contents>
+                              <oa:formValue id="SrcPersonId" dataType="NUMBER" prompt="PersonId" viewName="PerEmpVO1" viewAttr="PersonId"/>
+                              <oa:messageStyledText id="SrcFullName" dataType="VARCHAR2" prompt="FullName" viewName="PerEmpVO1" viewAttr="FullName" maximumLength="240" queryable="true"/>
+                           </ui:contents>
+                        </oa:table>
+                     </ui:contents>
+                  </oa:listOfValues>
+               </lovContents>
+               <lovMappings>
+                  <lovMap id="Lov_FullName" lovItem="SrcFullName" resultTo="FullName" criteriaFrom="FullName"/>
+                  <lovMap id="Lov_PersonId" lovItem="SrcPersonId" resultTo="PersonId"/>
+               </lovMappings>
+            </oa:messageLovInput>
+            <oa:formValue id="PersonId" rendered="true" viewAttr="Attribute2"/>
+         </ui:contents>
+      </oa:column>
+      <!-- <oa:column id="FullNameCol">
+         <ui:columnHeader>
+            <oa:sortableHeader id="FullNameSH" prompt="Full Name"/>
+         </ui:columnHeader>
+         <ui:contents>
+            <oa:messageLovInput id="FullName" viewAttr="FullName" externalListOfValues="/xxup/oracle/apps/per/publicservice/institutional/lov/webui/PerPSInstMemberRN" columns="30" unvalidated="false" lookAheadSearchType="contains" translatableDefaultValue="">
+               <lovMappings>
+                  <lovMap id="FullNameLovMap" lovItem="FullName" useForValidation="default" resultTo="FullName" criteriaFrom="FullName"/>
+                  <lovMap id="PositionLovMap" lovItem="Position" resultTo="Position" useForValidation="default"/>
+                  <lovMap id="OrganizationLovMap" lovItem="Organization" resultTo="Organization" useForValidation="default"/> 
+                  <lovMap id="PersonIdLovMap" lovItem="PersonId" resultTo="PersonId" useForValidation="default"/>
+               </lovMappings>
+            </oa:messageLovInput>
+            <oa:formValue id="PersonId" rendered="false" viewAttr="Attribute2"/>
+         </ui:contents>
+      </oa:column> -->
+      <!-- <oa:column id="PositionCol" rendered="true">
+         <ui:columnHeader>
+            <oa:sortableHeader id="PositionSH" prompt="Position"/>
+         </ui:columnHeader>
+         <ui:contents>
+            <oa:messageTextInput id="Position" viewAttr="Position" columns="30"/>
+         </ui:contents>
+      </oa:column> -->
+      <oa:column id="PositionCol">
+         <ui:columnHeader>
+            <oa:sortableHeader id="PositionSH" prompt="Position"/>
+         </ui:columnHeader>
+         <ui:contents>
+            <oa:messageLovInput id="Position" viewAttr="Position" maximumLength="240" lookAheadSearchType="contains" selectiveSearchCriteria="false" columns="30">
+               <lovContents>
+                  <oa:listOfValues id="region2" amDefName="xxup.oracle.apps.per.rim.lov.server.RIMLovAM">
+                     <ui:contents>
+                        <oa:table name="region2" id="PerPosVO1">
+                           <ui:contents>
+                              <oa:formValue id="PosPersonId" dataType="NUMBER" prompt="PersonId" viewName="PerPosVO1" viewAttr="PersonId"/>
+                              <oa:messageStyledText id="PosPosition" dataType="VARCHAR2" prompt="Position" viewName="PerPosVO1" viewAttr="Position" maximumLength="100" queryable="true" selectiveSearchCriteria="false"/>
+                           </ui:contents>
+                        </oa:table>
+                     </ui:contents>
+                  </oa:listOfValues>
+               </lovContents>
+               <lovMappings>
+                  <lovMap id="Lov_Position" resultTo="Position" criteriaFrom="Position" programmaticQuery="true" lovItem="PosPosition"/>
+                  <lovMap id="Lov_PerPosition" criteriaFrom="PersonId" lovItem="PosPersonId"/>
+               </lovMappings>
+            </oa:messageLovInput>
+         </ui:contents>
+      </oa:column>
+      <oa:column id="EndDateCol">
+         <ui:columnHeader>
+            <oa:sortableHeader id="EndDateSH" prompt="End Date"/>
+         </ui:columnHeader>
+         <ui:contents>
+            <oa:messageTextInput id="EndDate" viewAttr="EndDate" dataType="DATE"/>
+         </ui:contents>
+      </oa:column>
+      <oa:column id="OrganizationCol">
+         <ui:columnHeader>
+            <oa:sortableHeader id="OrganizationSH" prompt="Organization"/>
+         </ui:columnHeader>
+         <ui:contents>
+            <oa:messageLovInput id="Organization" viewAttr="Organization" columns="30" lookAheadSearchType="contains" selectiveSearchCriteria="false">
+               <lovContents>
+                  <oa:listOfValues id="region3" amDefName="xxup.oracle.apps.per.rim.lov.server.RIMLovAM">
+                     <ui:contents>
+                        <oa:table name="region3" id="PerOrgVO1">
+                           <ui:contents>
+                              <oa:formValue id="OrgPersonId" dataType="NUMBER" prompt="PersonId" viewName="PerOrgVO1" viewAttr="PersonId"/>
+                              <oa:messageStyledText id="OrgOrganization" dataType="VARCHAR2" prompt="Organization" viewName="PerOrgVO1" viewAttr="Organization" maximumLength="100" queryable="true" selectiveSearchCriteria="false"/>
+                           </ui:contents>
+                        </oa:table>
+                     </ui:contents>
+                  </oa:listOfValues>
+               </lovContents>
+               <lovMappings>
+                  <lovMap id="Lov_Organization" resultTo="Organization" criteriaFrom="Organization" programmaticQuery="true" lovItem="OrgOrganization"/>
+                  <lovMap id="Lov_PerOrganization" criteriaFrom="PersonId" lovItem="OrgPersonId"/>
+               </lovMappings>
+            </oa:messageLovInput>
+         </ui:contents>
+      </oa:column>
+      <!-- <oa:column id="OrganizationCol">
+         <ui:columnHeader>
+            <oa:sortableHeader id="OrganizationSH" prompt="Department/Unit/College"/>
+         </ui:columnHeader>
+         <ui:contents>
+            <oa:messageTextInput id="Organization" viewAttr="Organization" columns="30"/>
+         </ui:contents>
+      </oa:column> -->
+      <oa:column id="ProjectRoleCol">
+         <ui:columnHeader>
+            <oa:sortableHeader id="ProjectRoleSH" prompt="Project Role"/>
+         </ui:columnHeader>
+         <ui:contents>
+            <oa:messageTextInput viewAttr="ProjectRole" id="ProjectRole"/>
+         </ui:contents>
+      </oa:column>
+   </ui:contents>
+   <ui:footer>
+      <oa:tableFooter id="tableFooter1">
+         <ui:contents>
+            <oa:addTableRow id="addTableRow1"/>
+         </ui:contents>
+      </oa:tableFooter>
+   </ui:footer>
+</oa:advancedTable>

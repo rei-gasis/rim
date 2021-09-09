@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE JboPackage SYSTEM "jbo_03_01.dtd">
+
+<JboPackage
+   Name="server"
+   SeparateXMLFiles="true"
+   PackageName="xxup.oracle.apps.per.rim.lov.server" >
+   <DesignTime>
+      <Attr Name="_ejbPackage" Value="false" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+   </DesignTime>
+   <Containee
+      Name="PerEmpVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.PerEmpVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerOrgVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.PerOrgVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerPositionsVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.PerPositionsVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="PerPosVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.PerPosVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMCurrencyVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMCurrencyVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMCUVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMCUVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMDevGoalVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMDevGoalVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMDistributionModeVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMDistributionModeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMFundingVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMFundingVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMLovAM"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMLovAM"
+      ObjectType="AppModule" >
+   </Containee>
+   <Containee
+      Name="RIMMainAreaIntVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMMainAreaIntVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMProjectImpactVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMProjectImpactVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMProjectStatusVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMProjectStatusVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMResearchTypeVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMResearchTypeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMRespCenterVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMRespCenterVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMSPCodeVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMSPCodeVO"
+      ObjectType="ViewObject" >
+   </Containee>
+   <Containee
+      Name="RIMYesNoVO"
+      FullName="xxup.oracle.apps.per.rim.lov.server.RIMYesNoVO"
+      ObjectType="ViewObject" >
+   </Containee>
+</JboPackage>

@@ -1,0 +1,132 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<page xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:ui="http://xmlns.oracle.com/uix/ui" version="10.1.3_1312" xml:lang="en-US" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$">
+   <content>
+      <oa:pageLayout id="PageLayoutRN" amDefName="xxup.oracle.apps.per.rim.server.RIMMainAM" windowTitle="Research Information Module - Summary Page" title="Research Information Module - Summary Page" controllerClass="xxup.oracle.apps.per.rim.webui.RIMSummaryCO">
+         <ui:corporateBranding>
+            <oa:image id="corporateBrandingImage" source="/OA_MEDIA/FNDSSCORP.gif"/>
+         </ui:corporateBranding>
+         <ui:contents>
+            <oa:query id="SummaryQRN" mode="resultsBasedSearch" dispCustomized="true" defaultPanel="advanced" hideSaveSearch="true">
+               <ui:contents>
+                  <oa:advancedTable id="SummaryRN" viewName="RIMHeaderSummVO1" width="100%" detailViewAttr="">
+                     <ui:contents>
+                        <oa:column id="SequenceCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="SequenceNoSH" prompt="Research Sequence No"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="SequenceNo" viewAttr="TransactionNoDisp" queryable="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ResearchTitletleCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="ResearchTitleSH" prompt="Research Title"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ResearchTitle" viewAttr="ResearchTitle" queryable="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ResearchTypeCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="ResearchTypeSH" prompt="Type of Research"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ResearchType" viewAttr="ResearchType" queryable="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ProjectStatusCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="ProjectStatusSH" prompt="Project Status"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ProjectStatus" viewAttr="ProjectStatus" queryable="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ApprovalStatusCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="ApprovalStatusSH" prompt="Approval Status"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageStyledText id="ApprovalStatus" viewAttr="ApprovalStatus" queryable="false"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="ViewDetailsCol" rendered="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="ViewDetailsSH" prompt="View"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:image id="ViewDetails" destination="OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMReviewPG&amp;urlParam=VIEW&amp;pTransactionNo={@TransactionNo}&amp;pItemKey={@ItemKey}" source="detailsicon_enabled.gif" rendered="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="UpdateResCol" rendered="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="updateResSH" prompt="Update"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:switcher id="UpdateImageSwitcher" viewAttr="SummPgAc">
+                                 <ui:case name="ENABLED">
+                                    <oa:image id="UpdateDetails" destination="OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMRequestPG&amp;urlParam=UPDATE&amp;pTransactionNo={@TransactionNo}&amp;pItemKey={@ItemKey}" source="updateicon_enabled.gif"/>
+                                 </ui:case>
+                                 <ui:case name="DISABLED">
+                                    <oa:image id="UPDATE_DISABLED" source="updateicon_disabled.gif"/>
+                                 </ui:case>
+                                 <ui:case name="SFL">
+                                    <oa:image id="SaveForLater" destination="OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMRequestPG&amp;urlParam=SFL&amp;pTransactionNo={@TransactionNo}&amp;pItemKey={@ItemKey}" source="updateicon_enabled.gif"/>
+                                 </ui:case>
+                              </oa:switcher>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="CloseResCol" rendered="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="CloseResSH" prompt="Close"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:switcher id="CloseImageSwitcher" viewAttr="SummPgAc">
+                                 <ui:case name="ENABLED">
+                                    <oa:image id="CloseResearch" destination="OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMRequestPG&amp;urlParam=CLOSE&amp;pTransactionNo={@TransactionNo}&amp;pItemKey={@ItemKey}" source="notesicon_enabled.gif"/>
+                                 </ui:case>
+                                 <ui:case name="DISABLED">
+                                    <oa:image id="CLOSE_DISABLED" source="notesicon_disabled.gif"/>
+                                 </ui:case>
+                              </oa:switcher>
+                           </ui:contents>
+                        </oa:column>
+                        <!-- <oa:column id="accupdcol" rendered="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="accupdsh" prompt="ACCTG"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:image id="accupdimg" destination="OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMRequestPG&amp;urlParam=ACCTG_UPD&amp;pTransactionNo={@TransactionNo}&amp;pItemKey={@ItemKey}" source="updateicon_enabled.gif" rendered="true"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="completecol" rendered="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="completesh" prompt="COMPL"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:image id="completeimg" destination="OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMRequestPG&amp;urlParam=CLOSED&amp;pTransactionNo={@TransactionNo}&amp;pItemKey={@ItemKey}" source="updateicon_enabled.gif" rendered="true"/>
+                           </ui:contents>
+                     </oa:column>
+                        <oa:column id="rfccol" rendered="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="rfcsh" prompt="RFC"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:image id="rfcimg" destination="OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMRequestPG&amp;urlParam=RFC&amp;pTransactionNo={@TransactionNo}&amp;pItemKey={@ItemKey}" source="updateicon_enabled.gif" rendered="true"/>
+                           </ui:contents>
+                        </oa:column> -->
+                     </ui:contents>
+                     <ui:tableActions>
+                        <oa:flowLayout id="RIMSummTableAction">
+                           <ui:contents>
+                              <oa:button id="Create" use="/oracle/apps/fnd/attributesets/Buttons/Apply" text="Add" prompt="Add" destination="OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMRequestPG&amp;urlParam=CREATE"/>
+                           </ui:contents>
+                        </oa:flowLayout>
+                     </ui:tableActions>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:query>
+         </ui:contents>
+      </oa:pageLayout>
+   </content>
+</page>
