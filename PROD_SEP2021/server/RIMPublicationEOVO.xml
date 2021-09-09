@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RIMPublicationEOVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxup.oracle.apps.per.rim.server.RIMPublicationEOVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT RIMPublicationEO.RIM_PUBLICATION_ID, 
+       RIMPublicationEO.TRANSACTION_NO, 
+       RIMPublicationEO.ITEM_KEY, 
+       RIMPublicationEO.IS_PUBLISHED, 
+       RIMPublicationEO.DISTRIBUTION_MODE, 
+       RIMPublicationEO.HAS_AWARD, 
+       RIMPublicationEO.AWARD_TITLE, 
+       RIMPublicationEO.AWARD_DATE, 
+       RIMPublicationEO.CONFERRING_BODY, 
+       RIMPublicationEO.POINTS, 
+       RIMPublicationEO.POST_ACT_EVAL_RATING, 
+       RIMPublicationEO.REMARKS, 
+       RIMPublicationEO.ATTRIBUTE1, 
+       RIMPublicationEO.ATTRIBUTE2, 
+       RIMPublicationEO.ATTRIBUTE3, 
+       RIMPublicationEO.ATTRIBUTE4, 
+       RIMPublicationEO.ATTRIBUTE5, 
+       RIMPublicationEO.LAST_UPDATE_DATE, 
+       RIMPublicationEO.LAST_UPDATED_BY, 
+       RIMPublicationEO.LAST_UPDATE_LOGIN, 
+       RIMPublicationEO.CREATED_BY, 
+       RIMPublicationEO.CREATION_DATE
+FROM XXUP.XXUP_RIM_PUBLICATION RIMPublicationEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RIMPublicationEO"
+      Entity="xxup.oracle.apps.per.rim.schema.server.RIMPublicationEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="RimPublicationId"
+      IsNotNull="true"
+      EntityAttrName="RimPublicationId"
+      EntityUsage="RIMPublicationEO"
+      AliasName="RIM_PUBLICATION_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionNo"
+      IsNotNull="true"
+      EntityAttrName="TransactionNo"
+      EntityUsage="RIMPublicationEO"
+      AliasName="TRANSACTION_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemKey"
+      EntityAttrName="ItemKey"
+      EntityUsage="RIMPublicationEO"
+      AliasName="ITEM_KEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="IsPublished"
+      IsNotNull="true"
+      DefaultValue="N"
+      EntityAttrName="IsPublished"
+      EntityUsage="RIMPublicationEO"
+      AliasName="IS_PUBLISHED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DistributionMode"
+      EntityAttrName="DistributionMode"
+      EntityUsage="RIMPublicationEO"
+      AliasName="DISTRIBUTION_MODE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="HasAward"
+      EntityAttrName="HasAward"
+      EntityUsage="RIMPublicationEO"
+      AliasName="HAS_AWARD" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AwardTitle"
+      EntityAttrName="AwardTitle"
+      EntityUsage="RIMPublicationEO"
+      AliasName="AWARD_TITLE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="AwardDate"
+      EntityAttrName="AwardDate"
+      EntityUsage="RIMPublicationEO"
+      AliasName="AWARD_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ConferringBody"
+      EntityAttrName="ConferringBody"
+      EntityUsage="RIMPublicationEO"
+      AliasName="CONFERRING_BODY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Points"
+      EntityAttrName="Points"
+      EntityUsage="RIMPublicationEO"
+      AliasName="POINTS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="PostActEvalRating"
+      EntityAttrName="PostActEvalRating"
+      EntityUsage="RIMPublicationEO"
+      AliasName="POST_ACT_EVAL_RATING" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Remarks"
+      EntityAttrName="Remarks"
+      EntityUsage="RIMPublicationEO"
+      AliasName="REMARKS" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="RIMPublicationEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="RIMPublicationEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="RIMPublicationEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="RIMPublicationEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="RIMPublicationEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="RIMPublicationEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="RIMPublicationEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="RIMPublicationEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="RIMPublicationEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="RIMPublicationEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+</ViewObject>

@@ -1,0 +1,469 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+
+<Entity
+   Name="RIMHeaderEO"
+   DBObjectType="table"
+   DBObjectName="XXUP.XXUP_RIM_HEADER"
+   AliasName="RIMHeaderEO"
+   BindingStyle="OracleName"
+   UseGlueCode="false"
+   RowClass="xxup.oracle.apps.per.rim.schema.server.RIMHeaderEOImpl"
+   DefClass="oracle.apps.fnd.framework.server.OAEntityDefImpl"
+   CollClass="oracle.apps.fnd.framework.server.OAEntityCache" >
+   <DesignTime>
+      <Attr Name="_isCodegen" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <AttrArray Name="_publishEvents">
+      </AttrArray>
+      <Attr Name="_codeGenFlag2" Value="Init|Access" />
+   </DesignTime>
+   <Attribute
+      Name="TransactionNo"
+      IsNotNull="true"
+      Precision="15"
+      Scale="0"
+      ColumnName="TRANSACTION_NO"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXUP.XXUP_RIM_HEADER"
+      PrimaryKey="true" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="AssignmentId"
+      Precision="10"
+      Scale="0"
+      ColumnName="ASSIGNMENT_ID"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ResearchType"
+      Precision="240"
+      ColumnName="RESEARCH_TYPE"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="240" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ResearchTitle"
+      Precision="250"
+      ColumnName="RESEARCH_TITLE"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ResearchTitle2"
+      Precision="250"
+      ColumnName="RESEARCH_TITLE2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ResearchTitle3"
+      Precision="250"
+      ColumnName="RESEARCH_TITLE3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="250" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="BriefDescription"
+      Precision="4000"
+      ColumnName="BRIEF_DESCRIPTION"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ProjectImpactDesc"
+      Precision="4000"
+      ColumnName="PROJECT_IMPACT_DESC"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ProjectLeaderId"
+      ColumnName="PROJECT_LEADER_ID"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="StartDate"
+      ColumnName="START_DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      SQLType="DATE"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ActualEndDate"
+      ColumnName="ACTUAL_END_DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      SQLType="DATE"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ProjectStatus"
+      Precision="50"
+      ColumnName="PROJECT_STATUS"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="50" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ProjectRemarks"
+      Precision="2000"
+      ColumnName="PROJECT_REMARKS"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="2000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ItemKey"
+      Precision="100"
+      ColumnName="ITEM_KEY"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER"
+      PrimaryKey="true"
+      ChangeIndicator="true" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ApprovalStatus"
+      Precision="50"
+      ColumnName="APPROVAL_STATUS"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="50" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute1"
+      Precision="140"
+      ColumnName="ATTRIBUTE1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="140" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute2"
+      Precision="140"
+      ColumnName="ATTRIBUTE2"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="140" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute3"
+      Precision="140"
+      ColumnName="ATTRIBUTE3"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="140" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute4"
+      Precision="140"
+      ColumnName="ATTRIBUTE4"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="140" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="Attribute5"
+      Precision="140"
+      ColumnName="ATTRIBUTE5"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="140" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastUpdateDate"
+      ColumnName="LAST_UPDATE_DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      SQLType="DATE"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastUpdatedBy"
+      Precision="15"
+      Scale="0"
+      ColumnName="LAST_UPDATED_BY"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="LastUpdateLogin"
+      Precision="15"
+      Scale="0"
+      ColumnName="LAST_UPDATE_LOGIN"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreatedBy"
+      Precision="15"
+      Scale="0"
+      ColumnName="CREATED_BY"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="CreationDate"
+      ColumnName="CREATION_DATE"
+      Type="oracle.jbo.domain.Date"
+      ColumnType="DATE"
+      SQLType="DATE"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="7" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="ResearchTypeSpec"
+      Precision="4000"
+      ColumnName="RESEARCH_TYPE_SPEC"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      SQLType="VARCHAR"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="4000" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="StudBsNo"
+      ColumnName="STUD_BS_NO"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="StudMsNo"
+      ColumnName="STUD_MS_NO"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Attribute
+      Name="StudPhdNo"
+      ColumnName="STUD_PHD_NO"
+      Type="oracle.jbo.domain.Number"
+      ColumnType="NUMBER"
+      SQLType="NUMERIC"
+      TableName="XXUP.XXUP_RIM_HEADER" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="22" />
+      </DesignTime>
+   </Attribute>
+   <Key
+      Name="RimHdPk" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxup.oracle.apps.per.rim.schema.server.RIMHeaderEO.TransactionNo" />
+         <Item Value="xxup.oracle.apps.per.rim.schema.server.RIMHeaderEO.ItemKey" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_isPrimary" Value="true" />
+         <Attr Name="_DBObjectName" Value="RIM_HD_PK" />
+      </DesignTime>
+   </Key>
+   <!-- <Key
+      Name="SysC00768908" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxup.oracle.apps.per.rim.schema.server.RIMHeaderEO.TransactionNo" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;TRANSACTION_NO&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C00768908" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC00768909" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxup.oracle.apps.per.rim.schema.server.RIMHeaderEO.AssignmentId" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;ASSIGNMENT_ID&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C00768909" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC00768910" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxup.oracle.apps.per.rim.schema.server.RIMHeaderEO.ResearchType" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;RESEARCH_TYPE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C00768910" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC00768911" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxup.oracle.apps.per.rim.schema.server.RIMHeaderEO.ResearchTitle" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;RESEARCH_TITLE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C00768911" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC00768913" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxup.oracle.apps.per.rim.schema.server.RIMHeaderEO.ProjectImpactDesc" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;PROJECT_IMPACT_DESC&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C00768913" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC00768914" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxup.oracle.apps.per.rim.schema.server.RIMHeaderEO.ProjectLeaderId" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;PROJECT_LEADER_ID&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C00768914" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC00768915" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxup.oracle.apps.per.rim.schema.server.RIMHeaderEO.StartDate" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;START_DATE&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C00768915" />
+      </DesignTime>
+   </Key>
+   <Key
+      Name="SysC00768917" >
+      <AttrArray Name="Attributes">
+         <Item Value="xxup.oracle.apps.per.rim.schema.server.RIMHeaderEO.ProjectStatus" />
+      </AttrArray>
+      <DesignTime>
+         <Attr Name="_checkCondition" Value="&#34;PROJECT_STATUS&#34; IS NOT NULL" />
+         <Attr Name="_isCheck" Value="true" />
+         <Attr Name="_DBObjectName" Value="SYS_C00768917" />
+      </DesignTime>
+   </Key> -->
+</Entity>

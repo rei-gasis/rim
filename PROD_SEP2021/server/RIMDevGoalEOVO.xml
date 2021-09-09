@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RIMDevGoalEOVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxup.oracle.apps.per.rim.server.RIMDevGoalEOVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT RIMDevGoalEO.RIM_DEV_GOAL_ID, 
+       RIMDevGoalEO.LINE_NO, 
+       RIMDevGoalEO.TRANSACTION_NO, 
+       RIMDevGoalEO.ITEM_KEY, 
+       RIMDevGoalEO.DEVELOPMENT_GOAL, 
+       RIMDevGoalEO.SELECTED, 
+       RIMDevGoalEO.ATTRIBUTE1, 
+       RIMDevGoalEO.ATTRIBUTE2, 
+       RIMDevGoalEO.ATTRIBUTE3, 
+       RIMDevGoalEO.ATTRIBUTE4, 
+       RIMDevGoalEO.ATTRIBUTE5, 
+       RIMDevGoalEO.LAST_UPDATE_DATE, 
+       RIMDevGoalEO.LAST_UPDATED_BY, 
+       RIMDevGoalEO.LAST_UPDATE_LOGIN, 
+       RIMDevGoalEO.CREATED_BY, 
+       RIMDevGoalEO.CREATION_DATE
+FROM XXUP.XXUP_RIM_DEV_GOAL RIMDevGoalEO
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RIMDevGoalEO"
+      Entity="xxup.oracle.apps.per.rim.schema.server.RIMDevGoalEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="RimDevGoalId"
+      IsNotNull="true"
+      EntityAttrName="RimDevGoalId"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="RIM_DEV_GOAL_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LineNo"
+      EntityAttrName="LineNo"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="LINE_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionNo"
+      EntityAttrName="TransactionNo"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="TRANSACTION_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemKey"
+      EntityAttrName="ItemKey"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="ITEM_KEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DevelopmentGoal"
+      EntityAttrName="DevelopmentGoal"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="DEVELOPMENT_GOAL" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Selected"
+      EntityAttrName="Selected"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="SELECTED" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="RIMDevGoalEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+</ViewObject>

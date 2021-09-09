@@ -1,0 +1,169 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:flowLayout adminCustomizable="false" promptWidth="20%" version="10.1.3_1312" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" controllerClass="xxup.oracle.apps.per.rim.webui.RIMFiscalInfoSubCO">
+   <ui:contents>
+      <oa:messageComponentLayout id="FiscalInfoCL" adminCustomizable="false" promptWidth="20%">
+         <ui:contents>
+            <oa:messageLayout id="OrganizationML" prompt="* Organization">
+               <ui:contents>
+                  <oa:table id="OrganizationTbl">
+                     <ui:contents>
+                        <oa:messageLovInput id="ConstituentUniversity" viewName="RIMFiscalDetailsEOVO1" viewAttr="ConstituentUnit" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/RIMCULovRN" prompt="* Constituent University" selectiveSearchCriteria="false" lookAheadSearchType="contains">
+                           <lovMappings>
+                              <lovMap id="CULov" lovItem="ConstituentUniversity" resultTo="ConstituentUniversity" criteriaFrom="ConstituentUniversity"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                        <oa:formValue id="ResponsibilityCenter" viewName="RIMFiscalDetailsEOVO1" viewAttr="ResponsibilityCenter" dataType="VARCHAR2"/>
+                        <oa:messageLovInput id="ResponsibilityCenterDisp" viewName="RIMFiscalDetailsEOVO1" viewAttr="ResponsibilityCenterDisp" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/RIMRespCenterLovRN" prompt="* Responsibility Center" selectiveSearchCriteria="false" lookAheadSearchType="contains">
+                           <lovMappings>
+                              <lovMap id="RCLov" lovItem="RcCode" resultTo="ResponsibilityCenter"/>
+                              <lovMap id="RCDescLov" lovItem="Description" resultTo="ResponsibilityCenterDisp" criteriaFrom="ResponsibilityCenterDisp"/>
+                           </lovMappings>
+                        </oa:messageLovInput>
+                     </ui:contents>
+                  </oa:table>
+               </ui:contents>
+            </oa:messageLayout>
+            <oa:messageTextInput id="CollaboratingAgency" dataType="VARCHAR2" prompt="Collaborating Agency" maximumLength="250" viewName="RIMFiscalDetailsEOVO1" viewAttr="CollaboratingAgency"/>
+            <oa:messageLayout id="FundingML" prompt="Funding">
+               <ui:contents>
+                  <oa:advancedTable id="FundingAT" viewName="RIMFundingEOVO1">
+                     <ui:contents>
+                        <oa:column id="FundingSourceCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="FundingSourceSH" prompt="Funding Source"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageChoice id="FundingSource" pickListViewDef="xxup.oracle.apps.per.rim.lov.server.RIMFundingVO" pickListViewName="Funding" pickListDispAttr="Funding" pickListValAttr="Funding" viewAttr="FundingSource" defaultValue="Revolving Fund"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="DescriptionCol" rendered="true">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="DescriptionSH" prompt="Funding Description"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="Description" dataType="VARCHAR2" prompt="Funding Description" maximumLength="200" viewAttr="Description"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="StartDateCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="StartDateSH" prompt="Start Date"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="StartDate" dataType="DATE" prompt="Start Date" viewAttr="StartDate"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="EndDateCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="EndDateSH" prompt="End Date"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="EndDate" dataType="DATE" prompt="End Date" viewAttr="EndDate"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="CurrencyCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="CurrencySH" prompt="Currency"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageChoice id="Currency" dataType="VARCHAR2" prompt="Currency" pickListViewDef="xxup.oracle.apps.per.rim.lov.server.RIMCurrencyVO" pickListViewName="Currency" pickListDispAttr="Currency" pickListValAttr="Currency" defaultValue="PHP" viewAttr="Currency"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="AmountCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="AmountSH" prompt="Amount"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="Amount" dataType="NUMBER" prompt="Amount" viewAttr="Amount">
+                                 <ui:primaryClientAction>
+                                    <ui:firePartialAction event="CalculateTotalAmount"/>
+                                 </ui:primaryClientAction>
+                              </oa:messageTextInput>
+                           </ui:contents>
+                        </oa:column>
+                        <!-- <oa:column id="TotalAmountCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="TotalAmountSH" prompt="Total Amount"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="TotalAmount" dataType="NUMBER" prompt="Total Amount" viewAttr="TotalAmount"/>
+                           </ui:contents>
+                        </oa:column> -->
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter7">
+                           <ui:contents>
+                              <oa:addTableRow id="addTableRow9"/>
+                           </ui:contents>
+                        </oa:tableFooter>
+                     </ui:footer>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:messageLayout>
+            <oa:messageStyledText id="TotalAmount" viewName="RIMFiscalDetailsEOVO1" viewAttr="FmTotalAmount" dataType="VARCHAR2" styleClass="OraDataText" prompt="Total Amount"/>
+            <oa:messageTextInput id="FundingAgency" dataType="VARCHAR2" prompt="* Funding Agency" maximumLength="250" viewName="RIMFiscalDetailsEOVO1" viewAttr="FundingAgency"/>
+            <oa:formValue id="SpCode" viewName="RIMFiscalDetailsEOVO1" viewAttr="SpCode" dataType="VARCHAR2"/>
+            <oa:messageLovInput id="SpCodeDisp" externalListOfValues="/xxup/oracle/apps/per/rim/lov/webui/RIMSPCodeLovRN" prompt="SP Code" selectiveSearchCriteria="false" lookAheadSearchType="contains" disabled="${oa.RIMFiscalDetailsEOVO1.DisableAccountingMode}" viewName="RIMFiscalDetailsEOVO1" viewAttr="SpCodeDisp">
+               <lovMappings>
+                  <lovMap id="SPLov" lovItem="SpCode" resultTo="SpCode" requiredForLOV="false"/>
+                  <lovMap id="SPDescLov" lovItem="Description" resultTo="SpCodeDisp" criteriaFrom="SpCodeDisp"/>
+               </lovMappings>
+            </oa:messageLovInput>
+            <oa:formValue id="FundControllerId" viewName="RIMFiscalDetailsEOVO1" viewAttr="FundControllerId" dataType="NUMBER"/>
+            <oa:messageLovInput id="FundControllerDisp" dataType="VARCHAR2" prompt="Fund Controller" externalListOfValues="/xxup/oracle/apps/per/publicservice/institutional/lov/webui/PerPSInstMemberRN" maximumLength="200" disabled="${oa.RIMFiscalDetailsEOVO1.DisableAccountingMode}" viewName="RIMFiscalDetailsEOVO1" viewAttr="FundControllerDisp">
+               <lovMappings>
+                  <lovMap id="FundControllerNameLov" lovItem="FullName" resultTo="FundControllerDisp" criteriaFrom="FundControllerDisp"/>
+                  <lovMap id="FundControllerIdLov" lovItem="PersonId" resultTo="FundControllerId" requiredForLOV="false"/>
+               </lovMappings>
+            </oa:messageLovInput>
+            <oa:messageRadioGroup id="FarExcluded" dataType="VARCHAR2" prompt="FAR Excluded" pickListViewDef="xxup.oracle.apps.per.rim.lov.server.RIMYesNoVO" pickListViewName="Ans" pickListDispAttr="Ans" pickListValAttr="Val" defaultValue="N" disabled="${oa.RIMFiscalDetailsEOVO1.DisableAccountingMode}" viewName="RIMFiscalDetailsEOVO1" viewAttr="FarExcluded"/>
+            <oa:messageLayout id="MilestoneML" prompt="* Project Milestones">
+               <ui:contents>
+                  <oa:advancedTable id="RIMMilestonesEOVO1" viewName="RIMMilestonesEOVO1">
+                     <ui:contents>
+                        <oa:column id="MilestoneCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="MilestoneSH" prompt="* Milestone"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="Milestone" dataType="VARCHAR2" viewAttr="Milestone"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="CompletionPercentageCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="CompletionPercentageSH" prompt="* % Completion"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="CompletionPercentage" dataType="VARCHAR2" viewAttr="CompletionPercentage" maximumLength="3"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="BudgetReleasedDateCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="BudgetReleasedDateSH" prompt="Budget Released"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="BudgetReleasedDate" dataType="DATE" viewAttr="BudgetReleasedDate"/>
+                           </ui:contents>
+                        </oa:column>
+                        <oa:column id="MilestoneRemarksCol">
+                           <ui:columnHeader>
+                              <oa:sortableHeader id="MilestoneRemarksSH" prompt="Remarks"/>
+                           </ui:columnHeader>
+                           <ui:contents>
+                              <oa:messageTextInput id="MilestoneRemarks" dataType="VARCHAR2" viewAttr="Remarks" maximumLength="200"/>
+                           </ui:contents>
+                        </oa:column>
+                     </ui:contents>
+                     <ui:footer>
+                        <oa:tableFooter id="tableFooter1">
+                           <ui:contents>
+                              <oa:addTableRow id="addTableRow5"/>
+                           </ui:contents>
+                        </oa:tableFooter>
+                     </ui:footer>
+                  </oa:advancedTable>
+               </ui:contents>
+            </oa:messageLayout>
+         </ui:contents>
+      </oa:messageComponentLayout>
+   </ui:contents>
+</oa:flowLayout>

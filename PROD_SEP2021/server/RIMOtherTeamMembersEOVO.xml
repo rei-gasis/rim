@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RIMOtherTeamMembersEOVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxup.oracle.apps.per.rim.server.RIMOtherTeamMembersEOVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT RIMOtherMembersEO.RIM_MEMBER_ID, 
+       RIMOtherMembersEO.LINE_NO, 
+       RIMOtherMembersEO.TRANSACTION_NO, 
+       RIMOtherMembersEO.ITEM_KEY, 
+       RIMOtherMembersEO.FULL_NAME, 
+       RIMOtherMembersEO.POSITION, 
+       RIMOtherMembersEO.END_DATE, 
+       RIMOtherMembersEO.ORGANIZATION, 
+       RIMOtherMembersEO.PROJECT_ROLE, 
+       RIMOtherMembersEO.ATTRIBUTE1, 
+       RIMOtherMembersEO.ATTRIBUTE2, 
+       RIMOtherMembersEO.ATTRIBUTE3, 
+       RIMOtherMembersEO.ATTRIBUTE4, 
+       RIMOtherMembersEO.ATTRIBUTE5, 
+       RIMOtherMembersEO.LAST_UPDATE_DATE, 
+       RIMOtherMembersEO.LAST_UPDATED_BY, 
+       RIMOtherMembersEO.LAST_UPDATE_LOGIN, 
+       RIMOtherMembersEO.CREATED_BY, 
+       RIMOtherMembersEO.CREATION_DATE,
+       NVL(RIMOtherMembersEO.ATTRIBUTE1, 'UP') member_type
+FROM XXUP.XXUP_RIM_TEAM_MEMBERS RIMOtherMembersEO
+WHERE attribute1 = 'Non-UP'
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <EntityUsage
+      Name="RIMOtherMembersEO"
+      Entity="xxup.oracle.apps.per.rim.schema.server.RIMOtherMembersEO" >
+      <DesignTime>
+         <Attr Name="_queryClause" Value="false" />
+      </DesignTime>
+   </EntityUsage>
+   <ViewAttribute
+      Name="RimMemberId"
+      IsNotNull="true"
+      EntityAttrName="RimMemberId"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="RIM_MEMBER_ID" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LineNo"
+      EntityAttrName="LineNo"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="LINE_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="TransactionNo"
+      EntityAttrName="TransactionNo"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="TRANSACTION_NO" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ItemKey"
+      EntityAttrName="ItemKey"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="ITEM_KEY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="FullName"
+      EntityAttrName="FullName"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="FULL_NAME" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Position"
+      EntityAttrName="Position"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="POSITION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="EndDate"
+      EntityAttrName="EndDate"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="END_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Organization"
+      EntityAttrName="Organization"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="ORGANIZATION" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ProjectRole"
+      EntityAttrName="ProjectRole"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="PROJECT_ROLE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute1"
+      EntityAttrName="Attribute1"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="ATTRIBUTE1" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute2"
+      EntityAttrName="Attribute2"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="ATTRIBUTE2" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute3"
+      EntityAttrName="Attribute3"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="ATTRIBUTE3" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute4"
+      EntityAttrName="Attribute4"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="ATTRIBUTE4" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="Attribute5"
+      EntityAttrName="Attribute5"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="ATTRIBUTE5" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateDate"
+      EntityAttrName="LastUpdateDate"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="LAST_UPDATE_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdatedBy"
+      EntityAttrName="LastUpdatedBy"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="LAST_UPDATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="LastUpdateLogin"
+      EntityAttrName="LastUpdateLogin"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="LAST_UPDATE_LOGIN" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreatedBy"
+      EntityAttrName="CreatedBy"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="CREATED_BY" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CreationDate"
+      EntityAttrName="CreationDate"
+      EntityUsage="RIMOtherMembersEO"
+      AliasName="CREATION_DATE" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MemberType"
+      IsPersistent="false"
+      Precision="140"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MEMBER_TYPE"
+      Expression="MEMBER_TYPE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="140" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

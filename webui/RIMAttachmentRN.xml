@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oa:header version="10.1.3_1312" xml:lang="en-US" xmlns:oa="http://xmlns.oracle.com/oa" xmlns:jrad="http://xmlns.oracle.com/jrad" xmlns:ui="http://xmlns.oracle.com/uix/ui" xmlns:user="http://xmlns.oracle.com/jrad/user" xmlns="http://xmlns.oracle.com/jrad" file-version="$Header$" text="Attachment/s" amDefName="xxup.oracle.apps.per.rim.server.RIMMainAM" controllerClass="xxup.oracle.apps.per.rim.webui.RIMAttachmentCO">
+   <ui:contents>
+      <oa:attachmentLink id="RIMAttachment" viewName="RIMAttachmentEOVO1" rendered="true" enableDocumentCatalog="false" autoCommitEnabled="true" inlineAttachmentEnabled="true">
+         <oa:entityMappings>
+            <oa:entityMap id="AttachmentEM" entityId="XXUP_RIM_ATTACHMENT" insertAllowed="true" updateAllowed="true" deleteAllowed="true">
+               <oa:primaryKeys>
+                  <oa:primaryKey id="TransactionNoPK" viewAttr="TransactionNo"/>
+                  <oa:primaryKey id="ItemKeyPK" viewAttr="ItemKey"/>
+               </oa:primaryKeys>
+               <oa:categoryMappings>
+                  <oa:categoryMap id="AttachmentCM" categoryName="MISC"/>
+               </oa:categoryMappings>
+            </oa:entityMap>
+         </oa:entityMappings>
+      </oa:attachmentLink>
+   </ui:contents>
+</oa:header>

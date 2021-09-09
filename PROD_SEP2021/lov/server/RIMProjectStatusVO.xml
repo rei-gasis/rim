@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RIMProjectStatusVO"
+   BindingStyle="Oracle"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxup.oracle.apps.per.rim.lov.server.RIMProjectStatusVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT flex_value project_status
+FROM FND_FLEX_VALUES ffv
+WHERE flex_value_set_id =
+  (SELECT flex_value_set_id
+  FROM FND_FLEX_VALUE_SETS
+  WHERE flex_value_set_name = 'XXUP_RIM_PROJECT_STATUS'
+  )
+AND ffv.enabled_flag = 'Y'
+ORDER BY flex_value
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="ProjectStatus"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="32"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="PROJECT_STATUS"
+      Expression="PROJECT_STATUS"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="32" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

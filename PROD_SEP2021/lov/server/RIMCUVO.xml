@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+
+<ViewObject
+   Name="RIMCUVO"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   RowClass="oracle.apps.fnd.framework.server.OAViewRowImpl"
+   ComponentClass="xxup.oracle.apps.per.rim.lov.server.RIMCUVOImpl"
+   UseGlueCode="false" >
+   <SQLQuery><![CDATA[
+SELECT concatenated_segments constituent_university
+FROM hr_soft_coding_keyflex hsck
+WHERE concatenated_segments NOT LIKE '%DO NOT%'
+   ]]></SQLQuery>
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+      <Attr Name="_version" Value="10.1.3.41.57" />
+      <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess" />
+   </DesignTime>
+   <ViewAttribute
+      Name="ConstituentUniversity"
+      IsUpdateable="false"
+      IsPersistent="false"
+      Precision="700"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CONSTITUENT_UNIVERSITY"
+      Expression="CONSTITUENT_UNIVERSITY"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="700" />
+      </DesignTime>
+   </ViewAttribute>
+</ViewObject>

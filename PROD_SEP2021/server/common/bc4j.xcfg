@@ -1,0 +1,63 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig>
+   <AppModuleConfigBag>
+      <AppModuleConfig name="RIMMainAMLocal">
+         <DeployPlatform>LOCAL</DeployPlatform>
+         <JDBCName>SITNEW</JDBCName>
+         <jbo.project>researchInformationModule0</jbo.project>
+         <AppModuleJndiName>xxup.oracle.apps.per.rim.server.RIMMainAM</AppModuleJndiName>
+         <java.naming.factory.initial>oracle.jbo.common.JboInitialContextFactory</java.naming.factory.initial>
+         <ApplicationName>xxup.oracle.apps.per.rim.server.RIMMainAM</ApplicationName>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+   <ConnectionDefinition name="UISDEV">
+      <ENTRY name="JDBC_PORT" value="1541"/>
+      <ENTRY name="ConnectionType" value="JDBC"/>
+      <ENTRY name="HOSTNAME" value="202.92.141.58"/>
+      <ENTRY name="user" value="apps"/>
+      <ENTRY name="ConnectionName" value="UISDEV"/>
+      <ENTRY name="SID" value="PROD"/>
+      <ENTRY name="JdbcDriver" value="oracle.jdbc.OracleDriver"/>
+      <ENTRY name="password">{904}05A8CA65C4EB9B692AF073DEF2FCCF711C</ENTRY>
+      <ENTRY name="ORACLE_JDBC_TYPE" value="thin"/>
+      <ENTRY name="DeployPassword" value="true"/>
+   </ConnectionDefinition>
+   <ConnectionDefinition name="PROD">
+      <ENTRY name="JDBC_PORT" value="1541"/>
+      <ENTRY name="ConnectionType" value="JDBC"/>
+      <ENTRY name="HOSTNAME" value="10.0.0.95"/>
+      <ENTRY name="user" value="apps"/>
+      <ENTRY name="ConnectionName" value="PROD"/>
+      <ENTRY name="SID" value="PROD"/>
+      <ENTRY name="JdbcDriver" value="oracle.jdbc.OracleDriver"/>
+      <ENTRY name="password">{904}0525854C40AF3CB485D72E23C1A5F5BFA9</ENTRY>
+      <ENTRY name="ORACLE_JDBC_TYPE" value="thin"/>
+      <ENTRY name="DeployPassword" value="true"/>
+   </ConnectionDefinition>
+   <ConnectionDefinition name="SIT">
+      <ENTRY name="JDBC_PORT" value="1561"/>
+      <ENTRY name="ConnectionType" value="JDBC"/>
+      <ENTRY name="HOSTNAME" value="10.0.1.99"/>
+      <ENTRY name="user" value="apps"/>
+      <ENTRY name="ConnectionName" value="SIT"/>
+      <ENTRY name="SID" value="SIT"/>
+      <ENTRY name="JdbcDriver" value="oracle.jdbc.OracleDriver"/>
+      <ENTRY name="password">{904}0563EB25A181EBD324A5EAC10F3190D5B4BF336D63B8D2706E</ENTRY>
+      <ENTRY name="ORACLE_JDBC_TYPE" value="thin"/>
+      <ENTRY name="DeployPassword" value="true"/>
+   </ConnectionDefinition>
+   <ConnectionDefinition name="SITNEW">
+      <ENTRY name="JDBC_PORT" value="1551"/>
+      <ENTRY name="ConnectionType" value="JDBC"/>
+      <ENTRY name="HOSTNAME" value="10.0.0.44"/>
+      <ENTRY name="user" value="apps"/>
+      <ENTRY name="ConnectionName" value="SITNEW"/>
+      <ENTRY name="SID" value="SITNEW"/>
+      <ENTRY name="JdbcDriver" value="oracle.jdbc.OracleDriver"/>
+      <ENTRY name="password">
+         <![CDATA[{904}05AE518509E3E713DB34AF6E028887C3A1CED56B19F7ABE0BB]]>
+      </ENTRY>
+      <ENTRY name="ORACLE_JDBC_TYPE" value="thin"/>
+      <ENTRY name="DeployPassword" value="true"/>
+   </ConnectionDefinition>
+</BC4JConfig>
