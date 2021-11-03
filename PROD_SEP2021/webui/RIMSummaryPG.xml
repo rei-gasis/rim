@@ -47,7 +47,27 @@
                               <oa:sortableHeader id="ApprovalStatusSH" prompt="Approval Status"/>
                            </ui:columnHeader>
                            <ui:contents>
-                              <oa:messageStyledText id="ApprovalStatus" viewAttr="ApprovalStatus" queryable="false"/>
+                              <oa:switcher id="ApprovalStatusSwitcher" viewAttr="ApprovalStatus">
+                                 <ui:case name="For Approval">
+                                    <oa:link id="ForApprovalLink" destination="OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMReviewPG&amp;urlParam=VIEW&amp;pTransactionNo={@TransactionNo}&amp;pItemKey={@ItemKey}" text="For Approval">
+                                       <!-- <ui:primaryClientAction>
+                                          <ui:firePartialAction unvalidated="true"/>
+                                       </ui:primaryClientAction> -->
+                                    </oa:link>
+                                 </ui:case>
+                                 <ui:case name="Approved">
+                                    <oa:messageStyledText id="ApprovedApprStatus" viewAttr="ApprovalStatus" queryable="false"/>
+                                 </ui:case>
+                                 <ui:case name="Saved For Later">
+                                    <oa:messageStyledText id="SFLApprStatus" viewAttr="ApprovalStatus" queryable="false"/>
+                                 </ui:case>
+                                 <ui:case name="Closed">
+                                    <oa:messageStyledText id="ClosedApprStatus" viewAttr="ApprovalStatus" queryable="false"/>
+                                 </ui:case>
+                                 <ui:case name="Rejected">
+                                    <oa:messageStyledText id="RejectedApprStatus" viewAttr="ApprovalStatus" queryable="false"/>
+                                 </ui:case>
+                              </oa:switcher>
                            </ui:contents>
                         </oa:column>
                         <oa:column id="ViewDetailsCol" rendered="true">
@@ -55,7 +75,7 @@
                               <oa:sortableHeader id="ViewDetailsSH" prompt="View"/>
                            </ui:columnHeader>
                            <ui:contents>
-                              <oa:image id="ViewDetails" destination="OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMReviewPG&amp;urlParam=VIEW&amp;pTransactionNo={@TransactionNo}&amp;pItemKey={@ItemKey}" source="detailsicon_enabled.gif" rendered="true"/>
+                              <oa:image id="ViewDetails" destination="OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMReviewPG&amp;urlParam=VIEW&amp;pTransactionNo={@TransactionNo}&amp;pItemKey={@ApprovedItemKey}" source="detailsicon_enabled.gif" rendered="true"/>
                            </ui:contents>
                         </oa:column>
                         <oa:column id="UpdateResCol" rendered="true">

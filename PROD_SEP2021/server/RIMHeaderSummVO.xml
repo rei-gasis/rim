@@ -49,6 +49,22 @@ SELECT transaction_no,
                                                             END
                                                             ) appr_stat_rn
     ,LPAD(hd.TRANSACTION_NO,9,'0') transaction_no_disp
+    ,(SELECT item_key approved_item_key--, transaction_no
+      FROM (
+          SELECT ROW_NUMBER() OVER(PARTITION BY transaction_no ORDER BY CASE WHEN approval_status = 'Done' THEN 1
+                                                                           WHEN approval_status = 'Approved' THEN 2
+                                                                           ELSE 3
+                                                                        END
+                                                                       ,SUBSTR(item_key, -1, 1) DESC
+                ) approved_rec_rn, h.approval_status, h.item_key, transaction_no
+          FROM xxup_rim_header h
+          ) inner_hd
+      WHERE approved_rec_rn = 1
+      AND hd.transaction_no = inner_hd.transaction_no
+      ) approved_item_key
+     ,(SELECT constituent_unit
+      FROM xxup_rim_fiscal_details
+      WHERE item_key = hd.item_key) cu 
 FROM xxup_rim_header hd
 )
 WHERE appr_stat_rn = 1
@@ -470,6 +486,36 @@ WHERE appr_stat_rn = 1
       SQLType="VARCHAR" >
       <DesignTime>
          <Attr Name="_DisplaySize" Value="36" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ApprovedItemKey"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="100"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="APPROVED_ITEM_KEY"
+      Expression="APPROVED_ITEM_KEY"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="100" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="CU"
+      IsUpdateable="false"
+      IsPersistent="false"
+      IsNotNull="true"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="CU"
+      Expression="CU"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
       </DesignTime>
    </ViewAttribute>
 </ViewObject>
