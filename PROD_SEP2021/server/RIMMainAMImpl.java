@@ -1122,6 +1122,8 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
 
         RIMHeaderEOVOImpl sMainVO = getRIMHeaderEOVO2();
         this.writeDiagnostics(this, "Init source vo" ,OAFwkConstants.STATEMENT);
+        this.writeDiagnostics(this, "Item Key: " + pItemKey ,OAFwkConstants.STATEMENT);
+        
 
         //MAIN
         try{
@@ -1385,13 +1387,17 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
         try{
 
            this.writeDiagnostics(this, "Copy Members start" ,OAFwkConstants.STATEMENT);
-           sMembersVO.reset();
+           
 
            Row mRow = null;
            RIMTeamMembersEOVOImpl tMembersVO = getRIMTeamMembersEOVO1();
            if(sMembersVO != null){
                sMembersVO.initExist(pItemKey);
-               
+               sMembersVO.reset();
+
+               if(sMembersVO.getRowCount() < 1)
+                    tMembersVO.initExist("x");
+
                while(sMembersVO.hasNext()){
                    OAViewRowImpl currRow = (OAViewRowImpl) sMembersVO.next();
 
@@ -1455,13 +1461,14 @@ public class RIMMainAMImpl extends OAApplicationModuleImpl {
         try{
 
            this.writeDiagnostics(this, "Copy NON-UP start" ,OAFwkConstants.STATEMENT);
-           sOthMembersVO.reset();
+           
 
            Row mRow = null;
            RIMOtherTeamMembersEOVOImpl tOthMembersVO = getRIMOtherTeamMembersEOVO1();
            
            if(sOthMembersVO != null){
                sOthMembersVO.initExist(pItemKey);
+               sOthMembersVO.reset();
                
                while(sOthMembersVO.hasNext()){
                    OAViewRowImpl currRow = (OAViewRowImpl) sOthMembersVO.next();
