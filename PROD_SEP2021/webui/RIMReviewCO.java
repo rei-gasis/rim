@@ -8,6 +8,12 @@ package xxup.oracle.apps.per.rim.webui;
 
 import java.io.Serializable;
 
+import java.sql.Connection;
+
+import java.sql.PreparedStatement;
+
+import java.sql.ResultSet;
+
 import java.util.Dictionary;
 
 import oracle.apps.fnd.common.MessageToken;
@@ -88,9 +94,9 @@ public class RIMReviewCO extends OAControllerImpl
             submitBtn.setRendered(false);
             cancelBtn.setRendered(false);
 
-            OAHeaderBean histHdr = (OAHeaderBean) rootWB.findChildRecursive("ActionHistoryHRN");
-            if(histHdr != null)
-              histHdr.setRendered(Boolean.FALSE);
+            // OAHeaderBean histHdr = (OAHeaderBean) rootWB.findChildRecursive("ActionHistoryHRN");
+            // if(histHdr != null)
+            //   histHdr.setRendered(Boolean.FALSE);
             
         }
 
@@ -134,8 +140,6 @@ public class RIMReviewCO extends OAControllerImpl
     String transactionNo = pageContext.getParameter("pTransactionNo");
     String urlParam = pageContext.getParameter("urlParam");
     String pItemKey = pageContext.getParameter("pItemKey");
-    String srcMenu = pageContext.getParameter("srcMenu");
-    
 
     Serializable[] params = { transactionNo };
 
@@ -143,6 +147,31 @@ public class RIMReviewCO extends OAControllerImpl
     if (pageContext.getParameter("Back") != null) {
 
         if ("VIEW".equals(urlParam)) {
+
+            Connection conn = pageContext.getApplicationModule(webBean).getOADBTransaction().getJdbcConnection();
+            String strAccessLevel = "";
+            String srcMenu = "";
+            try {
+                
+                String Query = 
+                    "SELECT fnd_profile.value('XXUP_HR_ACCESS_LEVEL') access_level FROM dual";
+
+
+                PreparedStatement stmt = conn.prepareStatement(Query);
+                
+                for (ResultSet resultset = stmt.executeQuery(); resultset.next(); 
+                ) {
+
+                    strAccessLevel = resultset.getString("access_level");
+                }
+
+
+                if(strAccessLevel.equals("ALL") || strAccessLevel.equals("CU")){
+                  srcMenu = "Inquiry";
+                }
+              } catch (Exception ex) {
+                throw new OAException("Exception" + ex);
+              }
 
             TransactionUnitHelper.endTransactionUnit(pageContext, 
                                                      "PSCreateTxn");
