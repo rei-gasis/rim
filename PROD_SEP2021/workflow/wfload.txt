@@ -1,0 +1,2 @@
+/*Upload*/
+WFLOAD apps/$pwd 0 Y FORCE RIMWF_PROD_31AUG21.wft
