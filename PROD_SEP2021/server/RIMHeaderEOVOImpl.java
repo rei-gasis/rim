@@ -41,7 +41,7 @@ public class RIMHeaderEOVOImpl extends RIMVOParent {
     } else if (accessLevel.equals("CU")) {
       setWhereClause("created_by IN (SELECT user_id FROM fnd_user WHERE user_name IN (SELECT * FROM TABLE(xxup_ps_inst_wf_pkg.get_users_per_cu(fnd_global.user_id))))");
     } else if (accessLevel.equals("UNIT")) {
-      setWhereClause("created_by IN (SELECT user_id FROM fnd_user WHERE user_name IN (SELECT * FROM TABLE(xxup_ps_inst_wf_pkg.get_users_per_unit(fnd_global.user_id))))");
+      setWhereClause("created_by IN (SELECT user_id FROM fnd_user WHERE user_name IN (SELECT * FROM TABLE(xxup_get_users_per_cu(fnd_global.user_id))))");
     } else if (accessLevel.equals("USER")) {
       setWhereClause("project_leader_id = fnd_global.employee_id");
     } else {
