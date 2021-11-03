@@ -1,0 +1,24 @@
+
+DROP TABLE xxup.XXUP_RIM_END_DT_EXT;
+
+CREATE TABLE xxup.XXUP_RIM_END_DT_EXT
+(   
+    rim_ext_id NUMBER(15)
+   ,line_no NUMBER(2) 
+   ,transaction_no NUMBER(15) NOT NULL
+   ,item_key VARCHAR2(100)
+   ,end_date DATE
+   ,ATTRIBUTE1        VARCHAR2(140)  
+   ,ATTRIBUTE2        VARCHAR2(140)  
+   ,ATTRIBUTE3        VARCHAR2(140)  
+   ,ATTRIBUTE4        VARCHAR2(140)  
+   ,ATTRIBUTE5        VARCHAR2(140)  
+   ,LAST_UPDATE_DATE  DATE           
+   ,LAST_UPDATED_BY   NUMBER(15)     
+   ,LAST_UPDATE_LOGIN NUMBER(15)    
+   ,CREATED_BY        NUMBER(15)
+   ,CREATION_DATE     DATE
+   ,CONSTRAINT rim_ext_pk PRIMARY KEY(rim_ext_id)  
+);
+
+CREATE SYNONYM XXUP_RIM_END_DT_EXT FOR xxup.XXUP_RIM_END_DT_EXT;

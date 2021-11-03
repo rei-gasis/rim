@@ -1,0 +1,248 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+	
+<dataTemplate name="XXUPRIMMASLIST" description="UP Research Projects Master List" defaultPackage="" Version="1.0">
+
+	<parameters>
+		<parameter name="P_ORG_ID" dataType="number" />
+		<parameter name="P_USER_ID" dataType="number" />
+		<parameter name="P_REPORT_DATE" dataType="character" />
+		<parameter name="P_RESEARCH_NO" dataType="character" />
+		<parameter name="P_PROJECT_LEADER_ID" dataType="number" />
+		<parameter name="P_PROJECT_STATUS" dataType="character" />
+		<parameter name="P_COLLABORATING_AGENCY" dataType="character" />
+		<parameter name="P_FUNDING_SOURCE" dataType="character" />
+		<parameter name="P_FUNDING_AGENCY" dataType="character" />
+	</parameters>
+
+	<dataQuery>
+		<sqlStatement name="Q_HEADER_FOOTER">
+			<![CDATA[
+				SELECT
+				    hrou.organization_id AS hf_org_id,
+				    CASE
+				        WHEN hrou.name != 'UPV Tacloban College' THEN
+				            upper(substr(hrou.name, instr(hrou.name, ' ') + 1))
+				        ELSE
+				            upper(hrou.name)
+				    END AS hf_org_name,
+				    CASE
+				            WHEN hrl.address_line_1 = 'UP Tacloban College' THEN
+				                NULL
+				            ELSE
+				                hrl.address_line_1 || ', '
+				        END
+				    ||
+				        CASE
+				            WHEN hrl.town_or_city IS NULL THEN
+				                NULL
+				            WHEN hrl.town_or_city = 'Iloilo' THEN
+				                hrl.town_or_city || ' City, '
+				            WHEN hrl.town_or_city = 'Laguna' THEN
+				                NULL
+				            ELSE
+				                hrl.town_or_city || ', '
+				        END
+				    || hrl.region_1
+				    || ', '
+				    ||
+				        CASE
+				            WHEN hrl.region_1 = 'Leyte' THEN
+				                'VIII'
+				            ELSE
+				                hrl.region_2
+				        END
+				    AS hf_address,
+				    (
+				        SELECT 'TIN: '
+				            || '000'
+				            || '-'
+				            || substr(org_information1, 1, 3)
+				            || '-'
+				            || substr(org_information1, 4, 3)
+				            || '-00'
+				            || substr(org_information1, 7, 3)
+				        FROM
+				            hr_organization_information
+				        WHERE
+				            organization_id = :P_ORG_ID
+				            AND org_information_context LIKE 'PPH_TAX_EMPLOYER_INFO'
+				    ) AS hf_tin,
+				    (
+				        SELECT 'Report generated with UP eBusiness Suite Release 12 on' || ' ' ||
+				            TO_CHAR(SYSDATE, 'FMMonth DD, YYYY HH24:MI:SS')
+				        FROM
+				            dual
+				    ) AS hf_sysdate_footer,
+				    (
+				        SELECT
+				            MAX(hrou.organization_id
+				                || '-'
+				                || :P_USER_ID
+				                || '-'
+				                || fndcr.request_id)
+				        FROM
+				            fnd_concurrent_requests fndcr
+				        WHERE
+				            fndcr.requested_by = :P_USER_ID
+				            AND fndcr.request_date < SYSDATE
+				    ) AS hf_security_code,
+				    '(As of ' || to_char(fnd_date.canonical_to_date(:P_REPORT_DATE),'FMMonth DD, YYYY') || ')' report_date,
+				    DECODE(:P_ORG_ID, 279, '“PHIC - Accredited Health Care Provider”', '') hf_phic,
+                    DECODE(:P_ORG_ID, 279, 'ISO 0001:2008 Certified', '') hf_iso
+				FROM
+				    hr_org_units_no_join   hrou,
+				    hr_locations_no_join   hrl
+				WHERE
+				    hrou.organization_id = nvl(:P_ORG_ID, hrou.organization_id)
+				    AND hrou.location_id = hrl.location_id
+			]]>
+		</sqlStatement>
+
+		<sqlStatement name="Q_MAIN">
+			<![CDATA[
+				SELECT *
+				FROM (
+				WITH profile_v AS (
+				       SELECT employee_id, 'USER' access_level
+				       FROM fnd_user
+				       WHERE user_id = fnd_global.user_id
+				       UNION ALL
+				       SELECT employee_id, 'ALL' access_level
+				       FROM fnd_user
+				    )
+				    SELECT h.transaction_no research_no
+				          ,research_title
+				          ,research_type
+				          ,main_area_interest
+				          ,project_leader_id
+				          ,h.item_key
+				          ,pi.project_impact
+				          ,fs.funding_source
+				          ,f.total_amount
+				          ,f.funding_agency
+				          ,f.collaborating_agency
+				          ,f.constituent_unit
+				          ,to_char(start_date, 'Mon DD, YYYY') moa_start_date
+				          ,to_char(end_date, 'Mon DD, YYYY') moa_end_date
+				          ,project_status
+				          ,project_remarks
+				          ,f.constituent_unit organization
+				          ,NVL(p.is_published,'N') is_published
+				          ,p.distribution_mode
+				          ,NVL(p.has_award,'N') has_award
+				          ,p.award_title
+				          ,to_char(p.award_date, 'Mon DD, YYYY') award_date
+				          ,p.conferring_body
+				          ,p.points
+				          ,p.post_act_eval_rating
+				          ,p.remarks
+				          ,(SELECT full_name
+				            FROM hr.per_all_people_f
+				            WHERE person_id = h.project_leader_id 
+				            AND SYSDATE between effective_start_date AND effective_end_date
+				           ) project_leader
+				         ,(SELECT (SELECT ppd.segment1
+				                    FROM per_position_definitions ppd
+				                     WHERE ppd.position_definition_id = pap.position_definition_id) POSITION_NAME
+				            FROM per_all_assignments_f paaf
+				                ,per_all_positions pap
+				            WHERE 1=1
+				            AND SYSDATE BETWEEN paaf.effective_start_date AND paaf.effective_end_date
+				            AND paaf.position_id = pap.position_id
+				            AND paaf.assignment_id = h.ASSIGNMENT_ID) assignment_position
+				          ,ROW_NUMBER() OVER(PARtitION BY h.transaction_no ORDER BY CASE WHEN approval_status = 'Approved'
+				                                                                     THEN 2
+				                                                                     ELSE 1
+				                                                                END
+				                                                                ) appr_stat_rn 
+				    FROM xxup_rim_header h
+				    LEFT JOIN xxup_rim_fiscal_details f
+				        ON h.transaction_no = f.transaction_no
+				       AND h.item_key = f.item_key
+				    LEFT JOIN xxup_rim_publication p
+				        ON h.transaction_no = p.transaction_no
+				       AND h.item_key = p.item_key
+				    LEFT JOIN (SELECT LISTAGG(project_impact, chr(10)) WITHIN GROUP(ORDER BY line_no) OVER(PARTITION BY item_key) project_impact
+				                    ,transaction_no
+				                    ,line_no
+				                    ,item_key
+				           FROM xxup_rim_proj_impact pi
+				           ) pi
+				        ON h.transaction_no = pi.transaction_no
+				       AND h.item_key = pi.item_key
+				       AND pi.line_no = 1  
+				    LEFT JOIN (SELECT LISTAGG(funding_source, chr(10)) WITHIN GROUP(ORDER BY line_no) OVER(PARTITION BY item_key) funding_source
+				                    ,transaction_no
+				                    ,line_no
+				                    ,item_key
+				           FROM xxup_rim_funding fs
+				           ) fs
+				        ON h.transaction_no = fs.transaction_no
+				       AND h.item_key = fs.item_key
+				       AND fs.line_no = 1
+				    INNER JOIN profile_v
+				       ON profile_v.access_level = FND_PROFILE.value('XXUP_HR_ACCESS_LEVEL')
+--				      AND profile_v.employee_id = h.project_leader_id
+				) main
+				WHERE appr_stat_rn = 1
+				AND constituent_unit = NVL((SELECT name
+                                            FROM hr_all_organization_units
+                                            WHERE organization_id = :P_ORG_ID 
+                                            )
+                                          ,constituent_unit)
+				AND (:P_PROJECT_LEADER_ID IS NULL OR project_leader_id = :P_PROJECT_LEADER_ID)
+				AND (:P_RESEARCH_NO IS NULL OR research_no = :P_RESEARCH_NO)
+				AND (:P_PROJECT_STATUS IS NULL OR project_status = :P_PROJECT_STATUS)
+				AND (:P_COLLABORATING_AGENCY IS NULL OR collaborating_agency = :P_COLLABORATING_AGENCY)
+				AND (:P_FUNDING_AGENCY IS NULL OR funding_agency = :P_FUNDING_AGENCY)
+				AND fnd_date.canonical_to_date(:P_REPORT_DATE) >= (SELECT MAX(action_date)
+                                                                   FROM xxup_per_ps_action_history hist
+                                                                   WHERE hist.item_key = main.item_key
+                                                                   )
+			]]>
+		</sqlStatement>
+
+	</dataQuery>
+
+	<dataStructure>
+		<group name="G_HEADER_FOOTER" source="Q_HEADER_FOOTER">
+			<element name="hf_org_id" value="hf_org_id" />
+			<element name="hf_org_name" value="hf_org_name" />
+			<element name="hf_address" value="hf_address" />
+			<element name="hf_tin" value="hf_tin" />
+			<element name="hf_sysdate_footer" value="hf_sysdate_footer" />
+			<element name="hf_security_code" value="hf_security_code" />
+			<element name="report_date" value="report_date" />
+			
+		</group>
+
+
+		<group name="G_MAIN" source="Q_MAIN">
+			<element name="research_no" value="research_no"/>
+			<element name="research_title" value="research_title"/>
+			<element name="research_type" value="research_type"/>
+			<element name="main_area_interest" value="main_area_interest"/>
+			<element name="project_impact" value="project_impact"/>
+			<element name="funding_source" value="funding_source"/>
+			<element name="total_amount" value="total_amount"/>
+			<element name="funding_agency" value="funding_agency"/>
+			<element name="moa_start_date" value="moa_start_date"/>
+			<element name="moa_end_date" value="moa_end_date"/>
+			<element name="project_status" value="project_status"/>
+			<element name="project_remarks" value="project_remarks"/>
+			<element name="collaborating_agency" value="collaborating_agency"/>
+			<element name="organization" value="organization"/>
+			<element name="is_published" value="is_published"/>
+			<element name="distribution_mode" value="distribution_mode"/>
+			<element name="has_award" value="has_award"/>
+			<element name="award_title" value="award_title"/>
+			<element name="award_date" value="award_date"/>
+			<element name="conferring_body" value="conferring_body"/>
+			<element name="points" value="points"/>
+			<element name="post_act_eval_rating" value="post_act_eval_rating"/>
+			<element name="remarks" value="remarks"/>
+			<element name="project_leader" value="project_leader"/>
+			<element name="assignment_position" value="assignment_position"/>
+		</group>
+	</dataStructure>
+</dataTemplate>

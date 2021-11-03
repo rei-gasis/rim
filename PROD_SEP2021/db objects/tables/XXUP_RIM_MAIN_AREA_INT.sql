@@ -1,0 +1,25 @@
+
+DROP TABLE xxup.XXUP_RIM_MAIN_AREA_INT;
+
+CREATE TABLE xxup.XXUP_RIM_MAIN_AREA_INT
+(   
+    rim_mai_id NUMBER(15)
+   ,line_no NUMBER(2) 
+   ,transaction_no NUMBER(15) NOT NULL
+   ,item_key VARCHAR2(100)
+   ,main_area_interest VARCHAR2(240)
+   ,selected VARCHAR2(1)
+   ,ATTRIBUTE1        VARCHAR2(140)  
+   ,ATTRIBUTE2        VARCHAR2(140)  
+   ,ATTRIBUTE3        VARCHAR2(140)  
+   ,ATTRIBUTE4        VARCHAR2(140)  
+   ,ATTRIBUTE5        VARCHAR2(140)  
+   ,LAST_UPDATE_DATE  DATE           
+   ,LAST_UPDATED_BY   NUMBER(15)     
+   ,LAST_UPDATE_LOGIN NUMBER(15)    
+   ,CREATED_BY        NUMBER(15)
+   ,CREATION_DATE     DATE
+   ,CONSTRAINT rim_mai_pk PRIMARY KEY(rim_mai_id)  
+);
+
+CREATE SYNONYM XXUP_RIM_MAIN_AREA_INT FOR xxup.XXUP_RIM_MAIN_AREA_INT;

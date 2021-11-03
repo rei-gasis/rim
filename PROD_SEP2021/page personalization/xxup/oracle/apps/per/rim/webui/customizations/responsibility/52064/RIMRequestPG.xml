@@ -1,0 +1,10 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<customization xmlns="http://xmlns.oracle.com/jrad" version="9.0.6.0.0_64" xml:lang="en-US" customizes="/xxup/oracle/apps/per/rim/webui/RIMRequestPG" developerMode="true" MDSActiveDoc="true" xmlns:user="http://xmlns.oracle.com/jrad/user" user:responsibilityKey="up_rim_resp" user:responsibilityAppShortName="XXUP">
+   <modifications>
+      <modify element="MainRN.BasicInfoRN.MainAreaIntAT" rowNavigationPolicy="page"/>
+      <modify element="MainRN.BasicInfoRN.DevGoalAT" rowNavigationPolicy="page"/>
+      <modify element="MainRN.BasicInfoRN.OtherTeamMemberAT" rowNavigationPolicy="page"/>
+      <modify element="MainRN.BasicInfoRN.ResearchType" lookAheadRecordsVisible="50" queryable="true" userCustomizable="true"/>
+      <modify element="MainRN.FiscalInfoRN.ResponsibilityCenterDisp" lookAheadMultiColumnSearchEnabled="true" queryable="true"/>
+   </modifications>
+</customization>
