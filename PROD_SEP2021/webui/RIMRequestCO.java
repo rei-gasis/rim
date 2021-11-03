@@ -11,6 +11,11 @@ import java.io.Serializable;
 import com.sun.java.util.collections.ArrayList;
 import com.sun.java.util.collections.List;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import java.sql.ResultSet;
+
 import oracle.apps.fnd.common.MessageToken;
 import oracle.apps.fnd.common.VersionInfo;
 import oracle.apps.fnd.framework.OAApplicationModule;
@@ -714,18 +719,21 @@ public class RIMRequestCO extends OAControllerImpl
               // am.invokeMethod("delRecords", delRecParams);
               am.invokeMethod("rollbackTran", null);
           
-          }
+            }
 
           
 
             TransactionUnitHelper.endTransactionUnit(pageContext, 
                                                      "PSCreateTxn");
+            
+            
 
-            pageContext.forwardImmediately("OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMSummaryPG", 
+            pageContext.forwardImmediately("OA.jsp?page=/xxup/oracle/apps/per/rim/webui/RIMSummaryPG",
                                            null, 
                                            OAWebBeanConstants.KEEP_MENU_CONTEXT, 
                                            null, null, false, 
                                            OAWebBeanConstants.ADD_BREAD_CRUMB_SAVE);
+            
         } else if (pageContext.getParameter("Save") != null) {
 
           OAViewObject mainVo = (OAViewObject)am.findViewObject("RIMHeaderEOVO1");
@@ -764,3 +772,4 @@ public class RIMRequestCO extends OAControllerImpl
   }
 
 }
+    
