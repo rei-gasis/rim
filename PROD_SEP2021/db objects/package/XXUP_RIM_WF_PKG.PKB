@@ -29,8 +29,7 @@ IS
     c_for_clsout_ps CONSTANT VARCHAR2(50) := 'For Closeout';                    
 
     c_clsd_out_ps CONSTANT VARCHAR2(50) := 'Closed Out';                        
-    c_don_fin_rep_ps CONSTANT VARCHAR2(50) := 'Final Financial Reports Provided'
-;                                                                               
+    c_don_fin_rep_ps CONSTANT VARCHAR2(50) := 'Final Financial Reports Provided';                                                                               
 
     c_cls_rep_val_ps CONSTANT VARCHAR2(50) := 'Closeout Report Validated';      
     c_closed_ps CONSTANT VARCHAR2(50) := 'Closed';                              
@@ -888,7 +887,7 @@ tails - ' || SUBSTR(SQLERRM,0,200));
                              ,p_emp_org_name => lv_emp_org_name                 
             );                                                                  
 
-
+            
             /*Submit employee action line*/                                     
             ln_approver_ctr := ln_approver_ctr + 1;                             
 
@@ -2019,7 +2018,10 @@ tails - ' || SUBSTR(SQLERRM,0,200));
                     ,to_employee_name                                           
                     ,to_position_name                                           
                     ,to_org_name                                                
-                    ,'Pending'                                                  
+                    ,NVL(wf_engine.getitemattrtext(c_item_type                          
+                                              ,lv_item_key                            
+                                              ,'LAST_APPR_AC'                            
+                                              ),'Pending')
                     ,lv_item_key                                                
               FROM xxup.xxup_per_ps_action_history hist                         
               WHERE item_key = lv_item_key                                      
@@ -2130,7 +2132,8 @@ tails - ' || SUBSTR(SQLERRM,0,200));
     lv_close_ac VARCHAR2(50);                                                   
     lv_prev_proj_status xxup.xxup_rim_header.project_status%TYPE;               
 
-    ln_emp_last_appr NUMBER;                                                    
+    ln_emp_last_appr NUMBER;
+    lv_last_appr_ac xxup.xxup_per_ps_action_history.action%TYPE;
 
     lv_upd_acctg_info VARCHAR2(1) := 'N';                                       
     lv_upd_fund_acctg_info VARCHAR2(1) := 'N';                                  
@@ -2356,16 +2359,22 @@ tails - ' || SUBSTR(SQLERRM,0,200));
               INTO ln_cur_approver_no                                           
               FROM xxup.xxup_per_ps_action_history                              
               WHERE item_key = l_itemkey                                        
-              AND action = 'Pending';                                           
+--              AND action = 'Pending';                                           
+              AND action IN ('Pending'                   
+                            ,'For Accounting Info Update'
+                            ,c_prep_fin_rep_ac           
+                            ,c_val_cls_rep_ac            
+                            ,c_for_closing_ac            
+                            ,c_for_completion_ac         
+                            );
 
 
             EXCEPTION                                                           
               WHEN OTHERS THEN                                                  
-                raise_application_error(-20101, 'Error getting latest approver')
-;                                                                               
+                raise_application_error(-20101, 'Error getting latest approver');                                                                               
 
             END;                                                                
-
+            
 
             BEGIN                                                               
 
@@ -2400,12 +2409,18 @@ tails - ' || SUBSTR(SQLERRM,0,200));
                 INTO lv_appr_user_name                                          
                     ,lv_approver_name                                           
                 FROM fnd_user                                                   
-                WHERE employee_id = (SELECT to_employee_id                      
+                WHERE employee_id = (SELECT MIN(to_employee_id)
                                                    FROM xxup.xxup_per_ps_action_history pah                                                                     
                                                    WHERE item_key = l_itemkey   
-                                                   AND approver_no = ln_cur_approver_no                                                                                                                                                         
-                                                   AND action = 'Pending');     
-
+--                                                   AND approver_no = ln_cur_approver_no                                                                                                                                                         
+                                                   AND action IN  ('Pending'                   
+                                                                   ,'For Accounting Info Update'
+                                                                   ,c_prep_fin_rep_ac           
+                                                                   ,c_val_cls_rep_ac            
+                                                                   ,c_for_closing_ac            
+                                                                   ,c_for_completion_ac         
+                                                                  ));     
+                
 
             EXCEPTION                                                           
               WHEN OTHERS THEN                                                  
@@ -2413,7 +2428,7 @@ tails - ' || SUBSTR(SQLERRM,0,200));
 
             END;                                                                
 
-
+            
 
 
             BEGIN                                                               
@@ -2431,11 +2446,11 @@ tails - ' || SUBSTR(SQLERRM,0,200));
                 raise_application_error(-20101, 'Error getting total approver count');                                                                          
 
             END;                                                                
+            
+            
 
-
-
-            SELECT to_employee_id                                               
-            INTO ln_emp_last_appr                                               
+            SELECT to_employee_id, action
+            INTO ln_emp_last_appr, lv_last_appr_ac                                       
             FROM xxup_per_ps_action_history hist                                
             WHERE item_key = l_itemkey                                          
             AND approver_no = (SELECT MIN(approver_no)                          
@@ -2450,8 +2465,7 @@ tails - ' || SUBSTR(SQLERRM,0,200));
                                    AND hist_1.item_key = hist.item_key          
                                   );                                            
 
-
-
+    
                 IF lv_ntf_result = 'RFC' THEN                                   
 
                     wf_engine.setitemattrtext(itemtype                          
@@ -2474,7 +2488,13 @@ tails - ' || SUBSTR(SQLERRM,0,200));
                     wf_engine.setitemattrtext(itemtype                          
                                           ,l_itemkey                            
                                           ,'FROM'                               
-                                          ,lv_appr_user_name);                  
+                                          ,lv_appr_user_name);
+                                          
+                    wf_engine.setitemattrtext(itemtype                          
+                                      ,l_itemkey                            
+                                      ,'LAST_APPR_AC'                            
+                                      ,lv_last_appr_ac
+                                      );
 
 
 
@@ -2654,7 +2674,7 @@ tails - ' || SUBSTR(SQLERRM,0,200));
 --                                                      )                       
                                        AND hist.item_key = hist_1.item_key      
                                       );                                        
-                    --revert to approved status on rejected application         
+                
                     UPDATE xxup_rim_header tr                                   
                     SET approval_status = 'Rejected'                                
                     WHERE item_key = l_itemkey;                                 
